@@ -1,0 +1,126 @@
+[gd_scene load_steps=12 format=3 uid="uid://u5q5a7xl7gpt"]
+
+[ext_resource type="Script" uid="uid://ctu8x43gowxsu" path="res://player/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://dw6thhelsk6cc" path="res://player/player_sprite.png" id="2_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://0fmfehm72moy" path="res://player/player_option.png" id="2_g6k8r"]
+[ext_resource type="Texture2D" uid="uid://bvh2nevxlo7sy" path="res://player/grazebox.png" id="3_g1dw6"]
+[ext_resource type="AudioStream" uid="uid://kj4vflxtxwuh" path="res://sfx/switch01.wav" id="4_yw30f"]
+[ext_resource type="AudioStream" uid="uid://bge3amrimomgk" path="res://sfx/laser01.wav" id="5_qjkh3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g6k8r"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qjkh3"]
+radius = 4.0
+
+[sub_resource type="Gradient" id="Gradient_onrkg"]
+offsets = PackedFloat32Array(0, 0.23391813, 0.29239765, 0.64327484)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.049999952, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i3pqv"]
+gradient = SubResource("Gradient_onrkg")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Player" type="CharacterBody2D"]
+z_index = -50
+collision_mask = 16
+motion_mode = 1
+script = ExtResource("1_onrkg")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="OptionPosition" type="Node2D" parent="Node"]
+unique_name_in_owner = true
+z_index = -50
+
+[node name="Option1" type="Sprite2D" parent="Node/OptionPosition"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.5372549)
+position = Vector2(-64, 0)
+texture = ExtResource("2_g6k8r")
+
+[node name="Option2" type="Sprite2D" parent="Node/OptionPosition"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.5372549)
+position = Vector2(64, 0)
+texture = ExtResource("2_g6k8r")
+
+[node name="Option1Focused" type="Marker2D" parent="Node/OptionPosition"]
+unique_name_in_owner = true
+position = Vector2(-24, -64)
+
+[node name="Option1Unfocused" type="Marker2D" parent="Node/OptionPosition"]
+unique_name_in_owner = true
+position = Vector2(-64, 0)
+
+[node name="Option2Focused" type="Marker2D" parent="Node/OptionPosition"]
+unique_name_in_owner = true
+position = Vector2(24, -64)
+
+[node name="Option2Unfocused" type="Marker2D" parent="Node/OptionPosition"]
+unique_name_in_owner = true
+position = Vector2(64, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 50
+shape = SubResource("CircleShape2D_g6k8r")
+
+[node name="Grazebox" type="Area2D" parent="."]
+unique_name_in_owner = true
+z_index = 50
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grazebox"]
+shape = SubResource("CircleShape2D_4flbx")
+
+[node name="Hitbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+z_index = 50
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_qjkh3")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource("4_yw30f")
+volume_db = -7.918
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource("5_qjkh3")
+volume_db = -7.918
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Sprites"]
+unique_name_in_owner = true
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_g1dw6")
+hframes = 8
+vframes = 3
+
+[node name="HitboxSprite" type="Sprite2D" parent="Sprites"]
+unique_name_in_owner = true
+scale = Vector2(1e-05, 1e-05)
+texture = SubResource("GradientTexture2D_i3pqv")
+
+[node name="GrazeboxSprite" type="Sprite2D" parent="Sprites"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.42745098)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_g1dw6")
+
+[connection signal="body_entered" from="Grazebox" to="." method="_on_grazebox_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

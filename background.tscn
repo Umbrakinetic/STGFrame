@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnvr4tc24o5q0"]
+
+[ext_resource type="Script" uid="uid://c1s8a3o0n05yv" path="res://background.gd" id="1_i7s6n"]
+[ext_resource type="Texture2D" uid="uid://bby1beu7yd3w0" path="res://water_0339.jpg" id="2_xehqc"]
+[ext_resource type="Texture2D" uid="uid://ctspv41uplp2w" path="res://bullet/circle_top.png" id="3_xehqc"]
+
+[sub_resource type="Environment" id="Environment_splo0"]
+background_mode = 1
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_eq6nc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bpugw"]
+shading_mode = 0
+albedo_color = Color(0.46229059, 0.46229059, 0.46229059, 1)
+albedo_texture = ExtResource("2_xehqc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bpugw"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 0, 1)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, -0.4, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 1.0999978
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gjjrj"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.15686275)
+albedo_texture = ExtResource("3_xehqc")
+billboard_mode = 1
+fixed_size = true
+distance_fade_mode = 1
+distance_fade_min_distance = 3.0
+distance_fade_max_distance = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_vvxqx"]
+material = SubResource("StandardMaterial3D_gjjrj")
+size = Vector2(0.2, 0.2)
+
+[node name="Background" type="Node3D"]
+script = ExtResource("1_i7s6n")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_splo0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, 0, 0, 0)
+mesh = SubResource("PlaneMesh_eq6nc")
+surface_material_override/0 = SubResource("StandardMaterial3D_bpugw")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.9087779, 0.4172803, 0, -0.4172803, 0.9087779, 0, 0.8829257, 1)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95451474, -0.8340676)
+amount = 24
+lifetime = 2.0
+preprocess = 1.75
+process_material = SubResource("ParticleProcessMaterial_bpugw")
+draw_pass_1 = SubResource("QuadMesh_vvxqx")

@@ -1,0 +1,247 @@
+[gd_scene load_steps=12 format=3 uid="uid://hrwso57entg"]
+
+[ext_resource type="Script" uid="uid://4debt2fxx604" path="res://game_ui.gd" id="1_obik5"]
+[ext_resource type="Texture2D" uid="uid://7jjfawaj2v8x" path="res://ui_reference.png" id="1_ue6oa"]
+[ext_resource type="Theme" uid="uid://co4p6ha0g6xta" path="res://theme.tres" id="2_oaw30"]
+[ext_resource type="Texture2D" uid="uid://dci5g8crymb80" path="res://heart.png" id="3_3rlp6"]
+[ext_resource type="Texture2D" uid="uid://gf0b072w1lkt" path="res://star.png" id="4_obik5"]
+[ext_resource type="Texture2D" uid="uid://cd8bpruubjjkg" path="res://system.png" id="6_xlnb1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vealc"]
+
+[sub_resource type="Gradient" id="Gradient_obik5"]
+colors = PackedColorArray(0.23392546, 0.23392546, 0.23392543, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xlnb1"]
+gradient = SubResource("Gradient_obik5")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vealc"]
+texture = SubResource("GradientTexture2D_xlnb1")
+
+[sub_resource type="LabelSettings" id="LabelSettings_xlnb1"]
+font_size = 32
+shadow_size = 5
+shadow_color = Color(0.0015193435, 0.12685424, 0.5696408, 1)
+shadow_offset = Vector2(0, 3)
+
+[node name="GameUI" type="Control"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -960.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_obik5")
+
+[node name="Ref" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(32, 480)
+scale = Vector2(2, 2)
+texture = ExtResource("1_ue6oa")
+region_enabled = true
+region_rect = Rect2(32, 32, 32, 480)
+
+[node name="Ref2" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(1056, 480)
+scale = Vector2(2, 2)
+texture = ExtResource("1_ue6oa")
+region_enabled = true
+region_rect = Rect2(64, 32, 224, 480)
+
+[node name="Ref3" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(448, 944)
+scale = Vector2(2, 2)
+texture = ExtResource("1_ue6oa")
+region_enabled = true
+region_rect = Rect2(32, 528, 384, 16)
+
+[node name="Ref4" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(448, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("1_ue6oa")
+region_enabled = true
+region_rect = Rect2(32, 512, 384, 16)
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+z_index = 1
+texture = ExtResource("6_xlnb1")
+centered = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1280.0
+offset_bottom = 960.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="UITop" type="Panel" parent="CanvasGroup/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme = ExtResource("2_oaw30")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasGroup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UILeft" type="Panel" parent="CanvasGroup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 896)
+layout_mode = 2
+theme = ExtResource("2_oaw30")
+
+[node name="Container" type="Control" parent="CanvasGroup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(768, 0)
+layout_mode = 2
+
+[node name="BossInfo" type="MarginContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -668.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo"]
+layout_mode = 2
+
+[node name="BossName" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "bossname"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 16
+
+[node name="BossHealthBar" type="ProgressBar" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxEmpty_vealc")
+theme_override_styles/fill = SubResource("StyleBoxTexture_vealc")
+value = 100.0
+show_percentage = false
+
+[node name="BossTimer" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "99"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("4_obik5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PhasesRemaining" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 32
+text = "1"
+vertical_alignment = 1
+
+[node name="UIRight" type="Panel" parent="CanvasGroup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(448, 892)
+layout_mode = 2
+theme = ExtResource("2_oaw30")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer"]
+z_index = 1000
+layout_mode = 2
+
+[node name="Container" type="Container" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 192)
+layout_mode = 2
+
+[node name="Life" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/Life"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "LIFE"
+label_settings = SubResource("LabelSettings_xlnb1")
+
+[node name="LifeTexture" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/Life"]
+unique_name_in_owner = true
+texture_repeat = 2
+layout_mode = 2
+texture = ExtResource("3_3rlp6")
+stretch_mode = 1
+
+[node name="Bomb" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/Bomb"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "SPELL"
+label_settings = SubResource("LabelSettings_xlnb1")
+
+[node name="BombTexture" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/Bomb"]
+unique_name_in_owner = true
+texture_repeat = 2
+layout_mode = 2
+texture = ExtResource("4_obik5")
+stretch_mode = 1
+
+[node name="Graze" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="GrazeCount" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/Graze"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "GRAZE: 0"
+label_settings = SubResource("LabelSettings_xlnb1")
+
+[node name="UIBottom" type="Panel" parent="CanvasGroup/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme = ExtResource("2_oaw30")

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://du3vcvy2rhe0m"]
+
+[ext_resource type="Texture2D" uid="uid://dwjt3v7wg8dju" path="res://output.png" id="1_b105h"]
+[ext_resource type="Script" uid="uid://cp1w38ewby46g" path="res://boss/boss.gd" id="1_yy71b"]
+[ext_resource type="PackedScene" uid="uid://p3vq5ngw2h8f" path="res://hitbox.tscn" id="3_yy71b"]
+[ext_resource type="Script" uid="uid://dvdsjrl4xiy5r" path="res://boss/phase.gd" id="4_270ai"]
+
+[node name="Boss" type="CharacterBody2D" groups=["enemy"]]
+process_mode = 1
+z_index = -100
+script = ExtResource("1_yy71b")
+metadata/_custom_type_script = "uid://sccx3xnyduhd"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_b105h")
+
+[node name="Hitbox" parent="." instance=ExtResource("3_yy71b")]
+collision_layer = 0
+collision_mask = 4
+radius = 64.0
+
+[node name="Phase" type="Node" parent="."]
+script = ExtResource("4_270ai")
+metadata/_custom_type_script = "uid://dvdsjrl4xiy5r"
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

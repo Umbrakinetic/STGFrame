@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://pxmibwiq84n0"]
+
+[ext_resource type="Script" uid="uid://eaa3071abokd" path="res://bullet/bullet.gd" id="1_v8qja"]
+[ext_resource type="Script" uid="uid://c6v87uogpc2yb" path="res://bullet/bullet_sprite.gd" id="2_v8qja"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t4vbm"]
+blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t4vbm"]
+radius = 8.0
+
+[node name="Bullet" type="CharacterBody2D" groups=["bullet"]]
+process_mode = 1
+z_index = -1
+collision_layer = 4
+collision_mask = 0
+collision_priority = 10.0
+motion_mode = 1
+safe_margin = 0.01
+script = ExtResource("1_v8qja")
+
+[node name="Sprite" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 10
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_t4vbm")
+script = ExtResource("2_v8qja")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(1.35, 1.35)
+shape = SubResource("CircleShape2D_t4vbm")

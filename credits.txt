@@ -1,0 +1,6 @@
+-- Graphics --
+Default Reimu Player Sprite: DD
+
+
+-- SFX --
+Shooting, Player Death, Enemy Kill: 

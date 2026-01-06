@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwkqrejr5v000"]
+
+[ext_resource type="Shader" uid="uid://dtppssgn2v340" path="res://player/bomb.gdshader" id="1_11jk0"]
+[ext_resource type="Texture2D" uid="uid://cwiek00x0nhnm" path="res://border_line.png" id="1_vpyvq"]
+
+[sub_resource type="GDScript" id="GDScript_vpyvq"]
+resource_name = "default_bomb"
+script/source = "extends Area2D
+
+var player
+
+var expanding: bool = true
+
+func _ready() -> void:
+	player.invincible = true
+	$Line2D.material = $Line2D.material.duplicate()
+	afterimage_loop()
+	
+	scale = Vector2.ZERO
+	var twn = Tool.quick_tween(self, \"scale\", Vector2.ONE * 3, 1.5, Tween.EASE_OUT)
+	twn.parallel().tween_property(self, \"rotation_degrees\", 540 * Tool.rand_sign(), 1.5)
+	
+	twn.set_trans(Tween.TRANS_LINEAR)
+	twn.tween_property($Line2D, \"material:shader_parameter/alpha\", 0, 1)
+	twn.parallel().tween_property(self, \"modulate:a\", 0, 1)
+	
+	await twn.step_finished
+	expanding = false
+	
+	await twn.finished
+	player.bombing = false
+	player.invincible = false
+	queue_free()
+
+func afterimage_loop() -> void:
+	while true:
+		await Tool.quick_timer(0.03).timeout
+		var line: Line2D = $Line2D.duplicate()
+		Gametray.add_child(line)
+		line.material = null
+		line.modulate.a = 0.5
+		line.global_transform = global_transform
+		fade(line)
+
+func fade(line: Line2D) -> void:
+	var after_tween: = Tool.quick_tween(line, \"modulate:a\", 0, 0.75)
+	after_tween.parallel().tween_property(line, \"scale\", line.scale * 1.5, 0.75)
+	after_tween.finished.connect(func(): line.queue_free())
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Bullet and not body.is_in_group(\"playerbullet\") and body.cancellable:
+		body.start_free()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tgdgs"]
+size = Vector2(140, 140)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wv2yy"]
+shader = ExtResource("1_11jk0")
+shader_parameter/speed = Vector2(1, 0)
+shader_parameter/alpha = 1.0
+
+[node name="Bomb" type="Area2D"]
+z_index = -100
+collision_layer = 0
+collision_mask = 4
+script = SubResource("GDScript_vpyvq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tgdgs")
+
+[node name="Line2D" type="Line2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_wv2yy")
+points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+closed = true
+width = 16.0
+texture = ExtResource("1_vpyvq")
+texture_mode = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

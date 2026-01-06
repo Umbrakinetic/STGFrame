@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://hrwso57entg"]
 
-[ext_resource type="Script" uid="uid://4debt2fxx604" path="res://game_ui.gd" id="1_obik5"]
-[ext_resource type="Texture2D" uid="uid://7jjfawaj2v8x" path="res://ui_reference.png" id="1_ue6oa"]
+[ext_resource type="Script" uid="uid://4debt2fxx604" path="res://UI/game_ui.gd" id="1_obik5"]
+[ext_resource type="Texture2D" uid="uid://ouhjo53la0vm" path="res://UI/ui_reference.png" id="1_ue6oa"]
 [ext_resource type="Theme" uid="uid://co4p6ha0g6xta" path="res://theme.tres" id="2_oaw30"]
-[ext_resource type="Texture2D" uid="uid://dci5g8crymb80" path="res://heart.png" id="3_3rlp6"]
-[ext_resource type="Texture2D" uid="uid://gf0b072w1lkt" path="res://star.png" id="4_obik5"]
-[ext_resource type="Texture2D" uid="uid://cd8bpruubjjkg" path="res://system.png" id="6_xlnb1"]
+[ext_resource type="Texture2D" uid="uid://c64nnupck6cy1" path="res://UI/heart.png" id="3_3rlp6"]
+[ext_resource type="Texture2D" uid="uid://buh7ownntc031" path="res://UI/star.png" id="4_obik5"]
+[ext_resource type="Texture2D" uid="uid://capa8nh5hjf0k" path="res://UI/system.png" id="6_xlnb1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vealc"]
 

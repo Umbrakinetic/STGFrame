@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://bnvr4tc24o5q0"]
 
-[ext_resource type="Script" uid="uid://c1s8a3o0n05yv" path="res://background.gd" id="1_i7s6n"]
-[ext_resource type="Texture2D" uid="uid://bby1beu7yd3w0" path="res://water_0339.jpg" id="2_xehqc"]
-[ext_resource type="Texture2D" uid="uid://ctspv41uplp2w" path="res://bullet/circle_top.png" id="3_xehqc"]
+[ext_resource type="Script" uid="uid://c1s8a3o0n05yv" path="res://main_scene/background.gd" id="1_i7s6n"]
+[ext_resource type="Texture2D" uid="uid://c25a6lfe8cg3l" path="res://main_scene/water_0339.jpg" id="2_xehqc"]
+[ext_resource type="Texture2D" uid="uid://buqxbpyk1f5og" path="res://bullet/circle_top.png" id="3_xehqc"]
 
 [sub_resource type="Environment" id="Environment_splo0"]
 background_mode = 1

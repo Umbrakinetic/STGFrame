@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://du3vcvy2rhe0m"]
 
-[ext_resource type="Texture2D" uid="uid://dwjt3v7wg8dju" path="res://output.png" id="1_b105h"]
-[ext_resource type="Script" uid="uid://cp1w38ewby46g" path="res://boss/boss.gd" id="1_yy71b"]
+[ext_resource type="Texture2D" uid="uid://cqthjvwtacext" path="res://enemy/boss/boss.png" id="1_b105h"]
+[ext_resource type="Script" uid="uid://cp1w38ewby46g" path="res://enemy/boss/boss.gd" id="1_yy71b"]
 [ext_resource type="PackedScene" uid="uid://p3vq5ngw2h8f" path="res://hitbox.tscn" id="3_yy71b"]
-[ext_resource type="Script" uid="uid://dvdsjrl4xiy5r" path="res://boss/phase.gd" id="4_270ai"]
+[ext_resource type="Script" uid="uid://dvdsjrl4xiy5r" path="res://enemy/boss/phase.gd" id="4_270ai"]
 
 [node name="Boss" type="CharacterBody2D" groups=["enemy"]]
 process_mode = 1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dwkqrejr5v000"]
 
 [ext_resource type="Shader" uid="uid://dtppssgn2v340" path="res://player/bomb.gdshader" id="1_11jk0"]
-[ext_resource type="Texture2D" uid="uid://cwiek00x0nhnm" path="res://border_line.png" id="1_vpyvq"]
+[ext_resource type="Texture2D" uid="uid://c0voj6tk5yhrc" path="res://player/border_line.png" id="1_vpyvq"]
 
 [sub_resource type="GDScript" id="GDScript_vpyvq"]
 resource_name = "default_bomb"

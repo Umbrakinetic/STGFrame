@@ -16,6 +16,7 @@ signal phase_started
 signal defeated
 
 func _ready() -> void:
+	invincible = true
 	var move_tween = Tool.quick_tween(self, "global_position", start_pos, 1, Tween.EASE_IN, Tween.TRANS_LINEAR)
 	await move_tween.finished
 	await wait(1)

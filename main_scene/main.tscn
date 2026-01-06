@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://bguruyv0rhunf"]
 
 [ext_resource type="PackedScene" uid="uid://u5q5a7xl7gpt" path="res://player/player.tscn" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://bt0tnmdih3lea" path="res://main.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://hrwso57entg" path="res://game_ui.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://bnvr4tc24o5q0" path="res://background.tscn" id="5_lquwl"]
-[ext_resource type="Script" uid="uid://ddebscdi2xrrq" path="res://clear_border.gd" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://bt0tnmdih3lea" path="res://main_scene/main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://hrwso57entg" path="res://UI/game_ui.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bnvr4tc24o5q0" path="res://main_scene/background.tscn" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://ddebscdi2xrrq" path="res://main_scene/clear_border.gd" id="6_7mycd"]
 
 [node name="Node2D" type="Node2D"]
 process_mode = 1

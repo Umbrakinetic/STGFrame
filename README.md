@@ -11,9 +11,10 @@ STGFrame is an open-source framework to develop touhou-style shmup games in Godo
 
 
 To use this project, either:
-A) Clone the repository to your Godot Projects folder and scan that folder from the Projects List window.
 
-B) Download the ZIP of this repository, then select "Import" from the Projects List window and select the downloaded ZIP.
+  A) Clone the repository to your Godot Projects folder and scan that folder from the Projects List window.
+
+  B) Download the ZIP of this repository, then select "Import" from the Projects List window and select the downloaded ZIP.
 
 
 

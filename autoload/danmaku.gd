@@ -209,24 +209,6 @@ func bullet_line(point1: Vector2, point2: Vector2, bullet_count: int = 5, wait_t
 			await get_tree().create_timer(wait_time, false, true).timeout
 	return array
 
-# Sets a custom behavior for the bullet.
-# Ideally used only in the same frame as creating a bullet.
-# If it's set any frame after a bullet's creation, an additional conditional will be
-# needed to see if the bullet isn't freed already.
-func set_behavior(bullet: Bullet, behavior: Resource, additional_args: Array = []) -> void:
-	await get_tree().physics_frame
-	if bullet == null: return
-	var b = behavior.new()
-	bullet.custom_behavior = b
-	b.bullet = bullet
-	b.custom_args = additional_args
-	b._start()
-
-# Removes the current custom behavior from the bullet.
-func remove_behavior(bullet: Bullet) -> void:
-	if bullet.custom_behavior != null: bullet.custom_behavior = null
-	else:printerr("Attempting to remove BulletBehavior on bullet " + str(bullet.name) + " but there is no BulletBehavior attached!")
-
 # makes a bullet act as if it's on the player's side.
 # this means it hits enemies and not the player, has a "damage" value and attributes which affect its damage.
 # also lowers its z-index as enemy bullets are more important than player bullets

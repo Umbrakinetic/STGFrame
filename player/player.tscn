@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://u5q5a7xl7gpt"]
 
 [ext_resource type="Script" uid="uid://ctu8x43gowxsu" path="res://player/player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://dw6thhelsk6cc" path="res://player/player_sprite.png" id="2_g1dw6"]
-[ext_resource type="Texture2D" uid="uid://0fmfehm72moy" path="res://player/player_option.png" id="2_g6k8r"]
-[ext_resource type="Texture2D" uid="uid://bvh2nevxlo7sy" path="res://player/grazebox.png" id="3_g1dw6"]
-[ext_resource type="AudioStream" uid="uid://kj4vflxtxwuh" path="res://sfx/switch01.wav" id="4_yw30f"]
-[ext_resource type="AudioStream" uid="uid://bge3amrimomgk" path="res://sfx/laser01.wav" id="5_qjkh3"]
+[ext_resource type="Texture2D" uid="uid://6beax3xb0m5f" path="res://player/player_sprite.png" id="2_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://dsbevi61088yy" path="res://player/player_option.png" id="2_g6k8r"]
+[ext_resource type="Texture2D" uid="uid://bff6p8kerdprl" path="res://player/grazebox.png" id="3_g1dw6"]
+[ext_resource type="AudioStream" uid="uid://bsn80eostomy3" path="res://sfx/player_shoot.wav" id="4_yw30f"]
+[ext_resource type="AudioStream" uid="uid://didpaba04piaq" path="res://sfx/player_death.wav" id="5_qjkh3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g6k8r"]
 radius = 8.0

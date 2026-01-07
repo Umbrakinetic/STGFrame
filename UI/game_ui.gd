@@ -9,8 +9,8 @@ var boss_present: bool = false:
 		boss_present = value
 		%BossInfo.visible = value
 
-var life_texture = preload("uid://dci5g8crymb80")
-var bomb_texture = preload("uid://gf0b072w1lkt")
+var life_texture = preload("uid://c64nnupck6cy1")
+var bomb_texture = preload("uid://buh7ownntc031")
 
 func _ready() -> void:
 	player.resources_updated.connect(update_resources)

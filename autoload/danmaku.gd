@@ -21,9 +21,8 @@ const TYPE_DROPLET   = 6
 const TYPE_CRYSTAL   = 7
 const TYPE_FLOWER    = 8
 const TYPE_HEART     = 9
-const TYPE_AMULET    = 10
-const TYPE_SQUARE    = 11
-const TYPE_SLAVE     = 12
+const TYPE_SQUARE    = 10
+const TYPE_SLAVE     = 11
 
 enum Bullet_Type {
 	TYPE_CIRCLE,
@@ -36,7 +35,6 @@ enum Bullet_Type {
 	TYPE_CRYSTAL,
 	TYPE_FLOWER,
 	TYPE_HEART,
-	TYPE_AMULET,
 	TYPE_SQUARE,
 	
 	TYPE_SLAVE,
@@ -49,71 +47,66 @@ enum Bullet_Type {
 
 var type_dict: Dictionary[Bullet_Type, Array] = {
 	TYPE_CIRCLE : [
-		preload("uid://cn41eioj5bci2"), ##Bottom Sprite
-		preload("uid://ctspv41uplp2w"), ##Top Sprite
+		preload("uid://bbu7axu8cugyu"), ##Bottom Sprite
+		preload("uid://buqxbpyk1f5og"), ##Top Sprite
 		PackedVector2Array([            ##Hitbox Transform
 			Vector2(1.175, 0.0), Vector2(0.0, 1.175), Vector2(0.0, 0.0)
 		]),
 	],
 	TYPE_ARROWHEAD : [
-		preload("uid://begcn0v515v5d"), 
-		preload("uid://bpsn8nt18a74x"), 
+		preload("uid://d0partpowqude"), 
+		preload("uid://dcv8glk48dpta"), 
 		PackedVector2Array([Vector2(1.225, 0.0),Vector2(0.0, 1.07),Vector2(-2.0, 0.0)]) 
 	],
 	TYPE_SCALE : [
-		null,
-		null,
-		null,
+		preload("uid://dc1ce72itgaky"),
+		preload("uid://c1t36hbm8tfwg"),
+		PackedVector2Array([Vector2(2.56, 0.0), Vector2(0.0, 1.55), Vector2(-1.96, 0.0)])
+,
 	],
 	TYPE_STAR : [
-		preload("uid://beutbbk8b73f1"),
-		preload("uid://cud8ha8exmwed"),
+		preload("uid://bu8akd05b247a"),
+		preload("uid://bcv24gbarcisc"),
 		PackedVector2Array([Vector2(1.44, 0.0), Vector2(0.0, 1.44), Vector2(-3.015, 0.0)])
 	],
 	TYPE_BLADE : [
-		null,
-		null,
-		null,
+		preload("uid://brsvwrost6ugc"),
+		preload("uid://bf3v5i7vldfxq"),
+		PackedVector2Array([Vector2(1.35, 0.0), Vector2(0.0, 0.47), Vector2(7.815, 0.0)]),
 	],
 	TYPE_LTRLBULLET : [
-		preload("uid://bvf7vs7uj6xg"), 
-		preload("uid://cinahlei7woqp"), 
+		preload("uid://csrlhro2pfd3p"), 
+		preload("uid://cbiegvvmyrnht"), 
 		PackedVector2Array([Vector2(2.0, 0.0), Vector2(0.0, 0.65), Vector2(0.0, 0.0)])
 	],
 	TYPE_DROPLET : [
-		null,
-		null,
-		null,
+		preload("uid://bvu4m3po82t4b"),
+		preload("uid://drtfxdirw60l4"),
+		PackedVector2Array([Vector2(1.575, 0.0), Vector2(0.0, 1.575), Vector2(5.0, 0.0)]),
 	],
 	TYPE_CRYSTAL : [
-		preload("uid://dim0dtvfwjn7f"), 
-		preload("uid://y23x8gvo0bho"), 
+		preload("uid://yjrnk7jgufvh"), 
+		preload("uid://bjwypqi8pja5p"), 
 		PackedVector2Array([Vector2(1.48, 0.0), Vector2(0.0, 0.83), Vector2(0.0, 0.0)])
 	],
 	TYPE_FLOWER : [
-		preload("uid://sylq8croohvf"), 
-		preload("uid://c3wj7vxojir7c"), 
+		preload("uid://dslscb1drwv3x"), 
+		preload("uid://bjageeff3fbrt"), 
 		PackedVector2Array([Vector2(2.045, 0.0), Vector2(0.0, 2.045), Vector2(-2.0, 0.0)])
 	],
 	TYPE_HEART : [
-		preload("uid://ca6743anyg4cw"), 
-		preload("uid://c62371rbi08hp"), 
+		preload("uid://b0iwcxcemo3yq"), 
+		preload("uid://bmcvmst33fcuh"), 
 		PackedVector2Array([Vector2(2.05, 0.0), Vector2(0.0, 2.05), Vector2(-0.955, 0.0)])
 	],
-	TYPE_AMULET : [
-		null,
-		null,
-		null,
-	],
-	
 	TYPE_SQUARE : [
-		preload("uid://dgubyl47j20d6"),
-		preload("uid://b6kquodabdlco"),
+		preload("uid://c24m5t6avs504"),
+		preload("uid://ccgxoq2s1ar8s"),
 		PackedVector2Array([Vector2(1.35, 0.0), Vector2(0.0, 1.35), Vector2(0.0, 0.0)])
 	],
 	
 	TYPE_SLAVE : [
-		preload("uid://cqsq5hog5bg11"),
+		preload("uid://dd26tk777pt3t"),
 		null,
 		PackedVector2Array([Vector2.ZERO, Vector2.ZERO, Vector2.ZERO])
 

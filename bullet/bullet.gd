@@ -116,13 +116,6 @@ func _physics_process(delta: float) -> void:
 func start_free(delete_type: Variant = 4) -> void:
 	freeing = true
 	Gametray.bullet_list.erase(self)
-	
-	#var particles_trails = Global.get_all_children(self).filter(func(input): return input is GPUParticles2D)
-	#
-	#for i: GPUParticles2D in particles_trails:
-		#i.reparent(Gametray)
-		#i.start_free_timer()
-	#
 	#disable_hitbox()
 	#var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC).set_pause_mode(Tween.TWEEN_PAUSE_STOP)
 	#match delete_type: 
@@ -194,33 +187,6 @@ func kill_acceleration() -> void:
 func change_angle(new_angle: float, time_sec: float, tween_ease: Tween.EaseType = Tween.EASE_OUT, trans_type: Tween.TransitionType = Tween.TRANS_CIRC) -> void:
 	var tween = create_tween().set_ease(tween_ease).set_trans(trans_type)
 	tween.tween_method(set_angle, get_angle(), new_angle, time_sec)
-
-#func add_particle(particle, mod: Color = Color(0, 0, 0, 0)) -> void:
-	#var p = Global.bullet_particles[particle].instantiate()
-	#if mod != Color(0, 0, 0, 0):
-		#p.modulate = mod
-	#p.process_material.initial_velocity = Vector2(50, 200)
-	#add_child(p)
-	#p.emitting = true
-
-#func add_trail() -> void:
-	#var p = preload("res://bullet/particles/bullet_trail.tscn").instantiate()
-	
-	#add_child(p)
-	#p.texture = %BottomSprite.texture
-	#p.modulate = %BottomSprite.self_modulate
-	
-
-## Temporary function because somehow, adding a GPUParticles2D node after a bounce collision makes the default
-## collision particles go the right angle??
-## The two particle nodes aren't even connected?? the fuck
-func reset_impact_angle() -> void:
-	var p = GPUParticles2D.new()
-	add_child(p)
-	p.queue_free()
-
-func set_spectral(value: bool = true) -> void:
-	set_collision_mask_value(1, not value)
 
 func disable_hitbox() -> void:
 	$Hitbox.set_deferred("disabled", true)

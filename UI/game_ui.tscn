@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://4debt2fxx604" path="res://UI/game_ui.gd" id="1_obik5"]
 [ext_resource type="Texture2D" uid="uid://ouhjo53la0vm" path="res://UI/system_reference.png" id="1_ue6oa"]
 [ext_resource type="Theme" uid="uid://co4p6ha0g6xta" path="res://theme.tres" id="2_oaw30"]
-[ext_resource type="Texture2D" uid="uid://c64nnupck6cy1" path="res://UI/heart.png" id="3_3rlp6"]
-[ext_resource type="Texture2D" uid="uid://buh7ownntc031" path="res://UI/star.png" id="4_obik5"]
+[ext_resource type="Texture2D" uid="uid://by5bhbi1is1k0" path="res://UI/life.png" id="6_fy64h"]
+[ext_resource type="Texture2D" uid="uid://cfpshct2k52qa" path="res://UI/bomb.png" id="6_v6n52"]
 [ext_resource type="Texture2D" uid="uid://capa8nh5hjf0k" path="res://UI/system.png" id="6_xlnb1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vealc"]
@@ -112,7 +112,6 @@ layout_mode = 2
 
 [node name="BossInfo" type="MarginContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,7 +161,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("4_obik5")
+texture = ExtResource("6_v6n52")
 expand_mode = 1
 stretch_mode = 5
 
@@ -210,7 +209,7 @@ label_settings = SubResource("LabelSettings_xlnb1")
 unique_name_in_owner = true
 texture_repeat = 2
 layout_mode = 2
-texture = ExtResource("3_3rlp6")
+texture = ExtResource("6_fy64h")
 stretch_mode = 1
 
 [node name="Bomb" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
@@ -227,7 +226,7 @@ label_settings = SubResource("LabelSettings_xlnb1")
 unique_name_in_owner = true
 texture_repeat = 2
 layout_mode = 2
-texture = ExtResource("4_obik5")
+texture = ExtResource("6_v6n52")
 stretch_mode = 1
 
 [node name="Graze" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]

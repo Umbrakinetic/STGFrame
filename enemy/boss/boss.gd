@@ -33,15 +33,12 @@ func _on_death() -> void:
 	print("on death")
 	if current_phase + 1 < phases.size():
 		print("boss phase cleared")
-		invincible = true
 		give_drops()
 		await $Phase.end_phase()
 		await wait(1)
 		current_phase += 1
 		start_phase()
 		dying = false
-		await wait(1)
-		invincible = false
 	else:
 		print("boss die")
 		defeated.emit()

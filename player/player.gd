@@ -114,7 +114,7 @@ func _physics_process(delta: float) -> void:
 
 @onready var options: = [%Option1, %Option2]
 func shoot(x_offset: float):
-	var b: = Danmaku.spawn_bullet(global_position + Vector2(x_offset, -32), 32, -90, Danmaku.TYPE_ARROWHEAD, Color.PINK, self, 0)
+	var b: = Danmaku.spawn_bullet(global_position + Vector2(x_offset, -32), 32, -90, Danmaku.TYPE_SQUARE, Color.PINK, self, 0)
 	Danmaku.set_player_bullet(b)
 	b.modulate.a = 0.4
 	b.set_size(Vector2(3, 0.5))
@@ -124,6 +124,7 @@ func shoot(x_offset: float):
 			var op_b: = Danmaku.spawn_bullet(i.global_position, 30, -90, Danmaku.TYPE_ARROWHEAD, Color.RED, self, 0)
 			Danmaku.set_player_bullet(op_b, 1.8)
 			op_b.modulate.a = 0.3
+			op_b.set_size(Vector2(3, 0.5))
 	else:
 		for i: Node2D in options:
 			var op_b: = Danmaku.spawn_bullet(i.global_position, 20, -90, Danmaku.TYPE_SQUARE, Color.RED, self, 0)

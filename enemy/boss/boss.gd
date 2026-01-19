@@ -29,10 +29,14 @@ func start_phase() -> void:
 	$Phase.start()
 	phase_started.emit()
 
+
+## when boss health reaches 0, stops the current pattern (phase), 
+## & waits for a second before starting a new pattern.
+## if no patterns remain, the boss will die for real.
 func _on_death() -> void:
-	print("on death")
+	invincible = true
+	clear_all_bullets()
 	if current_phase + 1 < phases.size():
-		print("boss phase cleared")
 		give_drops()
 		await $Phase.end_phase()
 		await wait(1)
@@ -40,7 +44,10 @@ func _on_death() -> void:
 		start_phase()
 		dying = false
 	else:
-		print("boss die")
 		defeated.emit()
 		queue_free()
-	
+
+func clear_all_bullets() -> void:
+	for i in get_tree().get_nodes_in_group("bullet"):
+		if not i.is_in_group("playerbullet"):
+			i.start_free()

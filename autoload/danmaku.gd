@@ -62,7 +62,6 @@ var type_dict: Dictionary[Bullet_Type, Array] = {
 		preload("uid://dc1ce72itgaky"),
 		preload("uid://c1t36hbm8tfwg"),
 		PackedVector2Array([Vector2(2.56, 0.0), Vector2(0.0, 1.55), Vector2(-1.96, 0.0)])
-,
 	],
 	TYPE_STAR : [
 		preload("uid://bu8akd05b247a"),
@@ -109,31 +108,9 @@ var type_dict: Dictionary[Bullet_Type, Array] = {
 		preload("uid://dd26tk777pt3t"),
 		null,
 		PackedVector2Array([Vector2.ZERO, Vector2.ZERO, Vector2.ZERO])
-
 	],
+	
 }
-
-#var Type_Dictionary: = {
-	#TYPE_PELLET     : [preload("../bullet/sprites/pellet_top.png"), preload("../bullet/sprites/pellet_bottom.png"), preload("res://bullet/hitbox_shapes/pellet.tres"), Vector2(0, 0)],
-	#TYPE_ARROWHEAD  : [preload("res://bullet/sprites/arrowhead_top.png"), preload("res://bullet/sprites/arrowhead_bottom.png"), preload("res://bullet/hitbox_shapes/arrowhead.tres"), Vector2(-5, 0)],
-	#TYPE_BLADE      : [preload("res://bullet/sprites/blade_top.png"), preload("res://bullet/sprites/blade_bottom.png"), preload("res://bullet/hitbox_shapes/blade.tres"), Vector2(5, 0)],
-	#TYPE_CRYSTAL    : [preload("res://bullet/sprites/crystal_top.png"),preload("res://bullet/sprites/crystal_bottom.png"), preload("res://bullet/hitbox_shapes/blade.tres"), Vector2(0, 0)],
-	#
-	#TYPE_FOURSTAR   : [preload("res://bullet/sprites/4star_top.png"), preload("res://bullet/sprites/4star_bottom.png"), preload("res://bullet/hitbox_shapes/pellet.tres"), Vector2(0, 0)],
-	#TYPE_FIVESTAR   : [preload("res://bullet/sprites/5star_top.png"), preload("res://bullet/sprites/5star_bottom.png"), preload("res://bullet/hitbox_shapes/pellet.tres"), Vector2(0, 0)],
-	#TYPE_FLUX       : [preload("res://bullet/sprites/flux_top.png"), preload("res://bullet/sprites/flux_bottom.png"), preload("res://bullet/hitbox_shapes/pellet.tres"), Vector2(0, 0)],
-	#TYPE_CUBE       : [preload("res://bullet/sprites/cube_top.png"), preload("res://bullet/sprites/cube_bottom.png"), preload("res://bullet/hitbox_shapes/pellet.tres"), Vector2(0, 0)],
-#}
-
-## bullet types with animations. 
-## value is the number of frames of the key.
-#var animated_types: Dictionary = {
-	#TYPE_FOURSTAR   : 3,
-	#TYPE_FIVESTAR   : 3,
-	#TYPE_FLUX       : 4,
-	#TYPE_CUBE       : 7,
-#}
-
 #endregion
 
 #region Bullets
@@ -179,7 +156,8 @@ func spawn_circle(count: int, spawn_position: Vector2, speed: float, angle: floa
 
 func spawn_arc(count: int, spawn_position: Vector2, speed: float, angle: float, type: Bullet_Type = TYPE_CIRCLE, color: Color = Color.RED, origin: Node2D = null, spread: float = 15, delay: float = 0.2, distance: float = 0) -> Array[Bullet]:
 	var arc: Array[Bullet]
-	var bullet_angle = angle - (spread / 2.0)
+	var bullet_angle = angle 
+	bullet_angle -= spread / count
 	if not count % 2:
 		bullet_angle -= (spread/float(count)) / 2.0
 	for i in count:

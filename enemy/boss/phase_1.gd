@@ -8,11 +8,12 @@ func start() -> void:
 	
 
 func loop():
-	var s: = 1.0
+	var s: = 0.0
 	while boss.health > 0:
-		s += 0.01
-		var b := Danmaku.spawn_bullet(boss.position, 6, 8 * sin(s), Danmaku.TYPE_SCALE, Color.SEA_GREEN)
-		
+		s += 0.25
+		var a := Danmaku.spawn_arc(3, boss.position, 6, 90 + (45 * sin(s)), Danmaku.TYPE_SCALE, Color.YELLOW, boss, 45)
+		for b in a:
+			b.get_node("%Sprite").material = null
 		await boss.wait(0.05)
 
 #func loop():

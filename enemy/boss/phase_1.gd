@@ -26,9 +26,9 @@ func start() -> void:
 
 func loop():
 	while boss.health > 0:
-		for i in 3:
+		for i in 4:
 			Danmaku.spawn_bullet(boss.position, randf_range(4, 7), randi())
-		await boss.wait(0.1)
+		await boss.wait(0.05)
 
 func fall(args: Array):
 	var b = args[0]

@@ -57,5 +57,5 @@ func clear_all_bullets() -> void:
 	var a_pos: int = 0
 	for i in bullets:
 		if not i.is_in_group("playerbullet"):
-			i.start_free(Danmaku.DELETE_FADEGROW, a_pos / 240.0)
+			i.start_free(Danmaku.DELETE_FADEGROW, a_pos / 540.0)
 			a_pos += 1

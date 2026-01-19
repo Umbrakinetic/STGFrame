@@ -29,7 +29,6 @@ func start_phase() -> void:
 	$Phase.start()
 	phase_started.emit()
 
-
 ## when boss health reaches 0, stops the current pattern (phase), 
 ## & waits for a second before starting a new pattern.
 ## if no patterns remain, the boss will die for real.
@@ -46,7 +45,17 @@ func _on_death() -> void:
 		defeated.emit()
 		queue_free()
 
+## Clears all enemy bullets.
+## There is a (purely cosmetic) delay where the bullets 
+## further away take longer to delete.
+## the moment this function is run, all enemy bullets can 
+## no longer hit the player.
 func clear_all_bullets() -> void:
-	for i in get_tree().get_nodes_in_group("bullet"):
+	var bullets: Array = Gametray.bullet_list
+	bullets = Tool.sort_closest(bullets, position)
+	#bullets.reverse()
+	var a_pos: int = 0
+	for i in bullets:
 		if not i.is_in_group("playerbullet"):
-			i.start_free()
+			i.start_free(Danmaku.DELETE_FADEGROW, a_pos / 240.0)
+			a_pos += 1

@@ -143,10 +143,9 @@ func bullet_homing(args: Array) -> void:
 		if enemies.is_empty(): 
 			continue
 		
-		var closest = Tool.sort_closest(enemies, b.global_position)
+		var closest = Tool.sort_closest(enemies, b.global_position)[0]
 		b.velocity = b.velocity.lerp(b.global_position.direction_to(closest.global_position) * 60 * 16, 0.2)
 		b.velocity.clamp(Vector2(-16, -16), Vector2(16, 16))
-		#b.velocity += b.global_position.direction_to(closest.global_position) * 20
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body is Bullet and not body.is_in_group("playerbullet") == true and not invincible:

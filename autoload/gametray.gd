@@ -9,8 +9,6 @@ func _input(event: InputEvent) -> void:
 
 var max_bullet_count: int = 1000
 
-var bullet_list: Array[Bullet] = []
-
-func refresh_bullet_list():
-	bullet_list = bullet_list.filter(func(input): return not input == null)
-			
+var bullet_list: Array = []:
+	get():
+		return get_tree().get_nodes_in_group("bullet")

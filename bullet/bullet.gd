@@ -112,26 +112,26 @@ func _physics_process(delta: float) -> void:
 
 # Function to salvage everything that is not directly related to the bullet.
 # the bullet's components, like its sprite, are freed. Children bullets are reparented to the Gametray.
-func start_free(delete_type: Variant = 4) -> void:
+func start_free(delete_type: Variant = 1, predelay: float = 0.0) -> void:
+	kill_acceleration()
+	set_speed(get_speed() / 10)
 	freeing = true
-	Gametray.bullet_list.erase(self)
-	#disable_hitbox()
-	#var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC).set_pause_mode(Tween.TWEEN_PAUSE_STOP)
-	#match delete_type: 
-		#Global.DELETE_INSTANT:
-			#queue_free()
-			#return
-		#Global.DELETE_FADEOUT:
-			#tween.tween_method(set_alpha, get_alpha(), 0, 0.4)
-		#Global.DELETE_SHRINK:
-			#tween.tween_method(set_size, get_size(), Vector2(0, 0), 0.4)
-		#Global.DELETE_FADESHRINK:
-			#tween.tween_method(set_size, get_size(), Vector2(0, 0), 0.4)
-			#tween.parallel().tween_method(set_alpha, get_alpha(), 0, 0.4)
-		#Global.DELETE_FADEGROW:
-			#tween.tween_method(set_size, get_size(), get_size() * 2, 0.4)
-			#tween.parallel().tween_method(set_alpha, get_alpha(), 0, 0.4)
-	#await tween.finished
+	disable_hitbox()
+	
+	if predelay != 0: await Tool.quick_timer(predelay).timeout
+	
+	var delete_time: float = 0.2
+	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC).set_pause_mode(Tween.TWEEN_PAUSE_STOP)
+	match delete_type: 
+		Danmaku.DELETE_INSTANT:
+			queue_free()
+			return
+		Danmaku.DELETE_FADEGROW:
+			tween.tween_method(set_size, size, size * 2, delete_time)
+			tween.parallel().tween_method(set_alpha, get_alpha(), 0, delete_time)
+		Danmaku.DELETE_FADE:
+			tween.tween_method(set_alpha, get_alpha(), 0, delete_time)
+	await tween.finished
 	queue_free()
 
 

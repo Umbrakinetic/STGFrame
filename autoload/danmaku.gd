@@ -113,13 +113,23 @@ var type_dict: Dictionary[Bullet_Type, Array] = {
 }
 #endregion
 
+const DELETE_INSTANT  = 0
+const DELETE_FADEGROW = 1
+const DELETE_FADE     = 2
+const DELETE_SPRITE   = 3
+enum BulletDeleteType { ## Reference for how a bullet should visually be cleared.
+	DELETE_INSTANT,  ## instantly deletes the bullet with no frills.
+	DELETE_FADEGROW, ## increases the bullet's scale and reduces its alpha.
+	DELETE_FADE,     ## reduces the bullet's alpha.
+	DELETE_SPRITE,   ## plays a custom sprite animation on deletion (akin to modern touhou games)
+}
+
 #region Bullets
 const BULLET = preload("uid://pxmibwiq84n0")
 
 func spawn_bullet(spawn_position: Vector2, speed: float, angle: float, type: Bullet_Type = TYPE_CIRCLE, color: Color = Color.RED, origin: Node2D = null, delay: float = 0.2, distance: float = 0, bearing: float = 0 ) -> Bullet:
 	if Gametray.bullet_list.size() > Gametray.max_bullet_count:
-		Gametray.refresh_bullet_list()
-		Gametray.bullet_list.pop_front().start_free()
+		Gametray.bullet_list.pop_front().start_free(BulletDeleteType.DELETE_INSTANT)
 	var bullet: Bullet = BULLET.instantiate()
 	bullet.set_speed(speed)
 	bullet.set_angle(angle)
@@ -128,7 +138,6 @@ func spawn_bullet(spawn_position: Vector2, speed: float, angle: float, type: Bul
 	bullet.get_node("Sprite").color = color
 	bullet.get_node("Sprite").bullet_type = (type)
 	#if origin != null: bullet.origin  = origin
-	#bullet.get_node("Hitbox").shape = Type_Dictionary[type][2] 
 	
 	Gametray.call_deferred("add_child", bullet)
 	#Gametray.add_child(bullet)

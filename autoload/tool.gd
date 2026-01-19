@@ -51,8 +51,8 @@ func quick_timer(duration: float) -> SceneTreeTimer:
 		return timer
 	return null
 
-func sort_closest(array: Array, reference_point: Vector2) -> Node2D:
+func sort_closest(array: Array, reference_point: Vector2) -> Array:
 	array.sort_custom(func(a, b):
 		return a.global_position.distance_squared_to(reference_point) < b.global_position.distance_squared_to(reference_point))
 	
-	return array[0]
+	return array

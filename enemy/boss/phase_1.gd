@@ -17,12 +17,18 @@ func start() -> void:
 			#b.get_node("%Sprite").material = null
 		#await boss.wait(0.05)
 
+#func loop():
+	#while boss.health > 0:
+		#var c := Danmaku.spawn_circle(6, boss.position, 5, randi(), Danmaku.TYPE_SCALE, Color.BLUE)
+		#for i in c:
+			#i.set_behavior(fall.bind(), [i])
+		#await boss.wait(0.9)
+
 func loop():
 	while boss.health > 0:
-		var c := Danmaku.spawn_circle(6, boss.position, 5, randi(), Danmaku.TYPE_SCALE, Color.BLUE)
-		for i in c:
-			i.set_behavior(fall.bind(), [i])
-		await boss.wait(0.9)
+		for i in 3:
+			Danmaku.spawn_bullet(boss.position, randf_range(4, 7), randi())
+		await boss.wait(0.1)
 
 func fall(args: Array):
 	var b = args[0]

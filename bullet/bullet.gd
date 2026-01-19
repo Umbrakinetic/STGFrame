@@ -151,10 +151,6 @@ func frame_timer(frames: int) -> void:
 		if is_inside_tree():
 			await get_tree().physics_frame
 
-# Self-explanatory.
-#func find_angle_to_player(pos: Vector2 = self.global_position) -> float:
-	#return rad_to_deg(pos.angle_to_point(Global.player.global_position))
-
 #func find_angle_to_closest_enemy(pos: Vector2 = self.global_position) -> float:
 	#var enemy_array = get_tree().current_scene.get_node("%GameTray").get_children().filter(is_enemy)
 	#if enemy_array.size() > 0:

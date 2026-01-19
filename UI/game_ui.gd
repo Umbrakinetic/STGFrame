@@ -1,6 +1,6 @@
 extends Control
 
-@onready var player = get_tree().current_scene.get_node("Player")
+@onready var player = Gametray.player
 
 var graze_count: int = 0
 

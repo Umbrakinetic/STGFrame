@@ -78,7 +78,7 @@ func tst_3() -> void:
 	await tween2.finished
 	while slave:
 		var p = Vector2(randf_range(-384, 384), randf_range(-128, -200))
-		var to_player = rad_to_deg(p.angle_to_point(get_node("Player").global_position))
+		var to_player = rad_to_deg(p.angle_to_point(Gametray.player.global_position))
 		for count in 1:
 			Danmaku.spawn_bullet(p, randf_range(8, 12), 90, Danmaku.TYPE_CRYSTAL, Color.BLUE)
 		await Tool.quick_timer(0.02).timeout

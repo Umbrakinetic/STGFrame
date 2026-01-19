@@ -13,7 +13,7 @@ enum ItemTypes {
 
 @export var drops: Dictionary [ItemTypes, int]
 
-@onready var player = Tool.player
+@onready var player = Gametray.player
 
 var invincible: bool = false
 

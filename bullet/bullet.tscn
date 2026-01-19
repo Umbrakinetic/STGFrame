@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://pxmibwiq84n0"]
+[gd_scene load_steps=6 format=3 uid="uid://pxmibwiq84n0"]
 
 [ext_resource type="Script" uid="uid://eaa3071abokd" path="res://bullet/bullet.gd" id="1_v8qja"]
 [ext_resource type="Script" uid="uid://c6v87uogpc2yb" path="res://bullet/bullet_sprite.gd" id="2_v8qja"]
+[ext_resource type="Texture2D" uid="uid://c1t36hbm8tfwg" path="res://bullet/sprites/scale_top.png" id="3_0qjqd"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t4vbm"]
 blend_mode = 1
@@ -26,6 +27,7 @@ texture_filter = 1
 material = SubResource("CanvasItemMaterial_t4vbm")
 script = ExtResource("2_v8qja")
 bullet_type = 6
+top = ExtResource("3_0qjqd")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true

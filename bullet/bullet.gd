@@ -1,4 +1,3 @@
-@icon("res://editor/icons/bullet.svg")
 class_name Bullet extends CharacterBody2D
 
 signal finished_spawning

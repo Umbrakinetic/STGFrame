@@ -48,4 +48,6 @@ func set_resource_counter(counter_node, resource_count) -> void:
 
 func _physics_process(delta: float) -> void:
 	if Tool.boss != null and boss_present:
-		%BossHealthBar.value = Tool.boss.health
+		%BossHealthBar.value = lerp(\
+		%BossHealthBar.value, Tool.boss.health, 0.2)
+		

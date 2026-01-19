@@ -34,7 +34,6 @@ func start_phase() -> void:
 ## & waits for a second before starting a new pattern.
 ## if no patterns remain, the boss will die for real.
 func _on_death() -> void:
-	invincible = true
 	clear_all_bullets()
 	if current_phase + 1 < phases.size():
 		give_drops()

@@ -12,6 +12,7 @@ func rand_vector2(value_x: float, value_y: float = -1) -> Vector2:
 		randf_range(-value_x, value_x),
 		randf_range(-value_y, value_y)
 	)
+
 func speed(v_distance: float, v_time: float) -> float:
 	return (v_distance / v_time) / 60
 func distance(v_speed: float, v_time: float) -> float:

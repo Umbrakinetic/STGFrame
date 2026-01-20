@@ -37,6 +37,9 @@ signal lost
 
 var focus_tween: Tween
 
+func _ready() -> void:
+	%OptionPosition.global_position = global_position
+
 func _unhandled_input(event: InputEvent) -> void:
 	direction = Input.get_vector("ui_left", "ui_right","ui_up","ui_down") * int(can_move)
 	

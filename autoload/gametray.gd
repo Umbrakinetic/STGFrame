@@ -2,6 +2,10 @@ extends Node2D
 
 @onready var player = get_tree().current_scene.get_node("Player")
 
+var boss: Enemy
+
+signal boss_entered
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 

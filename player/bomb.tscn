@@ -13,7 +13,8 @@ var expanding: bool = true
 
 func _ready() -> void:
 	player.invincible = true
-	$Line2D.material = $Line2D.material.duplicate()
+	#$Line2D.material = $Line2D.material.duplicate()
+	
 	afterimage_loop()
 	
 	scale = Vector2.ZERO
@@ -38,7 +39,7 @@ func afterimage_loop() -> void:
 		var line: Line2D = $Line2D.duplicate()
 		Gametray.add_child(line)
 		line.material = null
-		line.modulate.a = 0.5
+		line.modulate.a = 0.2
 		line.global_transform = global_transform
 		fade(line)
 
@@ -58,7 +59,7 @@ size = Vector2(140, 140)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wv2yy"]
 shader = ExtResource("1_11jk0")
 shader_parameter/speed = Vector2(1, 0)
-shader_parameter/alpha = 1.0
+shader_parameter/alpha = 0.5000000074506
 
 [node name="Bomb" type="Area2D"]
 z_index = -100

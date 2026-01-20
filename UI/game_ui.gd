@@ -2,6 +2,8 @@ extends Control
 
 @onready var player = Gametray.player
 
+var boss
+
 var graze_count: int = 0
 
 var boss_present: bool = false:
@@ -22,12 +24,13 @@ func _ready() -> void:
 	)
 
 func boss_added() -> void:
-	%BossName.text = Tool.boss.boss_name
-	Tool.boss.phase_started.connect(func():
-		%BossHealthBar.max_value = Tool.boss.health
-		%BossHealthBar.value = Tool.boss.health
+	boss = Gametray.get_node("Boss")
+	%BossName.text = boss.boss_name
+	boss.phase_started.connect(func():
+		%BossHealthBar.max_value = boss.health
+		%BossHealthBar.value = boss.health
 	)
-	Tool.boss.defeated.connect(func():
+	boss.defeated.connect(func():
 		boss_present = false
 		
 	)
@@ -47,7 +50,7 @@ func set_resource_counter(counter_node, resource_count) -> void:
 	
 
 func _physics_process(delta: float) -> void:
-	if Tool.boss != null and boss_present:
+	if boss != null and boss_present:
 		%BossHealthBar.value = lerp(\
-		%BossHealthBar.value, Tool.boss.health, 0.2)
+		%BossHealthBar.value, boss.health, 0.2)
 		

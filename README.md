@@ -18,9 +18,9 @@ To use this project, either:
 
 
 
-The project so far is represented in the "main.tscn" scene, which is also the default scene to open when running the game.
+The project so far is represented in the "stage.tscn" scene, which is also the default scene to open when running the game.
 
-main.tscn consists of a player in a scene with a UI border. There are several patterns the player can view by opening main.tscn and editing main.gd; simply change the function in \_ready() to whichever pattern you wish to view.
+stage.tscn consists of a player in a scene with a UI border. There are several patterns the player can view by editing stage.gd; simply change the function in \_ready() to whichever pattern you wish to view.
 
 
 
@@ -42,13 +42,16 @@ Streamlines the process of creating bullets \& various patterns. Also includes s
 
 **Gametray.gd**
 
-Node under which all in-game nodes are parented to. Also currently contains a basic "pause" function (esc to pause/unpause).
+Node under which all in-game nodes are parented to.
 
+Contains references to the player and boss.
+
+Contains a basic "pause" function (esc to pause/unpause).
 
 
 **Tool.gd**
 
-Miscellaneous but useful functions used regularly in various situations. Also contains a reference to the Player and Boss.
+Miscellaneous but useful functions used regularly in various situations.
 
 
 

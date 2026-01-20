@@ -6,6 +6,8 @@ var current_phase: int = 0
 
 var boss_name: String = "Minnatsmonki"
 
+signal entered
+
 var phases: Array = [
 	preload("uid://bjxy3cjmsrv4u"),
 	preload("uid://cdmh8q7o5ku51"),
@@ -16,6 +18,7 @@ signal phase_started
 signal defeated
 
 func _ready() -> void:
+	entered.emit()
 	invincible = true
 	var move_tween = Tool.quick_tween(self, "global_position", start_pos, 1, Tween.EASE_IN, Tween.TRANS_LINEAR)
 	await move_tween.finished

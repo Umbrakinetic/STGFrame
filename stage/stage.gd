@@ -4,6 +4,7 @@ var c: int = 1
 
 func _ready():
 	pass
+	Gametray.player = $Player
 	#enemy_tst_1()
 	#tst_1()
 	boss_tst_1()
@@ -122,7 +123,6 @@ func boss_tst_1() -> void:
 	var boss = preload("uid://du3vcvy2rhe0m").instantiate()
 	Gametray.add_child(boss)
 	boss.global_position = Vector2(0, -320)
-	Tool.boss = boss
 	$GameUI.boss_present = true
 	$GameUI.boss_added()
 #endregion

@@ -62,6 +62,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		bombing = true
 		emit_signal("bombed")
 		
+		var cutin = preload("uid://crmdsard6ri2c").instantiate()
+		Gametray.add_child(cutin)
+		
 		var bomb = preload("uid://dwkqrejr5v000").instantiate()
 		bomb.player = self
 		Gametray.add_child(bomb)

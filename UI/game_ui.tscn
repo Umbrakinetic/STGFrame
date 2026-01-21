@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://4debt2fxx604" path="res://UI/game_ui.gd" id="1_obik5"]
 [ext_resource type="Texture2D" uid="uid://ouhjo53la0vm" path="res://UI/system_reference.png" id="1_ue6oa"]
 [ext_resource type="Theme" uid="uid://co4p6ha0g6xta" path="res://theme.tres" id="2_oaw30"]
+[ext_resource type="Texture2D" uid="uid://do7dtmrbpbfil" path="res://UI/system2.png" id="3_fy64h"]
 [ext_resource type="Texture2D" uid="uid://by5bhbi1is1k0" path="res://UI/life.png" id="6_fy64h"]
 [ext_resource type="Texture2D" uid="uid://cfpshct2k52qa" path="res://UI/bomb.png" id="6_v6n52"]
-[ext_resource type="Texture2D" uid="uid://capa8nh5hjf0k" path="res://UI/system.png" id="6_xlnb1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vealc"]
 
@@ -77,7 +77,7 @@ region_rect = Rect2(32, 512, 384, 16)
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
 z_index = 1
-texture = ExtResource("6_xlnb1")
+texture = ExtResource("3_fy64h")
 centered = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup"]
@@ -189,55 +189,69 @@ theme_override_constants/margin_bottom = 32
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer"]
 z_index = 1000
 layout_mode = 2
+theme_override_constants/separation = -3
 
 [node name="Container" type="Container" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 192)
+custom_minimum_size = Vector2(0, 175.175)
 layout_mode = 2
 
-[node name="Life" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Container" type="Container" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Container2" type="VBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="Life" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/Life"]
+[node name="Label" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Life"]
+visible = false
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "LIFE"
 label_settings = SubResource("LabelSettings_xlnb1")
 
-[node name="LifeTexture" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/Life"]
+[node name="LifeTexture" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Life"]
 unique_name_in_owner = true
 texture_repeat = 2
 layout_mode = 2
 texture = ExtResource("6_fy64h")
 stretch_mode = 1
 
-[node name="Bomb" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
+[node name="Bomb" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/Bomb"]
+[node name="Label2" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Bomb"]
+visible = false
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 text = "SPELL"
 label_settings = SubResource("LabelSettings_xlnb1")
 
-[node name="BombTexture" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/Bomb"]
+[node name="BombTexture" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Bomb"]
 unique_name_in_owner = true
 texture_repeat = 2
 layout_mode = 2
 texture = ExtResource("6_v6n52")
 stretch_mode = 1
 
-[node name="Graze" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
+[node name="Graze" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
-[node name="GrazeCount" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/Graze"]
+[node name="GrazeCount" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Graze"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-text = "GRAZE: 0"
+text = "0"
 label_settings = SubResource("LabelSettings_xlnb1")
 
 [node name="UIBottom" type="Panel" parent="CanvasGroup/VBoxContainer"]

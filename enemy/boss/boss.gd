@@ -49,10 +49,8 @@ func _on_death() -> void:
 		queue_free()
 
 ## Clears all enemy bullets.
-## There is a (purely cosmetic) delay where the bullets 
-## further away take longer to delete.
-## the moment this function is run, all enemy bullets can 
-## no longer hit the player.
+## There is a (purely cosmetic) delay where the bullets further away take longer to delete.
+## the moment this function is run, all enemy bullets can no longer hit the player.
 func clear_all_bullets() -> void:
 	var bullets: Array = Gametray.bullet_list
 	bullets = Tool.sort_closest(bullets, position)

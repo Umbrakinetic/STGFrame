@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bguruyv0rhunf"]
+[gd_scene format=3 uid="uid://bguruyv0rhunf"]
 
 [ext_resource type="PackedScene" uid="uid://u5q5a7xl7gpt" path="res://player/player.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://bt0tnmdih3lea" path="res://stage/stage.gd" id="1_h2yge"]
@@ -6,23 +6,23 @@
 [ext_resource type="PackedScene" uid="uid://bnvr4tc24o5q0" path="res://stage/background.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://ddebscdi2xrrq" path="res://stage/clear_border.gd" id="6_7mycd"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Stage" type="Node2D" unique_id=309247216]
 process_mode = 1
 script = ExtResource("1_h2yge")
 
-[node name="Player" parent="." instance=ExtResource("1_0xm2m")]
+[node name="Player" parent="." unique_id=1492113418 instance=ExtResource("1_0xm2m")]
 position = Vector2(0, 512)
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="." unique_id=1761326814]
 position = Vector2(192, 208)
 
-[node name="GameUI" parent="." instance=ExtResource("1_ig7tw")]
+[node name="GameUI" parent="." unique_id=101083300 instance=ExtResource("1_ig7tw")]
 offset_left = -448.0
 offset_top = -272.0
 offset_right = -448.0
 offset_bottom = -272.0
 
-[node name="DebugBulletCount" type="Label" parent="GameUI"]
+[node name="DebugBulletCount" type="Label" parent="GameUI" unique_id=725712115]
 unique_name_in_owner = true
 z_index = 100
 layout_mode = 0
@@ -32,17 +32,19 @@ offset_right = 1006.0
 offset_bottom = 39.0
 text = "DebugBulletCount"
 
-[node name="DebugFPS" type="Label" parent="GameUI"]
+[node name="DebugFPS" type="Label" parent="GameUI" unique_id=1112114258]
 unique_name_in_owner = true
 z_index = 100
 layout_mode = 0
-offset_left = 864.0
-offset_top = 48.0
-offset_right = 942.0
-offset_bottom = 71.0
+offset_left = 1110.0
+offset_top = 898.0
+offset_right = 1264.0
+offset_bottom = 943.0
+theme_override_font_sizes/font_size = 32
 text = "DebugFPS"
+horizontal_alignment = 2
 
-[node name="Background" parent="." instance=ExtResource("5_lquwl")]
+[node name="Background" parent="." unique_id=1730802043 instance=ExtResource("5_lquwl")]
 
 [node name="SubViewportContainer" parent="Background" index="2"]
 z_index = -500
@@ -54,22 +56,25 @@ offset_bottom = 656.0
 [node name="SubViewport" parent="Background/SubViewportContainer" index="0"]
 size = Vector2i(768, 896)
 
-[node name="ClearBorder" type="Area2D" parent="."]
+[node name="AnimationPlayer" parent="Background" index="4"]
+autoplay = &"new_animation"
+
+[node name="ClearBorder" type="Area2D" parent="." unique_id=341579599]
 position = Vector2(0, 192)
 collision_layer = 16
 collision_mask = 6
 script = ExtResource("6_7mycd")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ClearBorder"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ClearBorder" unique_id=1584254865]
 position = Vector2(0, -192)
 build_mode = 1
 polygon = PackedVector2Array(-512, -368, -512, 784, 512, 784, 512, -368)
 
-[node name="MovementBorder" type="StaticBody2D" parent="."]
+[node name="MovementBorder" type="StaticBody2D" parent="." unique_id=531993069]
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MovementBorder"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MovementBorder" unique_id=1699067812]
 build_mode = 1
 polygon = PackedVector2Array(-384, -240, -384, 656, 384, 656, 384, -240)
 

@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://dirikhsarftg"]
+
+[ext_resource type="Texture2D" uid="uid://c24m5t6avs504" path="res://bullet/sprites/square_bottom.png" id="2_0yf7w"]
+[ext_resource type="PackedScene" uid="uid://u5q5a7xl7gpt" path="res://player/player.tscn" id="3_asj72"]
+
+[sub_resource type="GDScript" id="GDScript_qvlm1"]
+script/source = "extends Node2D
+
+var initial_chain_size: int = 8
+
+@onready var chain: Array[Bullet] = [
+]
+
+var max_spd: float = 2048
+
+var strength: float = 16
+
+func _ready() -> void:
+	worm(Vector2(-128, -256), -1)
+	worm(Vector2(128, -256), 1)
+
+func worm(pos: Vector2, offset: float):
+	for i in initial_chain_size:
+		var final_pos = pos + Vector2(64 * i * offset, 0)
+		var bullet = Danmaku.spawn_bullet(pos, 0, 0, Danmaku.TYPE_ARROWHEAD)
+		bullet.lifetime_frames = -1
+		chain.append(bullet)
+	
+	chain[0].set_behavior(bullet_homing.bind(), [chain[0]])
+
+func bullet_homing(a) -> void:
+	var b: Bullet = a[0]
+	var s = b.speed
+	var clamp_value = 512
+	while b != null:
+		await get_tree().physics_frame
+		if b == null: break
+		
+		var player = Gametray.player
+		
+		var distance = b.global_position.distance_to(player.global_position)
+		
+		b.velocity = (b.velocity.lerp(b.global_position.direction_to(player.global_position) * 20 * (distance / 8), 0.01))
+		b.velocity = b.velocity.limit_length(clamp_value)
+
+
+func _physics_process(delta: float) -> void:
+	for i in chain.size():
+		if i >= chain.size(): continue
+		if not is_instance_valid(chain[i]): chain.remove_at(i)
+	
+	queue_redraw()
+	for i in chain.size():
+		if i == 0: continue
+		var distance = chain[i].global_position.distance_to(chain[i-1].global_position)
+		chain[i].velocity = (chain[i].global_position.direction_to(chain[i-1].global_position) * distance) * strength
+		
+func _draw() -> void:
+	for i in chain.size():
+		if i == 0: continue
+		draw_line(chain[i].global_position, chain[i-1].global_position, Color.WHITE, 2)
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_asj72"]
+size = Vector2(28, 28)
+
+[node name="Node2D" type="Node2D" unique_id=1944036643]
+script = SubResource("GDScript_qvlm1")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=665822245]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=307797020]
+position = Vector2(56, 136)
+scale = Vector2(16.079998, 1)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=892893309]
+z_index = 1
+shape = SubResource("RectangleShape2D_asj72")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=670186560]
+texture = ExtResource("2_0yf7w")
+
+[node name="border" type="StaticBody2D" parent="." unique_id=1173030370]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="border" unique_id=230547042]
+build_mode = 1
+polygon = PackedVector2Array(-640, 480, 638, 480, 640, -480, -640, -480)
+
+[node name="Player" parent="." unique_id=1299411771 instance=ExtResource("3_asj72")]

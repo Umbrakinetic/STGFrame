@@ -4,6 +4,8 @@ signal finished_spawning
 
 signal acceleration_finished
 
+signal started_freeing
+
 var parented: bool = false
 
 var accelerating: bool = false
@@ -113,6 +115,7 @@ func _physics_process(delta: float) -> void:
 # Function to salvage everything that is not directly related to the bullet.
 # the bullet's components, like its sprite, are freed. Children bullets are reparented to the Gametray.
 func start_free(delete_type: Variant = 1, predelay: float = 0.0) -> void:
+	emit_signal("started_freeing", self)
 	kill_acceleration()
 	set_speed(get_speed() / 10)
 	freeing = true

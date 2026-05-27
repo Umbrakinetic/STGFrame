@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://crmdsard6ri2c"]
+[gd_scene format=3 uid="uid://crmdsard6ri2c"]
 
 [ext_resource type="Texture2D" uid="uid://biq0wnmqfaius" path="res://player/portrait_player.png" id="1_patq1"]
 
@@ -101,14 +101,14 @@ _data = {
 &"cutin": SubResource("Animation_chn7p")
 }
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=243962773]
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Line2D" type="Line2D" parent="." unique_id=1479080756]
 visible = false
 points = PackedVector2Array(-384, -240, 384, -240, 384, 656, -384, 656)
 closed = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=308976093]
 z_index = -50
 anchors_preset = 8
 anchor_left = 0.5
@@ -126,9 +126,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("1_patq1")
 expand_mode = 1
+stretch_mode = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_lrm03")
-}
-autoplay = "cutin"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1298367793]
+libraries/ = SubResource("AnimationLibrary_lrm03")
+autoplay = &"cutin"

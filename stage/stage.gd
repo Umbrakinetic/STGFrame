@@ -12,13 +12,11 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 	%DebugBulletCount.text = str(Gametray.bullet_list.size())
-	%DebugFPS.text = str(Engine.get_frames_per_second())
+	%DebugFPS.text = str(snappedi(Engine.get_frames_per_second(), 1))
 
 #region pattern1
 func tst_1():
 	while true:
-		
-		
 		for count in 16:
 			var s: int = Tool.rand_sign()
 			var curve = randf_range(0.3, 1) * s
@@ -94,7 +92,7 @@ func enemy_tst_1():
 			var enemy = scene.instantiate()
 			Gametray.add_child(enemy)
 			enemy.global_position = Vector2(-320 * d, -300)
-			enemy.health = 60
+			enemy.health = 10
 			enemy.set_behavior(enemy_tst_1_move.bind(), [enemy, d])
 			enemy.set_behavior(enemy_tst_1_shoot.bind(), [enemy])
 			await Tool.quick_timer(0.4).timeout
@@ -107,8 +105,6 @@ func enemy_tst_1_move(args: Array):
 	enemy.velocity = Vector2.DOWN * 4 * 60
 	await enemy.wait(1)
 	Tool.quick_tween(enemy, "velocity", Vector2.RIGHT * 4 * 60 * args[1], 1, Tween.EASE_IN_OUT, Tween.TRANS_LINEAR)
-	#await enemy.wait(4)
-	#enemy.queue_free()
 
 func enemy_tst_1_shoot(args: Array):
 	var enemy = args[0]

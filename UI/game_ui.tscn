@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://hrwso57entg"]
+[gd_scene format=3 uid="uid://hrwso57entg"]
 
 [ext_resource type="Script" uid="uid://4debt2fxx604" path="res://UI/game_ui.gd" id="1_obik5"]
 [ext_resource type="Texture2D" uid="uid://ouhjo53la0vm" path="res://UI/system_reference.png" id="1_ue6oa"]
@@ -25,7 +25,7 @@ shadow_size = 5
 shadow_color = Color(0.0015193435, 0.12685424, 0.5696408, 1)
 shadow_offset = Vector2(0, 3)
 
-[node name="GameUI" type="Control"]
+[node name="GameUI" type="Control" unique_id=1760975603]
 z_index = 100
 layout_mode = 3
 anchors_preset = 15
@@ -37,7 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_obik5")
 
-[node name="Ref" type="Sprite2D" parent="."]
+[node name="Ref" type="Sprite2D" parent="." unique_id=477483206]
 visible = false
 texture_filter = 1
 position = Vector2(32, 480)
@@ -46,7 +46,7 @@ texture = ExtResource("1_ue6oa")
 region_enabled = true
 region_rect = Rect2(32, 32, 32, 480)
 
-[node name="Ref2" type="Sprite2D" parent="."]
+[node name="Ref2" type="Sprite2D" parent="." unique_id=1784390514]
 visible = false
 texture_filter = 1
 position = Vector2(1056, 480)
@@ -55,7 +55,7 @@ texture = ExtResource("1_ue6oa")
 region_enabled = true
 region_rect = Rect2(64, 32, 224, 480)
 
-[node name="Ref3" type="Sprite2D" parent="."]
+[node name="Ref3" type="Sprite2D" parent="." unique_id=1969876605]
 visible = false
 texture_filter = 1
 position = Vector2(448, 944)
@@ -64,7 +64,7 @@ texture = ExtResource("1_ue6oa")
 region_enabled = true
 region_rect = Rect2(32, 528, 384, 16)
 
-[node name="Ref4" type="Sprite2D" parent="."]
+[node name="Ref4" type="Sprite2D" parent="." unique_id=1316038273]
 visible = false
 texture_filter = 1
 position = Vector2(448, 16)
@@ -73,14 +73,14 @@ texture = ExtResource("1_ue6oa")
 region_enabled = true
 region_rect = Rect2(32, 512, 384, 16)
 
-[node name="CanvasGroup" type="CanvasGroup" parent="."]
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=239326970]
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup" unique_id=786018912]
 z_index = 1
 texture = ExtResource("3_fy64h")
 centered = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup" unique_id=2104742285]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -92,25 +92,25 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="UITop" type="Panel" parent="CanvasGroup/VBoxContainer"]
+[node name="UITop" type="Panel" parent="CanvasGroup/VBoxContainer" unique_id=1459265708]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 theme = ExtResource("2_oaw30")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasGroup/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasGroup/VBoxContainer" unique_id=2054871248]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="UILeft" type="Panel" parent="CanvasGroup/VBoxContainer/HBoxContainer"]
+[node name="UILeft" type="Panel" parent="CanvasGroup/VBoxContainer/HBoxContainer" unique_id=1050454780]
 custom_minimum_size = Vector2(64, 896)
 layout_mode = 2
 theme = ExtResource("2_oaw30")
 
-[node name="Container" type="Control" parent="CanvasGroup/VBoxContainer/HBoxContainer"]
+[node name="Container" type="Control" parent="CanvasGroup/VBoxContainer/HBoxContainer" unique_id=1286664533]
 custom_minimum_size = Vector2(768, 0)
 layout_mode = 2
 
-[node name="BossInfo" type="MarginContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container"]
+[node name="BossInfo" type="MarginContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container" unique_id=1996063213]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -124,21 +124,21 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo" unique_id=1706243843]
 layout_mode = 2
 
-[node name="BossName" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer"]
+[node name="BossName" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer" unique_id=1720119820]
 unique_name_in_owner = true
 layout_mode = 2
 text = "bossname"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer" unique_id=2052477078]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_constants/separation = 16
 
-[node name="BossHealthBar" type="ProgressBar" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer"]
+[node name="BossHealthBar" type="ProgressBar" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer" unique_id=1442607185]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
@@ -149,15 +149,15 @@ theme_override_styles/fill = SubResource("StyleBoxTexture_vealc")
 value = 100.0
 show_percentage = false
 
-[node name="BossTimer" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer"]
+[node name="BossTimer" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer" unique_id=1321207150]
 layout_mode = 2
 size_flags_vertical = 0
 text = "99"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer" unique_id=1546554388]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer2" unique_id=279346116]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -165,19 +165,19 @@ texture = ExtResource("6_v6n52")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PhasesRemaining" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer2"]
+[node name="PhasesRemaining" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer2" unique_id=470670633]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 32
 text = "1"
 vertical_alignment = 1
 
-[node name="UIRight" type="Panel" parent="CanvasGroup/VBoxContainer/HBoxContainer"]
+[node name="UIRight" type="Panel" parent="CanvasGroup/VBoxContainer/HBoxContainer" unique_id=1319168285]
 custom_minimum_size = Vector2(448, 892)
 layout_mode = 2
 theme = ExtResource("2_oaw30")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight" unique_id=589819984]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -186,31 +186,31 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer" unique_id=2026432816]
 z_index = 1000
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="Container" type="Container" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
+[node name="Container" type="Container" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer" unique_id=1863260775]
 custom_minimum_size = Vector2(0, 175.175)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer" unique_id=1073186239]
 layout_mode = 2
 
-[node name="Container" type="Container" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Container" type="Container" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1571449053]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="Container2" type="VBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Container2" type="VBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer" unique_id=33768910]
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="Life" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2"]
+[node name="Life" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2" unique_id=1065909991]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Life"]
+[node name="Label" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Life" unique_id=1026048053]
 visible = false
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
@@ -218,43 +218,43 @@ size_flags_horizontal = 4
 text = "LIFE"
 label_settings = SubResource("LabelSettings_xlnb1")
 
-[node name="LifeTexture" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Life"]
+[node name="LifeTexture" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Life" unique_id=1826051767]
 unique_name_in_owner = true
 texture_repeat = 2
 layout_mode = 2
 texture = ExtResource("6_fy64h")
 stretch_mode = 1
 
-[node name="Bomb" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2"]
+[node name="Bomb" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2" unique_id=425468891]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Bomb"]
+[node name="Label2" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Bomb" unique_id=1524446241]
 visible = false
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 text = "SPELL"
 label_settings = SubResource("LabelSettings_xlnb1")
 
-[node name="BombTexture" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Bomb"]
+[node name="BombTexture" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Bomb" unique_id=619178405]
 unique_name_in_owner = true
 texture_repeat = 2
 layout_mode = 2
 texture = ExtResource("6_v6n52")
 stretch_mode = 1
 
-[node name="Graze" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2"]
+[node name="Graze" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2" unique_id=575731563]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
-[node name="GrazeCount" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Graze"]
+[node name="GrazeCount" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/UIRight/MarginContainer/VBoxContainer/HBoxContainer/Container2/Graze" unique_id=929239548]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_xlnb1")
 
-[node name="UIBottom" type="Panel" parent="CanvasGroup/VBoxContainer"]
+[node name="UIBottom" type="Panel" parent="CanvasGroup/VBoxContainer" unique_id=2026563032]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 theme = ExtResource("2_oaw30")

@@ -194,3 +194,8 @@ func _on_grazebox_body_entered(body: Node2D) -> void:
 	if body is Bullet and not body.is_in_group("playerbullet") and not body.is_in_group("grazed"):
 		body.add_to_group("grazed")
 		emit_signal("grazed")
+
+
+func _on_grazebox_area_entered(area: Area2D) -> void:
+	if area is Item:
+		area.queue_free()

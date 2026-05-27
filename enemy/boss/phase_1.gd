@@ -1,7 +1,8 @@
 extends Phase
 
 func start() -> void:
-	boss.invincible = true
+	#boss.invincible = true
+	boss.invincible = false
 	loop()
 	
 	await Tool.quick_timer(2).timeout
@@ -17,25 +18,25 @@ func start() -> void:
 			#b.get_node("%Sprite").material = null
 		#await boss.wait(0.05)
 
-#func loop():
-	#while boss.health > 0:
-		#var c := Danmaku.spawn_circle(6, boss.position, 5, randi(), Danmaku.TYPE_SCALE, Color.BLUE)
-		#for i in c:
-			#i.set_behavior(fall.bind(), [i])
-		#await boss.wait(0.9)
-
 func loop():
 	while boss.health > 0:
-		for i in 4:
-			Danmaku.spawn_bullet(boss.position, randf_range(4, 7), randi())
-		await boss.wait(0.05)
+		var c := Danmaku.spawn_circle(6, boss.position, 5, randi(), Danmaku.TYPE_SCALE, Color.BLUE)
+		for i in c:
+			i.set_behavior(fall.bind(), [i])
+		await boss.wait(0.9)
+
+#func loop():
+	#while boss.health > 0:
+		#for i in 4:
+			#Danmaku.spawn_bullet(boss.position, randf_range(4, 7), randi())
+		#await boss.wait(0.05)
 
 func fall(args: Array):
 	var b = args[0]
 	
 	while b != null:
 		if b.global_position.y >= 656:
-			Danmaku.spawn_circle(6, b.global_position, 5, randi(), Danmaku.TYPE_BLADE, Color.SKY_BLUE)
+			Danmaku.spawn_circle(6, b.global_position, 4, 0, Danmaku.TYPE_BLADE, Color.SKY_BLUE)
 			b.queue_free()
-		b.velocity.y += 9.8 * 0.5
+		b.velocity.y += 9.8 * 0.3
 		await get_tree().physics_frame

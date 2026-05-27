@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 	player.grazed.connect(func():
 		graze_count += 1
-		%GrazeCount.text = "GRAZE: " + str(graze_count)
+		%GrazeCount.text = str(graze_count)
 	)
 
 func boss_added() -> void:

@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://7qebyenh7k7e"]
+
+[ext_resource type="Texture2D" uid="uid://buk714fnyqg3u" path="res://enemy/fx_radial.png" id="1_e3lqg"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a6pid"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_qg0xk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xh8fj"]
+resource_name = "radial_burst"
+length = 0.33333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.01, 0.33),
+"transitions": PackedFloat32Array(0.5176325, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3s26e"]
+_data = {
+&"RESET": SubResource("Animation_qg0xk"),
+&"radial_burst": SubResource("Animation_xh8fj")
+}
+
+[node name="FxRadialBurst" type="Sprite2D" unique_id=496432511]
+material = SubResource("CanvasItemMaterial_a6pid")
+texture = ExtResource("1_e3lqg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1456638629]
+libraries/ = SubResource("AnimationLibrary_3s26e")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="queue_free" unbinds=1]

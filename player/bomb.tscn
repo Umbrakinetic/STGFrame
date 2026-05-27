@@ -11,6 +11,11 @@ var player
 
 var expanding: bool = true
 
+func _physics_process(delta: float) -> void:
+	for i in get_overlapping_bodies():
+		if i is Enemy:
+			i.take_damage(2)
+
 func _ready() -> void:
 	player.invincible = true
 	#$Line2D.material = $Line2D.material.duplicate()
@@ -64,7 +69,8 @@ shader_parameter/alpha = 0.5000000074506
 [node name="Bomb" type="Area2D"]
 z_index = -100
 collision_layer = 0
-collision_mask = 4
+collision_mask = 6
+monitorable = false
 script = SubResource("GDScript_vpyvq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

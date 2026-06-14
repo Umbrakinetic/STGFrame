@@ -2,13 +2,7 @@
 
 [ext_resource type="Script" uid="uid://doep7127bmt3y" path="res://main_menu/main_menu.gd" id="1_d3a7t"]
 [ext_resource type="Texture2D" uid="uid://5v67r8m77uft" path="res://UI/logo.png" id="1_oa53l"]
-
-[sub_resource type="Gradient" id="Gradient_d3a7t"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.18300001, 0.20835002, 0.3, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_3shxk"]
-gradient = SubResource("Gradient_d3a7t")
+[ext_resource type="Texture2D" uid="uid://fpxcr8aldm0q" path="res://main_menu/title.png" id="2_3shxk"]
 
 [node name="MainMenu" type="Control" unique_id=56467638]
 layout_mode = 3
@@ -26,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture1D_3shxk")
+texture = ExtResource("2_3shxk")
 stretch_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="TextureRect" unique_id=921180548]
@@ -37,7 +31,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
+theme_override_constants/margin_top = 360
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
@@ -48,6 +42,7 @@ theme_override_constants/separation = 189
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=2060123386]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("1_oa53l")

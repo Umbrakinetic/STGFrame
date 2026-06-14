@@ -15,6 +15,7 @@ var life_texture = preload("uid://by5bhbi1is1k0")
 var bomb_texture = preload("uid://cfpshct2k52qa")
 
 func _ready() -> void:
+	await get_parent().tree_entered
 	player.resources_updated.connect(update_resources)
 	update_resources()
 	

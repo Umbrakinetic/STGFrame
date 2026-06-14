@@ -21,8 +21,8 @@ func start() -> void:
 func loop():
 	while boss.health > 0:
 		var c := Danmaku.spawn_circle(6, boss.position, 5, randi(), Danmaku.TYPE_SCALE, Color.BLUE)
-		for i in c:
-			i.set_behavior(fall.bind(), [i])
+		#for i in c:
+			#i.set_behavior(fall.bind(), [i])
 		await boss.wait(0.9)
 
 #func loop():

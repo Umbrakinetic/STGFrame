@@ -103,7 +103,7 @@ _data = {
 
 [node name="Node2D" type="Node2D" unique_id=243962773]
 
-[node name="Line2D" type="Line2D" parent="." unique_id=1479080756]
+[node name="UIBorderReference" type="Line2D" parent="." unique_id=1479080756]
 visible = false
 points = PackedVector2Array(-384, -240, 384, -240, 384, 656, -384, 656)
 closed = true
@@ -121,7 +121,7 @@ offset_right = -384.667
 offset_bottom = 471.333
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(192, 278)
+pivot_offset = Vector2(194, 246)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("1_patq1")

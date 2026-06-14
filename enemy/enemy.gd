@@ -10,7 +10,7 @@ enum ItemTypes {
 
 @export var health: float = 100
 
-@export var drops: Dictionary [Danmaku.ItemType, int]
+@export var drops: Dictionary [Item.ItemType, int]
 
 @onready var player = Gametray.player
 

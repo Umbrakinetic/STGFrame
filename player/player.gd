@@ -58,6 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		shooting = false
 	
 	if event.is_action_pressed("bomb") and bombs > 0 and not bombing and not respawning and can_bomb:
+		collect_all_items()
 		bombs -= 1
 		bombing = true
 		emit_signal("bombed")
@@ -199,3 +200,7 @@ func _on_grazebox_body_entered(body: Node2D) -> void:
 func _on_grazebox_area_entered(area: Area2D) -> void:
 	if area is Item:
 		area.queue_free()
+
+func collect_all_items():
+	for i in get_tree().get_nodes_in_group("item"):
+		i.tracking_player = true

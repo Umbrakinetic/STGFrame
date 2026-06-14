@@ -10,12 +10,7 @@ func refresh_vars() -> void:
 	#Gametray = get_tree().current_scene.get_node("Gametray")
 
 #region items
-enum ItemType {
-	POINT,
-	POWER,
-	EXTEND,
-	BOMB,
-}
+
 
 #endregion
 

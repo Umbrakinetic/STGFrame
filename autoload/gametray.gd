@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var player = get_tree().current_scene.get_node("Player")
+var player
 
 var boss: Enemy
 

@@ -17,14 +17,14 @@ func loop() -> void:
 
 func spin(args: Array):
 	var b: Bullet = args[0]
-	await Tool.quick_timer(1).timeout
+	await b.wait(1)
 	b.set_speed(0)
 	b.accelerate(6, 1)
 	Danmaku.spawn_bullet(b.global_position, 6, b.get_angle(), Danmaku.TYPE_CIRCLE, Color.YELLOW)
 	b.set_angle(b.get_angle() + 90)
 	
 	
-	await Tool.quick_timer(1).timeout
+	await b.wait(1)
 	b.set_speed(0)
 	b.accelerate(6, 1)
 	Danmaku.spawn_bullet(b.global_position, 6, b.get_angle(), Danmaku.TYPE_CIRCLE, Color.GREEN)

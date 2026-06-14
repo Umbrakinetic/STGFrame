@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxpiy2crvahvs"]
+[gd_scene format=3 uid="uid://cxpiy2crvahvs"]
 
 [ext_resource type="Script" uid="uid://doep7127bmt3y" path="res://main_menu/main_menu.gd" id="1_d3a7t"]
 [ext_resource type="Texture2D" uid="uid://5v67r8m77uft" path="res://UI/logo.png" id="1_oa53l"]
@@ -10,7 +10,7 @@ colors = PackedColorArray(0.18300001, 0.20835002, 0.3, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_3shxk"]
 gradient = SubResource("Gradient_d3a7t")
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=56467638]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d3a7t")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1724151578]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +29,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture1D_3shxk")
 stretch_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect" unique_id=921180548]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,31 +41,31 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer" unique_id=904696097]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 189
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=2060123386]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("1_oa53l")
 stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=441578116]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 16
 
-[node name="PlayButton" type="Button" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1234850688]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Play Demo"
 
-[node name="Exit Button" type="Button" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Exit Button" type="Button" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1993718770]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32

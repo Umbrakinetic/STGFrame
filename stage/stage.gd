@@ -11,6 +11,12 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
+	
+	#Point of Collection-- if player is above a certain value, all items start tracking the player
+	if Gametray.player.global_position.y <= 0 and not Gametray.player.respawning:
+		Gametray.player.collect_all_items()
+	
+	#real-time debug info
 	%DebugBulletCount.text = str(Gametray.bullet_list.size())
 	%DebugFPS.text = str(snappedi(Engine.get_frames_per_second(), 1))
 

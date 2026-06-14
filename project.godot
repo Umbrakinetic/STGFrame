@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="STGFrame"
-run/main_scene="uid://bguruyv0rhunf"
+run/main_scene="uid://cxpiy2crvahvs"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 Danmaku="*res://autoload/danmaku.gd"
 Gametray="*res://autoload/gametray.gd"
 Tool="*res://autoload/tool.gd"
+Transition="*uid://bad5u7l78vt00"
 
 [debug]
 
@@ -46,6 +47,7 @@ window/vsync/vsync_mode=3
 [global_group]
 
 enemy=""
+item=""
 
 [gui]
 

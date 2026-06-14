@@ -1,28 +1,45 @@
 class_name Item
 extends Area2D
 
-var item_gravity: float = 0.098
-var initial_velocity: float = -4
-var velocity = initial_velocity
-var max_velocity: float = 6
+var item_gravity:     float = 0.098
+var initial_velocity: Vector2 = Vector2(0, -4)
+var velocity:         Vector2 = initial_velocity
+var max_velocity:     float = 6
 
+var tracking_player:  bool = false
 
+var sprite_dict: Dictionary[ItemType, Texture2D] = {
+	ItemType.POINT  : preload("uid://cj2flfxe1v0qw"),
+	ItemType.POWER  : preload("uid://4jpdwepgww7b"),
+}
 
-var sprite: Danmaku.ItemType:
+enum ItemType {
+	POINT,
+	POWER,
+	EXTEND,
+	BOMB,
+}
+
+var sprite: ItemType:
 	set(value):
 		sprite = value
-		match value:
-			Danmaku.ItemType.POINT:
-				$ItemSprite.texture = preload("uid://cj2flfxe1v0qw")
-			Danmaku.ItemType.POWER:
-				$ItemSprite.texture = preload("uid://4jpdwepgww7b")
-
+		$ItemSprite.texture = sprite_dict[sprite]
 
 func _ready() -> void:
+	scale = Vector2.ZERO
 	var tween : = Tool.quick_tween(self, "global_rotation_degrees", global_rotation_degrees + 360, 0.5)
 	tween.parallel().tween_property(self, "scale", Vector2.ONE, 0.3)
+	#tracking_player = true
 
 func _physics_process(delta: float) -> void:
-	global_position.y += velocity
-	if velocity < max_velocity: velocity += item_gravity
+	if not tracking_player:
+		velocity.y = clamp(velocity.y + item_gravity, -4, 2)
+		global_position.y += velocity.y
+	else:
+		if Gametray.player.respawning:
+			tracking_player = false
+			velocity = Vector2.ZERO
+		velocity = global_position.direction_to(Gametray.player.global_position) * 16
+	
+	global_position += velocity
 	

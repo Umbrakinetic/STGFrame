@@ -24,8 +24,8 @@ var direction: Vector2
 var invincible: bool = false:
 	set(value):
 		invincible = value
-		%Hitbox.monitoring = not value
-		%Grazebox.monitoring = not value
+		%Hitbox.set_collision_mask_value(3, not value)
+		%Grazebox.set_collision_mask_value(3, not value)
 var speed: float = default_speed
 
 signal died

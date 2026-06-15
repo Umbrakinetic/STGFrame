@@ -1,7 +1,7 @@
 extends Line2D
 
 var max_points: int = 20
-var point_array: Array = []
+var point_array: Array[Vector2] = []
 
 ## The Node2D this trail is following
 var tracking: Node2D

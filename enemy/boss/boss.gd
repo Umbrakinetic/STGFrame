@@ -37,8 +37,8 @@ func start_phase() -> void:
 ## if no patterns remain, the boss will die for real.
 func _on_death() -> void:
 	clear_all_bullets()
+	give_drops()
 	if current_phase + 1 < phases.size():
-		give_drops()
 		await $Phase.end_phase()
 		await wait(1)
 		current_phase += 1

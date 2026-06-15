@@ -9,11 +9,6 @@ func refresh_vars() -> void:
 	pass
 	#Gametray = get_tree().current_scene.get_node("Gametray")
 
-#region items
-
-
-#endregion
-
 #region Bullet Definition
 
 const TYPE_CIRCLE    = 0

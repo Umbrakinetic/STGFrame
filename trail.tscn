@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://f1bk6nbqr6nd"]
+
+[ext_resource type="Script" uid="uid://ei1mgke8p31v" path="res://trail.gd" id="1_xjhlx"]
+
+[sub_resource type="Curve" id="Curve_abn3g"]
+bake_resolution = 24
+_data = [Vector2(0, 1), 0.0, -0.99979925, 0, 0, Vector2(1, 0), -1.0004554, 0.0, 0, 0]
+point_count = 2
+
+[node name="Trail" type="Line2D" unique_id=1682171661]
+z_index = -5
+points = PackedVector2Array(-5, -8, 157, -14)
+width_curve = SubResource("Curve_abn3g")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 1
+script = ExtResource("1_xjhlx")

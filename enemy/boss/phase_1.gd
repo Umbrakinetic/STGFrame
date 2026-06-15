@@ -20,10 +20,14 @@ func start() -> void:
 
 func loop():
 	while boss.health > 0:
-		var c := Danmaku.spawn_circle(6, boss.position, 5, randi(), Danmaku.TYPE_SCALE, Color.BLUE)
-		#for i in c:
+		var c := Danmaku.spawn_circle(12, boss.position, 10, randi(), Danmaku.TYPE_SCALE, Color.BLUE)
+		for i in c:
+			var trail = preload("uid://f1bk6nbqr6nd").instantiate()
+			Gametray.add_child(trail)
+			trail.tracking = i
+			i.curve = 0.1
 			#i.set_behavior(fall.bind(), [i])
-		await boss.wait(0.9)
+		await boss.wait(0.3)
 
 #func loop():
 	#while boss.health > 0:

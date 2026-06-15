@@ -20,7 +20,7 @@ var can_bomb : bool = true
 var focused: bool = false
 var shooting: bool = false
 var respawning: bool = false
-var direction: Vector2
+var movement_input_direction: Vector2
 var invincible: bool = false:
 	set(value):
 		invincible = value
@@ -41,7 +41,7 @@ func _ready() -> void:
 	%OptionPosition.global_position = global_position
 
 func _unhandled_input(event: InputEvent) -> void:
-	direction = Input.get_vector("ui_left", "ui_right","ui_up","ui_down") * int(can_move)
+	movement_input_direction = Input.get_vector("ui_left", "ui_right","ui_up","ui_down") * int(can_move)
 	
 	if event.is_action_pressed("focus"):
 		focused = true
@@ -104,7 +104,7 @@ func _physics_process(delta: float) -> void:
 	
 	%OptionPosition.global_position = lerp(%OptionPosition.global_position, global_position, 0.2)
 	
-	velocity = direction * delta * 60 * speed
+	velocity = movement_input_direction * delta * 60 * speed
 	var collision: = move_and_slide()
 	
 	if invincible:

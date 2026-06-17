@@ -8,6 +8,7 @@ _data = [Vector2(0, 1), 0.0, -0.99979925, 0, 0, Vector2(1, 0), -1.0004554, 0.0, 
 point_count = 2
 
 [node name="Trail" type="Line2D" unique_id=1682171661]
+process_mode = 1
 z_index = -5
 points = PackedVector2Array(-5, -8, 157, -14)
 width_curve = SubResource("Curve_abn3g")

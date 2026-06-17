@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://b3oitxcmvkqdy"]
+
+[ext_resource type="Script" uid="uid://d4edhnamqu2w4" path="res://pause_menu.gd" id="1_hdmo1"]
+
+[node name="PauseMenu" type="Control" unique_id=1568294371]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 768.0
+offset_bottom = 896.0
+script = ExtResource("1_hdmo1")
+
+[node name="PauseMenu" type="ColorRect" parent="." unique_id=949605920]
+z_index = 1000
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu" unique_id=882121828]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer" unique_id=1547400409]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1051464554]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1295808993]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1955492800]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Restart from Beginning"
+
+[node name="MainMenuButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1534068451]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit To Main Menu"
+
+[node name="Quit To Desktop" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1316141081]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit To Desktop"
+
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]

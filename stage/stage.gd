@@ -2,9 +2,12 @@ extends Node2D
 
 var c: int = 1
 
+
+
 func _ready():
-	pass
 	Gametray.player = $Player
+	$GameUI.start_ui()
+	
 	#enemy_tst_1()
 	#tst_1()
 	boss_tst_1()

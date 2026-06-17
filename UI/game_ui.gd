@@ -1,6 +1,6 @@
 extends Control
 
-@onready var player = Gametray.player
+var player
 
 var boss
 
@@ -14,9 +14,13 @@ var boss_present: bool = false:
 var life_texture = preload("uid://by5bhbi1is1k0")
 var bomb_texture = preload("uid://cfpshct2k52qa")
 
-func _ready() -> void:
-	await get_parent().tree_entered
-	player.resources_updated.connect(update_resources)
+
+## The reason this is not a _ready() function is because it fires before Gametray.player is defined;
+## So it is only manually called *after* that variable is defined.
+func start_ui() -> void:
+	player = Gametray.player
+	print(player)
+	Gametray.player.resources_updated.connect(update_resources)
 	update_resources()
 	
 	player.grazed.connect(func():
@@ -37,6 +41,7 @@ func boss_added() -> void:
 	)
 
 func update_resources() -> void:
+	print("resources updated")
 	var lives = player.lives
 	var bombs = player.bombs
 	

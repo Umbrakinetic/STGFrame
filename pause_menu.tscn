@@ -58,9 +58,12 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Quit To Main Menu"
 
-[node name="Quit To Desktop" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1316141081]
+[node name="DesktopButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1316141081]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit To Desktop"
 
 [connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/DesktopButton" to="." method="_on_desktop_button_pressed"]

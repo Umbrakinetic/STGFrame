@@ -19,7 +19,6 @@ var bomb_texture = preload("uid://cfpshct2k52qa")
 ## So it is only manually called *after* that variable is defined.
 func start_ui() -> void:
 	player = Gametray.player
-	print(player)
 	Gametray.player.resources_updated.connect(update_resources)
 	update_resources()
 	
@@ -41,7 +40,6 @@ func boss_added() -> void:
 	)
 
 func update_resources() -> void:
-	print("resources updated")
 	var lives = player.lives
 	var bombs = player.bombs
 	

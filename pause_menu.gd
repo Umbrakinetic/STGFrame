@@ -20,10 +20,12 @@ func _on_resume_button_pressed() -> void:
 	resume()
 
 func _on_restart_button_pressed() -> void:
+	Gametray.clear()
 	resume()
 	get_tree().change_scene_to_file(get_tree().current_scene.scene_file_path)
 
 func _on_main_menu_button_pressed() -> void:
+	Gametray.clear()
 	resume()
 	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")
 

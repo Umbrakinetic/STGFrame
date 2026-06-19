@@ -50,8 +50,6 @@ func set_resource_counter(counter_node, resource_count) -> void:
 	if resource_count <= 0: counter_node.hide()
 	else: counter_node.show()
 	counter_node.custom_minimum_size.x = 48 * resource_count
-	
-	
 
 func _physics_process(delta: float) -> void:
 	if boss != null and boss_present:

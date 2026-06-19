@@ -144,7 +144,7 @@ func bullet_homing(args: Array) -> void:
 	var s = b.speed
 	while b != null:
 		await get_tree().physics_frame
-		if b == null: break
+		if b == null or get_tree() == null: break
 		
 		var enemies = get_tree().get_nodes_in_group("enemy")
 		if enemies.is_empty(): 

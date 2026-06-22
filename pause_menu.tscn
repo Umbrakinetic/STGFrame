@@ -32,38 +32,75 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer" unique_id=1547400409]
+[node name="MainPauseMenu" type="VBoxContainer" parent="PauseMenu/MarginContainer" unique_id=1547400409]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1051464554]
+[node name="PausedText" type="RichTextLabel" parent="PauseMenu/MarginContainer/MainPauseMenu" unique_id=928684391]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/normal_font_size = 32
 text = "PAUSED"
+fit_content = true
 horizontal_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1295808993]
+[node name="ResumeButton" type="Button" parent="PauseMenu/MarginContainer/MainPauseMenu" unique_id=1295808993]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../DesktopButton")
 text = "Resume"
 
-[node name="RestartButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1955492800]
+[node name="RestartButton" type="Button" parent="PauseMenu/MarginContainer/MainPauseMenu" unique_id=1955492800]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Restart from Beginning"
 
-[node name="MainMenuButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1534068451]
+[node name="MainMenuButton" type="Button" parent="PauseMenu/MarginContainer/MainPauseMenu" unique_id=1534068451]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit To Main Menu"
 
-[node name="DesktopButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer" unique_id=1316141081]
+[node name="DesktopButton" type="Button" parent="PauseMenu/MarginContainer/MainPauseMenu" unique_id=1316141081]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../ResumeButton")
 text = "Quit To Desktop"
 
-[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/DesktopButton" to="." method="_on_desktop_button_pressed"]
+[node name="ConfirmationMenu" type="VBoxContainer" parent="PauseMenu/MarginContainer" unique_id=482675584]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(188, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ConfirmationText" type="RichTextLabel" parent="PauseMenu/MarginContainer/ConfirmationMenu" unique_id=1403812897]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "YOU ARE ABOUT TO:
+ARE YOU SURE?"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="PauseMenu/MarginContainer/ConfirmationMenu" unique_id=1598383083]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../BackButton")
+text = "Yes Yes Yes"
+
+[node name="BackButton" type="Button" parent="PauseMenu/MarginContainer/ConfirmationMenu" unique_id=1296063257]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_bottom = NodePath("../ConfirmButton")
+text = "No No No"
+
+[connection signal="pressed" from="PauseMenu/MarginContainer/MainPauseMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/MainPauseMenu/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/MainPauseMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/MainPauseMenu/DesktopButton" to="." method="_on_desktop_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/ConfirmationMenu/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/ConfirmationMenu/BackButton" to="." method="_on_back_button_pressed"]

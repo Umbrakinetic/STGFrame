@@ -1,28 +1,16 @@
 extends Control
 
-## The pause menu immediately closes after pressing "Escape" without this.
-## This feels a little obtuse, but whatever
-var switched_pause_this_frame: bool = false
+func _ready() -> void:
+	hide()
 
 func pause():
-	print("pausing")
-	switched_pause_this_frame = true
 	get_tree().paused = true
 	show()
-	%ResumeButton.grab_focus()
-	
-	await get_tree().process_frame
-	switched_pause_this_frame = false
+	%ContinueButton.grab_focus()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause") and not switched_pause_this_frame:
-		switched_pause_this_frame = true
-		resume()
-		
-		await get_tree().process_frame
-		switched_pause_this_frame = false
-
-func _on_resume_button_pressed() -> void:
+func _on_continue_button_pressed() -> void:
+	Gametray.continued_run = true
+	Gametray.player.lives = 2
 	resume()
 
 func resume():
@@ -40,7 +28,7 @@ func restart():
 	resume()
 
 func _on_main_menu_button_pressed() -> void:
-	go_to_confirm("Return to Main Menu", go_to_main_menu)
+	go_to_main_menu()
 
 func go_to_main_menu():
 	Gametray.clear()

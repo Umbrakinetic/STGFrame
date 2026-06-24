@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://u5q5a7xl7gpt" path="res://player/player.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://bt0tnmdih3lea" path="res://stage/stage.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://hrwso57entg" path="res://UI/game_ui.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://b3oitxcmvkqdy" path="res://pause_menu.tscn" id="2_cxybx"]
 [ext_resource type="PackedScene" uid="uid://bnvr4tc24o5q0" path="res://stage/background.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://ddebscdi2xrrq" path="res://stage/clear_border.gd" id="6_7mycd"]
 
@@ -78,13 +77,6 @@ collision_mask = 0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MovementBorder" unique_id=1699067812]
 build_mode = 1
 polygon = PackedVector2Array(-384, -240, -384, 656, 384, 656, 384, -240)
-
-[node name="PauseMenu" parent="." unique_id=1568294371 instance=ExtResource("2_cxybx")]
-visible = false
-offset_left = -384.0
-offset_top = -240.0
-offset_right = 384.0
-offset_bottom = 656.0
 
 [connection signal="area_entered" from="ClearBorder" to="ClearBorder" method="_on_area_entered"]
 [connection signal="body_exited" from="ClearBorder" to="ClearBorder" method="_on_body_exited"]

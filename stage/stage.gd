@@ -2,8 +2,6 @@ extends Node2D
 
 var c: int = 1
 
-
-
 func _ready():
 	Gametray.player = $Player
 	$GameUI.start_ui()

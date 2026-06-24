@@ -176,8 +176,6 @@ func die():
 	can_move = false
 	
 	await get_tree().create_timer(1, false, true).timeout
-	if lives < 0:
-		get_tree().quit()
 	
 	bombs = max(bombs, bombs_per_life)
 	

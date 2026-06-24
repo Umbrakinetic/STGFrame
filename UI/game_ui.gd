@@ -45,6 +45,8 @@ func update_resources() -> void:
 	
 	set_resource_counter(%LifeTexture, lives)
 	set_resource_counter(%BombTexture, bombs)
+	
+	if lives <= 0: %GameOverMenu.pause()
 
 func set_resource_counter(counter_node, resource_count) -> void:
 	if resource_count <= 0: counter_node.hide()
@@ -56,3 +58,10 @@ func _physics_process(delta: float) -> void:
 		%BossHealthBar.value = lerp(\
 		%BossHealthBar.value, boss.health, 0.2)
 		
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause") and not %PauseMenu.switched_pause_this_frame:
+		%PauseMenu.pause()
+	else:
+		%PauseMenu.resume()
+	

@@ -1,6 +1,7 @@
 extends Control
 
 func _ready() -> void:
+	Gametray.continued_run = false
 	%PlayButton.grab_focus()
 
 func _on_play_button_pressed() -> void:

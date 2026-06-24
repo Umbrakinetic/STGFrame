@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://do7dtmrbpbfil" path="res://UI/system2.png" id="3_fy64h"]
 [ext_resource type="Texture2D" uid="uid://by5bhbi1is1k0" path="res://UI/life.png" id="6_fy64h"]
 [ext_resource type="Texture2D" uid="uid://cfpshct2k52qa" path="res://UI/bomb.png" id="6_v6n52"]
+[ext_resource type="PackedScene" uid="uid://cheq1keb46jb" path="res://game_over_menu.tscn" id="7_ywmy4"]
+[ext_resource type="PackedScene" uid="uid://b3oitxcmvkqdy" path="res://pause_menu.tscn" id="8_jd38o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vealc"]
 
@@ -258,3 +260,20 @@ label_settings = SubResource("LabelSettings_xlnb1")
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 theme = ExtResource("2_oaw30")
+
+[node name="Control" type="Control" parent="." unique_id=663493482]
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 104.0
+offset_bottom = 72.0
+
+[node name="GameOverMenu" parent="Control" unique_id=1568294371 instance=ExtResource("7_ywmy4")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+
+[node name="PauseMenu" parent="Control" unique_id=1678706175 instance=ExtResource("8_jd38o")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0

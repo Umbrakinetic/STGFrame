@@ -4,6 +4,9 @@ var player
 
 var boss: Enemy
 
+#Did the player game over and choose "Continue" during this playthrough?
+var continued_run: bool = false
+
 signal boss_entered
 
 #func _ready() -> void:
@@ -13,11 +16,6 @@ signal boss_entered
 func clear():
 	for i in get_children():
 		i.queue_free()
-
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause") and not get_tree().paused:
-		get_tree().current_scene.get_node("PauseMenu").pause()
-		
 
 var max_bullet_count: int = 1000
 

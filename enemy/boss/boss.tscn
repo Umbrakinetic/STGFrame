@@ -5,9 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://p3vq5ngw2h8f" path="res://hitbox.tscn" id="3_yy71b"]
 [ext_resource type="Script" uid="uid://dvdsjrl4xiy5r" path="res://enemy/boss/phase.gd" id="4_270ai"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0qke7"]
-radius = 64.0
-
 [node name="Boss" type="CharacterBody2D" unique_id=903074780 groups=["enemy"]]
 process_mode = 1
 z_index = -100
@@ -32,8 +29,5 @@ radius = 64.0
 [node name="Phase" type="Node" parent="." unique_id=1102699916]
 script = ExtResource("4_270ai")
 metadata/_custom_type_script = "uid://dvdsjrl4xiy5r"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=944050515]
-shape = SubResource("CircleShape2D_0qke7")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

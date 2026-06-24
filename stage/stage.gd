@@ -1,15 +1,23 @@
 extends Node2D
 
-var c: int = 1
+#Enemy1, Enemy2, Midboss, Enemy3, Enemy4, Boss
+#Enemies sections can just be functions
+var sections: Array[Callable] = [enemy_tst_1, boss_tst_1, enemy_tst_1]
+var boss: Enemy
 
 func _ready():
 	Gametray.player = $Player
 	$GameUI.start_ui()
 	
 	await Transition.finished
-	#enemy_tst_1()
-	#tst_1()
-	boss_tst_1()
+	
+	for section in sections:
+		print("new section: " + str(section))
+		await section.call()
+	
+	await Tool.quick_timer(1).timeout
+	print("all clear")
+	
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
@@ -22,18 +30,20 @@ func _physics_process(delta: float) -> void:
 	%DebugBulletCount.text = str(Gametray.bullet_list.size())
 	%DebugFPS.text = str(snappedi(Engine.get_frames_per_second(), 1))
 
+var bullet_counter: int = 1
+
 #region pattern1
 func tst_1():
 	while true:
 		for count in 16:
 			var s: int = Tool.rand_sign()
 			var curve = randf_range(0.3, 1) * s
-			var color: Color = Color.from_ok_hsl(c / 80.0, 1, 0.5, 1)
+			var color: Color = Color.from_ok_hsl(bullet_counter / 80.0, 1, 0.5, 1)
 			var b: = Danmaku.spawn_circle(20, Vector2.ZERO, 5, randi(), Danmaku.TYPE_CIRCLE, color)
 			for i in b:
 				i.set_behavior(tst_1_custom.bind(), [i, curve])
 			await Tool.quick_timer(0.12).timeout
-			c += 1
+			bullet_counter += 1
 		await Tool.quick_timer(3).timeout
 
 func tst_1_custom(args: Array) -> void:
@@ -95,24 +105,24 @@ func tst_3() -> void:
 func enemy_tst_1():
 	var scene = preload("uid://etx7et4252gc")
 	var d = 1
-	while true:
+	for count in 2:
 		for i in 8:
 			var enemy = scene.instantiate()
-			Gametray.add_child(enemy)
+			Gametray.call_deferred("add_child", enemy)
 			enemy.global_position = Vector2(-320 * d, -300)
-			enemy.health = 10
+			enemy.health = 8
 			enemy.set_behavior(enemy_tst_1_move.bind(), [enemy, d])
 			enemy.set_behavior(enemy_tst_1_shoot.bind(), [enemy])
-			await Tool.quick_timer(0.4).timeout
+			await Tool.quick_timer(0.2).timeout
 		await Tool.quick_timer(1.8).timeout
 		d *= -1
 		
 
 func enemy_tst_1_move(args: Array):
 	var enemy = args[0]
-	enemy.velocity = Vector2.DOWN * 4 * 60
-	await enemy.wait(1)
-	Tool.quick_tween(enemy, "velocity", Vector2.RIGHT * 4 * 60 * args[1], 1, Tween.EASE_IN_OUT, Tween.TRANS_LINEAR)
+	enemy.velocity = Vector2.DOWN * 10 * 60
+	await enemy.wait(0.2)
+	Tool.quick_tween(enemy, "velocity", Vector2.RIGHT * 10 * 60 * args[1], 1, Tween.EASE_IN_OUT, Tween.TRANS_LINEAR)
 
 func enemy_tst_1_shoot(args: Array):
 	var enemy = args[0]
@@ -124,9 +134,11 @@ func enemy_tst_1_shoot(args: Array):
 
 #region boss1
 func boss_tst_1() -> void:
-	var boss = preload("uid://du3vcvy2rhe0m").instantiate()
+	var new_boss: Enemy = preload("uid://du3vcvy2rhe0m").instantiate()
+	boss = new_boss
 	Gametray.add_child(boss)
 	boss.global_position = Vector2(0, -320)
-	$GameUI.boss_present = true
 	$GameUI.boss_added()
+	
+	await boss.defeated
 #endregion

@@ -43,3 +43,4 @@ func _physics_process(delta: float) -> void:
 	
 	global_position += velocity
 	
+	if global_position.y > 688: queue_free()

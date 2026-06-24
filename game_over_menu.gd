@@ -19,7 +19,7 @@ func resume():
 	get_tree().paused = false
 
 func _on_restart_button_pressed() -> void:
-	go_to_confirm("Restart from beginning stage", restart)
+	restart()
 
 func restart():
 	Gametray.clear()

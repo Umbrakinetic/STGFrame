@@ -33,7 +33,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not tracking_player:
-		velocity.y = clamp(velocity.y + item_gravity, -4, 2)
+		velocity.y = clamp(velocity.y + item_gravity, -4, 2.5)
 		global_position.y += velocity.y
 	else:
 		if Gametray.player.respawning:

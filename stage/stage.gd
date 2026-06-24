@@ -8,6 +8,7 @@ func _ready():
 	Gametray.player = $Player
 	$GameUI.start_ui()
 	
+	await Transition.finished
 	#enemy_tst_1()
 	#tst_1()
 	boss_tst_1()

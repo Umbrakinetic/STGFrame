@@ -1,13 +1,69 @@
 [gd_scene format=3 uid="uid://bad5u7l78vt00"]
 
-[ext_resource type="Script" uid="uid://doq7ihh521kry" path="res://transition.gd" id="1_2gi1b"]
+[ext_resource type="Script" uid="uid://cyjugobh1r6gw" path="res://transition.gd" id="1_2gi1b"]
+[ext_resource type="Shader" uid="uid://cj446i6wwe8e0" path="res://transition.gdshader" id="1_pj2mc"]
 
-[node name="Transition" type="ColorRect" unique_id=744025866]
-custom_minimum_size = Vector2(4096, 4096)
+[sub_resource type="Gradient" id="Gradient_7numd"]
+offsets = PackedFloat32Array(0, 0.51582277, 0.64873415, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.78439456, 0, 0, 0, 0.21682578, 0, 0, 0, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fcnqv"]
+frequency = 0.002
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3gngh"]
+width = 1280
+height = 960
+noise = SubResource("FastNoiseLite_fcnqv")
+color_ramp = SubResource("Gradient_7numd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d0u6y"]
+shader = ExtResource("1_pj2mc")
+shader_parameter/screen_cover = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_3gngh")
+
+[node name="Transition" type="Control" unique_id=1687528594]
+process_mode = 3
+z_index = 500
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0)
 script = ExtResource("1_2gi1b")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=392066204]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=744025866]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_d0u6y")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(1, 1, 1, 0)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ColorRect" unique_id=1557142099]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Text" type="Label" parent="CanvasLayer/ColorRect/MarginContainer" unique_id=591787969]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 32
+text = "Please Wait Warmly
+(Loading...)"
+horizontal_alignment = 2
+vertical_alignment = 2

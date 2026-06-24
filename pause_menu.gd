@@ -30,16 +30,18 @@ func _on_restart_button_pressed() -> void:
 
 func restart():
 	Gametray.clear()
+	Transition.load_next_scene(get_tree().current_scene.scene_file_path)
+	await Transition.finished
 	resume()
-	get_tree().change_scene_to_file(get_tree().current_scene.scene_file_path)
 
 func _on_main_menu_button_pressed() -> void:
 	go_to_confirm("Return to Main Menu", go_to_main_menu)
 
 func go_to_main_menu():
 	Gametray.clear()
+	Transition.load_next_scene("res://main_menu/main_menu.tscn")
+	await Transition.finished
 	resume()
-	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")
 
 func _on_desktop_button_pressed() -> void:
 	go_to_confirm("Quit to Desktop", quit_to_desktop)

@@ -6,5 +6,5 @@ func _on_body_exited(body: Node2D) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	var e = area.get_parent()
-	if e is Enemy:
+	if e is Enemy and not e.allowed_out_of_bounds:
 		e.queue_free()

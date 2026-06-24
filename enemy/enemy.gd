@@ -16,6 +16,8 @@ enum ItemTypes {
 
 var invincible: bool = false
 
+var allowed_out_of_bounds: bool = false
+
 signal died
 
 func _ready() -> void:

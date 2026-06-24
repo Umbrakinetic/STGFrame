@@ -114,7 +114,7 @@ func _physics_process(delta: float) -> void:
 	if not invincible and not visible:
 		show()
 	
-	if shooting and not frame_c % 4 and not respawning:
+	if shooting and not frame_c % 4 and not respawning and not bombing:
 		shoot(-16)
 		shoot(16)
 		%ShootSound.play()

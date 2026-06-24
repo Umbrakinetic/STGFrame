@@ -5,7 +5,6 @@ extends Control
 var switched_pause_this_frame: bool = false
 
 func pause():
-	print("pausing")
 	switched_pause_this_frame = true
 	get_tree().paused = true
 	show()

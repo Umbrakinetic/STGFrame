@@ -6,14 +6,11 @@ var boss
 
 var graze_count: int = 0
 
-var boss_present: bool = false:
-	set(value):
-		boss_present = value
-		%BossInfo.visible = value
-
 var life_texture = preload("uid://by5bhbi1is1k0")
 var bomb_texture = preload("uid://cfpshct2k52qa")
 
+func _ready() -> void:
+	%BossInfo.hide()
 
 ## The reason this is not a _ready() function is because it fires before Gametray.player is defined;
 ## So it is only manually called *after* that variable is defined.
@@ -28,15 +25,17 @@ func start_ui() -> void:
 	)
 
 func boss_added() -> void:
+	%BossInfo.show()
 	boss = Gametray.get_node("Boss")
+	set_process(true)
 	%BossName.text = boss.boss_name
 	boss.phase_started.connect(func():
 		%BossHealthBar.max_value = boss.health
 		%BossHealthBar.value = boss.health
 	)
 	boss.defeated.connect(func():
-		boss_present = false
-		
+		set_process(false)
+		%BossInfo.hide()
 	)
 
 func update_resources() -> void:
@@ -54,7 +53,7 @@ func set_resource_counter(counter_node, resource_count) -> void:
 	counter_node.custom_minimum_size.x = 48 * resource_count
 
 func _physics_process(delta: float) -> void:
-	if boss != null and boss_present:
+	if boss != null:
 		%BossHealthBar.value = lerp(\
 		%BossHealthBar.value, boss.health, 0.2)
 		

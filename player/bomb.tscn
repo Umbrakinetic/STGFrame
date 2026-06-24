@@ -12,9 +12,10 @@ var player
 var expanding: bool = true
 
 func _physics_process(delta: float) -> void:
-	for i in get_overlapping_bodies():
-		if i is Enemy:
-			i.take_damage(2)
+	for i in get_overlapping_areas():
+		var parent = i.get_parent()
+		if parent is Enemy:
+			parent.take_damage(2)
 
 func _ready() -> void:
 	player.invincible = true

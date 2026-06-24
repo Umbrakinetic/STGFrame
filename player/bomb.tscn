@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	for i in get_overlapping_areas():
 		var parent = i.get_parent()
 		if parent is Enemy:
-			parent.take_damage(2)
+			parent.take_damage(3)
 
 func _ready() -> void:
 	player.invincible = true

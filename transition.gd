@@ -10,11 +10,14 @@ func _ready() -> void:
 	%ColorRect.material.set_shader_parameter("screen_cover", 0.0)
 	%ColorRect.hide()
 	%Text.hide()
+	randomize_noise()
 
 func fade_in():
 	%ColorRect.show()
 	var tween = Tool.quick_tween(%ColorRect, "material:shader_parameter/screen_cover", 1.0, trans_time)
 	await tween.finished
+	
+	randomize_noise()
 	%Text.show()
 	
 	emit_signal("finished")
@@ -23,9 +26,14 @@ func fade_out():
 	%Text.hide()
 	var tween = Tool.quick_tween(%ColorRect, "material:shader_parameter/screen_cover", 0.0, trans_time)
 	await tween.finished
+	
+	randomize_noise()
 	%ColorRect.hide()
 	
 	emit_signal("finished")
+
+func randomize_noise():
+	%ColorRect.material.get_shader_parameter("noise").noise.seed = randi()
 
 func load_next_scene(path: String):
 	release_focus()

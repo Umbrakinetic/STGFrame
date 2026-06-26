@@ -32,6 +32,7 @@ func boss_added() -> void:
 	boss.phase_started.connect(func():
 		%BossHealthBar.max_value = boss.health
 		%BossHealthBar.value = boss.health
+		%BossPhaseTimer.start(30)
 	)
 	boss.defeated.connect(func():
 		set_process(false)
@@ -57,6 +58,9 @@ func _physics_process(delta: float) -> void:
 		%BossHealthBar.value = lerp(\
 		%BossHealthBar.value, boss.health, 0.2)
 		
+		%BossTimer.text = str(snappedi(%BossPhaseTimer.time_left, 1))
+		
+		%BossPhasesRemaining.text = str(boss.current_phase + 1) + "/" + str(boss.phases.size())
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause") and not %PauseMenu.switched_pause_this_frame:
@@ -64,3 +68,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	else:
 		%PauseMenu.resume()
 	
+
+func open_game_clear_menu():
+	%GameClearMenu.pause()
+
+
+func _on_boss_phase_timer_timeout() -> void:
+	boss.health = 0
+	boss._on_death()

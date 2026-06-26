@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cfpshct2k52qa" path="res://UI/bomb.png" id="6_v6n52"]
 [ext_resource type="PackedScene" uid="uid://cheq1keb46jb" path="res://game_over_menu.tscn" id="7_ywmy4"]
 [ext_resource type="PackedScene" uid="uid://b3oitxcmvkqdy" path="res://pause_menu.tscn" id="8_jd38o"]
+[ext_resource type="PackedScene" uid="uid://6j1kfdxn6ira" path="res://game_clear_menu.tscn" id="9_jd38o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vealc"]
 
@@ -37,6 +38,7 @@ offset_right = -1280.0
 offset_bottom = -960.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_obik5")
 
 [node name="Ref" type="Sprite2D" parent="." unique_id=477483206]
@@ -128,6 +130,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo" unique_id=1706243843]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="BossName" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer" unique_id=1720119820]
 unique_name_in_owner = true
@@ -152,22 +155,32 @@ value = 100.0
 show_percentage = false
 
 [node name="BossTimer" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer" unique_id=1321207150]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 32
 text = "99"
+
+[node name="BossPhaseTimer" type="Timer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer" unique_id=803998013]
+unique_name_in_owner = true
+wait_time = 99.0
+one_shot = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer" unique_id=1546554388]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer2" unique_id=279346116]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("6_v6n52")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 4
 
-[node name="PhasesRemaining" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer2" unique_id=470670633]
+[node name="BossPhasesRemaining" type="Label" parent="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer2" unique_id=470670633]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 32
@@ -267,6 +280,7 @@ offset_left = 64.0
 offset_top = 32.0
 offset_right = 104.0
 offset_bottom = 72.0
+mouse_behavior_recursive = 1
 
 [node name="GameOverMenu" parent="Control" unique_id=1568294371 instance=ExtResource("7_ywmy4")]
 unique_name_in_owner = true
@@ -277,3 +291,10 @@ layout_mode = 0
 unique_name_in_owner = true
 visible = false
 layout_mode = 0
+
+[node name="GameClearMenu" parent="Control" unique_id=181200880 instance=ExtResource("9_jd38o")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+
+[connection signal="timeout" from="CanvasGroup/VBoxContainer/HBoxContainer/Container/BossInfo/VBoxContainer/HBoxContainer/BossPhaseTimer" to="." method="_on_boss_phase_timer_timeout"]

@@ -9,10 +9,6 @@ var continued_run: bool = false
 
 signal boss_entered
 
-#func _ready() -> void:
-	#process_mode = Node.PROCESS_MODE_ALWAYS
-	
-
 func clear():
 	for i in get_children():
 		i.queue_free()

@@ -52,6 +52,7 @@ offset_left = -384.0
 offset_top = -240.0
 offset_right = 384.0
 offset_bottom = 656.0
+mouse_filter = 2
 
 [node name="SubViewport" parent="Background/SubViewportContainer" index="0"]
 size = Vector2i(768, 896)

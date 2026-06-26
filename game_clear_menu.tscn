@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbmkt80ioynr" path="res://game_clear_menu.gd" id="1_tefri"]
 
-[node name="PauseMenu" type="Control" unique_id=1568294371]
+[node name="GameClearMenu" type="Control" unique_id=1568294371]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 0
@@ -37,6 +37,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+offset_transform_enabled = true
 
 [node name="MainText" type="RichTextLabel" parent="PauseMenu/MarginContainer/MainPauseMenu" unique_id=928684391]
 layout_mode = 2

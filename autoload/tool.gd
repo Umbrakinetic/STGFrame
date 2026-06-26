@@ -1,5 +1,8 @@
 extends Node
 
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 func find_angle_to_player(from: Vector2) -> float:
 	return rad_to_deg(from.angle_to_point(Gametray.player.global_position))
 

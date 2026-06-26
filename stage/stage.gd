@@ -5,6 +5,9 @@ extends Node2D
 var sections: Array[Callable] = [enemy_tst_1, boss_tst_1, enemy_tst_1]
 var boss: Enemy
 
+signal section_cleared
+signal all_sections_cleared
+
 func _ready():
 	Gametray.player = $Player
 	$GameUI.start_ui()
@@ -12,12 +15,13 @@ func _ready():
 	await Transition.finished
 	
 	for section in sections:
-		print("new section: " + str(section))
 		await section.call()
+		emit_signal("section_cleared")
 	
 	await Tool.quick_timer(1).timeout
-	print("all clear")
+	emit_signal("all_sections_cleared")
 	
+	$GameUI.open_game_clear_menu()
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
@@ -127,7 +131,7 @@ func enemy_tst_1_move(args: Array):
 func enemy_tst_1_shoot(args: Array):
 	var enemy = args[0]
 	for i in 24:
-		await enemy.wait(0.2)
+		await enemy.wait(0.3)
 		Danmaku.spawn_bullet(enemy.position, 8, Tool.find_angle_to_player(enemy.position))
 
 #endregion

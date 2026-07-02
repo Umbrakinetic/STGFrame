@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c066duutcevli"]
+
+[ext_resource type="Script" uid="uid://cld2i2kubyjfr" path="res://spellcard_background.gd" id="1_0hjuh"]
+[ext_resource type="Texture2D" uid="uid://cjgwmqokwgt1c" path="res://enemy/boss/spellcard.png" id="2_jksd8"]
+
+[node name="SpellcardBackground" type="Node2D" unique_id=1020833381]
+z_index = -499
+script = ExtResource("1_0hjuh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1612352673]
+texture_repeat = 2
+texture = ExtResource("2_jksd8")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 768, 896)

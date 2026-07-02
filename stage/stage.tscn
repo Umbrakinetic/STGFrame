@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://u5q5a7xl7gpt" path="res://player/player.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://bt0tnmdih3lea" path="res://stage/stage.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://hrwso57entg" path="res://UI/game_ui.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://c066duutcevli" path="res://spellcard_background.tscn" id="4_cxybx"]
 [ext_resource type="PackedScene" uid="uid://bnvr4tc24o5q0" path="res://stage/background.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://ddebscdi2xrrq" path="res://stage/clear_border.gd" id="6_7mycd"]
 
@@ -26,23 +27,28 @@ offset_bottom = -272.0
 unique_name_in_owner = true
 z_index = 100
 layout_mode = 0
-offset_left = 864.0
-offset_top = 16.0
-offset_right = 1006.0
-offset_bottom = 39.0
+offset_left = 980.0
+offset_top = 876.0
+offset_right = 1263.0
+offset_bottom = 921.0
+theme_override_font_sizes/font_size = 24
 text = "DebugBulletCount"
+horizontal_alignment = 2
 
 [node name="DebugFPS" type="Label" parent="GameUI" unique_id=1112114258]
 unique_name_in_owner = true
 z_index = 100
 layout_mode = 0
 offset_left = 1110.0
-offset_top = 898.0
+offset_top = 910.0
 offset_right = 1264.0
-offset_bottom = 943.0
-theme_override_font_sizes/font_size = 32
+offset_bottom = 955.0
+theme_override_font_sizes/font_size = 24
 text = "DebugFPS"
 horizontal_alignment = 2
+
+[node name="SpellcardBackground" parent="." unique_id=1020833381 instance=ExtResource("4_cxybx")]
+position = Vector2(-384, -238)
 
 [node name="Background" parent="." unique_id=1730802043 instance=ExtResource("5_lquwl")]
 

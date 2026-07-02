@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	
 	#real-time debug info
 	%DebugBulletCount.text = "Bullet Count: " + str(Gametray.bullet_list.size())
-	%DebugFPS.text = str(snappedi(Engine.get_frames_per_second(), 1))
+	%DebugFPS.text = "FPS: " + str(snappedi(Engine.get_frames_per_second(), 1))
 
 var bullet_counter: int = 1
 

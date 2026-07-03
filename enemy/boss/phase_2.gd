@@ -1,6 +1,7 @@
 extends Phase
 
 func start() -> void:
+	boss.declare_spell("Development Sign \"Test Pattern\"")
 	boss.invincible = true
 	loop()
 	
@@ -8,25 +9,18 @@ func start() -> void:
 	boss.invincible = false
 
 func loop() -> void:
+	var count: float = 0
+	var mult: float = 3
 	while boss.health > 0:
-		var c: = Danmaku.spawn_circle(12, boss.position, 6, randi(), Danmaku.TYPE_CIRCLE, Color.RED)
-		for b in c:
-			b.set_behavior(spin.bind(), [b])
-		await boss.wait(0.5)
-
-
-func spin(args: Array):
-	var b: Bullet = args[0]
-	await b.wait(1)
-	b.set_speed(0)
-	b.accelerate(6, 1)
-	Danmaku.spawn_bullet(b.global_position, 6, b.get_angle(), Danmaku.TYPE_CIRCLE, Color.YELLOW)
-	b.set_angle(b.get_angle() + 90)
-	
-	
-	await b.wait(1)
-	b.set_speed(0)
-	b.accelerate(6, 1)
-	Danmaku.spawn_bullet(b.global_position, 6, b.get_angle(), Danmaku.TYPE_CIRCLE, Color.GREEN)
-	b.set_angle(b.get_angle() -135)
-	
+		var pos = boss.global_position + Vector2(240 * cos(count / 60), 120 * sin(count / 60))
+		var npos = boss.global_position - Vector2(240 * cos(count / 60), 120 * sin(count / 60))
+		for speed in range(4, 7):
+			var bullet: = Danmaku.spawn_bullet(pos, speed, 0, Danmaku.TYPE_CRYSTAL, Color.RED)
+			var bullet2: = Danmaku.spawn_bullet(npos, speed, 0, Danmaku.TYPE_CRYSTAL, Color.BLUE)
+			
+			for i in [bullet, bullet2]:
+				i.set_angle(rad_to_deg(i.global_position.angle_to_point(boss.global_position)) + 180)
+		
+		
+		count += mult
+		await boss.wait(mult / 60.0)

@@ -143,6 +143,7 @@ func boss_tst_1() -> void:
 	Gametray.add_child(boss)
 	boss.global_position = Vector2(0, -320)
 	$GameUI.boss_added()
+	$SpellcardBackground.boss = boss
 	
 	await boss.defeated
 #endregion

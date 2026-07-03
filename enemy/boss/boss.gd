@@ -14,6 +14,9 @@ var phases: Array = [
 ]
 
 signal phase_started
+signal phase_ended
+
+signal spell_declared(spell_name: String)
 
 signal defeated
 
@@ -33,12 +36,16 @@ func start_phase() -> void:
 	$Phase.start()
 	phase_started.emit()
 
+func declare_spell(spell_name: String):
+	emit_signal("spell_declared", spell_name)
+
 ## when boss health reaches 0, stops the current pattern (phase), 
 ## & waits for a second before starting a new pattern.
 ## if no patterns remain, the boss will die for real.
 func _on_death() -> void:
 	clear_all_bullets()
 	give_drops()
+	phase_ended.emit()
 	if current_phase + 1 < phases.size():
 		await $Phase.end_phase()
 		await wait(1)

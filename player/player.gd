@@ -81,6 +81,9 @@ func change_focus_scale(time: float, sprite_scale: Vector2) -> void:
 
 var iframe_blink: int = 0
 var frame_c: int = 0
+
+var invincibility_time_left: float = 0
+
 func _physics_process(delta: float) -> void:
 	frame_c += 1
 	
@@ -91,6 +94,9 @@ func _physics_process(delta: float) -> void:
 	for option in %OptionPosition.get_children():
 		option.rotation_degrees += 4
 	
+	
+	%InvincibilityIndicator.rotation_degrees -= 1.5
+	%InvincibilityIndicator.scale = Vector2.ONE * min(%InvincibilityTimer.time_left, 1)
 	
 	var a = [
 		[%Option1, %Option1Unfocused, %Option1Focused],
@@ -175,11 +181,11 @@ func die():
 	emit_signal("died")
 	
 	%Sprite.hide()
+	set_invincibility(4)
 	respawning = true
-	invincible = true
 	can_move = false
 	
-	await get_tree().create_timer(1, false, true).timeout
+	await Tool.quick_timer(1).timeout
 	
 	bombs = max(bombs, bombs_per_life)
 	
@@ -187,11 +193,16 @@ func die():
 	%Sprite.show()
 	respawning = false
 	can_move = true
-	await get_tree().create_timer(3, false, true).timeout
-	invincible = false
+	await Tool.quick_timer(3).timeout
 	
 	show()
 
+func set_invincibility(time: float):
+	invincible = true
+	if time > %InvincibilityTimer.time_left:
+		%InvincibilityTimer.start(time)
+func _on_invincibility_timer_timeout() -> void:
+	invincible = false
 
 func _on_grazebox_body_entered(body: Node2D) -> void:
 	if body is Bullet and not body.is_in_group("playerbullet") and not body.is_in_group("grazed"):

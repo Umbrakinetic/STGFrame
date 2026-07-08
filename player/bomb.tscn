@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 			parent.take_damage(3)
 
 func _ready() -> void:
-	player.invincible = true
+	player.set_invincibility(3)
 	#$Line2D.material = $Line2D.material.duplicate()
 	
 	afterimage_loop()
@@ -36,7 +36,6 @@ func _ready() -> void:
 	
 	await twn.finished
 	player.bombing = false
-	player.invincible = false
 	queue_free()
 
 func afterimage_loop() -> void:

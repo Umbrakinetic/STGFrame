@@ -6,7 +6,7 @@ var boss
 
 var graze_count: int = 0
 
-var life_texture = preload("uid://by5bhbi1is1k0")
+var life_texture = preload("uid://bi0yej7noch3r")
 var bomb_texture = preload("uid://cfpshct2k52qa")
 
 func _ready() -> void:
@@ -30,7 +30,6 @@ func start_ui() -> void:
 	)
 
 func boss_added() -> void:
-	#declare_spell("Development Sign \"Test Pattern\"")
 	%BossInfo.show()
 	boss = Gametray.get_node("Boss")
 	boss.spell_declared.connect(declare_spell.bind())
@@ -41,7 +40,10 @@ func boss_added() -> void:
 	boss.phase_started.connect(func():
 		%BossHealthBar.max_value = boss.health
 		%BossHealthBar.value = boss.health
-		%BossPhaseTimer.start(30)
+		%BossPhaseTimer.start(\
+		boss.current_phase.get_phase_time() + 2 if boss.current_phase_num == 0
+		else boss.current_phase.get_phase_time() + 1
+		)
 	)
 	boss.defeated.connect(func():
 		set_process(false)
@@ -84,7 +86,7 @@ func reset_spell_ui():
 	%SpellNameBG.offset_transform_scale = Vector2(2, 2)
 	%SpellNameBG.offset_transform_position_ratio.y = 8.33
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if boss != null:
 		%BossHealthBar.value = lerp(\
 		%BossHealthBar.value, boss.health, 0.2)
@@ -93,7 +95,7 @@ func _physics_process(delta: float) -> void:
 		if %BossPhaseTimer.time_left < 10: %BossTimer.add_theme_color_override("font_color", Color.RED)
 		else: %BossTimer.add_theme_color_override("font_color", Color.WHITE)
 		
-		%BossPhasesRemaining.text = str(boss.current_phase + 1) + "/" + str(boss.phases.size())
+		%BossPhasesRemaining.text = str(boss.current_phase_num + 1) + "/" + str(boss.phases.size())
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause") and not %PauseMenu.switched_pause_this_frame:

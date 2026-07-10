@@ -2,16 +2,20 @@ extends Enemy
 
 var start_pos: Vector2 = Vector2.ZERO
 
-var current_phase: int = 0
-
 var boss_name: String = "Minnatsmonki"
 
 signal entered
 
-var phases: Array = [
+var phases: Array[GDScript] = [
 	preload("uid://bjxy3cjmsrv4u"),
 	preload("uid://cdmh8q7o5ku51"),
 ]
+
+var current_phase_num: int = 0
+
+@onready var current_phase: = $Phase
+
+var first_phase_time: float = 30
 
 signal phase_started
 signal phase_ended
@@ -23,17 +27,15 @@ signal defeated
 func _ready() -> void:
 	entered.emit()
 	allowed_out_of_bounds = true
-	invincible = true
-	var move_tween = Tool.quick_tween(self, "global_position", start_pos, 1, Tween.EASE_IN, Tween.TRANS_LINEAR)
-	await move_tween.finished
-	await wait(1)
+	
 	start_phase()
 
 func start_phase() -> void:
-	$Phase.set_script(phases[current_phase])
+	$Phase.set_script(phases[current_phase_num])
 	$Phase.boss = self
 	health = $Phase.phase_health
 	$Phase.start()
+	await get_tree().physics_frame
 	phase_started.emit()
 
 func declare_spell(spell_name: String):
@@ -46,10 +48,9 @@ func _on_death() -> void:
 	clear_all_bullets()
 	give_drops()
 	phase_ended.emit()
-	if current_phase + 1 < phases.size():
+	if current_phase_num + 1 < phases.size():
 		await $Phase.end_phase()
-		await wait(1)
-		current_phase += 1
+		current_phase_num += 1
 		start_phase()
 		dying = false
 	else:

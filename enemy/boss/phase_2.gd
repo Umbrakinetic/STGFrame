@@ -1,8 +1,11 @@
 extends Phase
 
 func start() -> void:
-	boss.declare_spell("Development Sign \"Test Pattern\"")
 	boss.invincible = true
+	var move_tween = Tool.quick_tween(boss, "global_position", boss.start_pos, 1, Tween.EASE_IN, Tween.TRANS_LINEAR)
+	await move_tween.finished
+	
+	boss.declare_spell("Development Sign \"Test Pattern\"")
 	loop()
 	
 	await Tool.quick_timer(2).timeout

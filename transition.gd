@@ -2,6 +2,8 @@ extends Control
 
 var next_scene_path: String
 
+var transitioning: bool = false
+
 const trans_time: float = 0.5
 
 signal finished
@@ -36,6 +38,8 @@ func randomize_noise():
 	%ColorRect.material.get_shader_parameter("noise").noise.seed = randi()
 
 func load_next_scene(path: String):
+	if transitioning: return
+	transitioning = true
 	release_focus()
 	await fade_in()
 	next_scene_path = path
@@ -50,4 +54,5 @@ func _process(delta: float) -> void:
 		var next_scene = ResourceLoader.load_threaded_get(next_scene_path)
 		get_tree().change_scene_to_packed(next_scene)
 		fade_out()
+		transitioning = false
 		set_process(false)

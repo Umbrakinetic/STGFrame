@@ -64,6 +64,7 @@ func give_drops() -> void:
 			Gametray.call_deferred("add_child", item)
 			item.sprite = type
 			item.global_position = global_position + Tool.rand_vector2(128, 128)
+			item.global_position.x = clamp(item.global_position.x, -384, 384)
 			##add item spawning
 
 func wait(time_sec) -> void:

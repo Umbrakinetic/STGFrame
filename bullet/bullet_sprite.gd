@@ -1,18 +1,18 @@
-@tool
 extends Node2D
 
-@export_tool_button("Print Hitbox Transform") var export_hitbox_info = export
-func export():
-	var st = \
-	"PackedVector2Array([" + \
-	"Vector2" + str(%Hitbox.get_transform().x) + ", " + \
-	"Vector2" + str(%Hitbox.get_transform().y) + ", " + \
-	"Vector2" + str(%Hitbox.get_transform().origin) + "])"
-	print(st)
+##TODO move to BulletBuilder
+#@export_tool_button("Print Hitbox Transform") var export_hitbox_info = export
+#func export():
+	#var st = \
+	#"PackedVector2Array([" + \
+	#"Vector2" + str(%Hitbox.get_transform().x) + ", " + \
+	#"Vector2" + str(%Hitbox.get_transform().y) + ", " + \
+	#"Vector2" + str(%Hitbox.get_transform().origin) + "])"
+	#print(st)
+#
+#@export_tool_button("Redraw") var redraw = queue_redraw
 
-@export_tool_button("Redraw") var redraw = queue_redraw
-
-@export var bullet_type: Danmaku.Bullet_Type: 
+var bullet_type: Danmaku.Bullet_Type: 
 	set(value):
 		if not is_inside_tree():
 			await tree_entered
@@ -29,15 +29,19 @@ func export():
 			
 		queue_redraw()
 
-@export var bottom: Texture2D:
+var bottom: Texture2D:
 	set(value):
 		bottom = value
-@export var top: Texture2D:
+var top: Texture2D:
 	set(value):
 		top = value
-@export var color: Color = Color.RED:
+var color: Color = Color.RED:
 	set(value):
 		color = value
+		queue_redraw()
+var inverted_color: bool = false:
+	set(value):
+		inverted_color = value
 		queue_redraw()
 
 var passive_rotation: float = 0
@@ -46,7 +50,8 @@ func _draw() -> void:
 	if bottom != null:
 		draw_texture(bottom, Vector2.ZERO - bottom.get_size()/2, color)
 	if top != null:
-		draw_texture(top, Vector2.ZERO - top.get_size()/2, lerp(Color.WHITE, color, 0.02))
+		var top_color: Color = Color.BLACK if inverted_color else Color.WHITE
+		draw_texture(top, Vector2.ZERO - top.get_size()/2, lerp(top_color, color, 0.02))
 
 func _process(delta: float) -> void:
 	if passive_rotation != 0:

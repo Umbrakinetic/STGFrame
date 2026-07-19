@@ -212,3 +212,17 @@ func wait(time_sec) -> void:
 
 func set_behavior(behavior:Callable, args: Array) -> void:
 	behavior.call(args)
+
+func set_bullet_type(bullet_type: Danmaku.Bullet_Type):
+	$Sprite.bullet_type = bullet_type
+func get_bullet_type():
+	return $Sprite.bullet_type
+func set_color(color: Color = Color.RED, inverted: bool = false):
+	$Sprite.color = color
+	$Sprite.inverted_color = inverted
+func get_color():
+	return $Sprite.color
+func is_inverted():
+	return $Sprite.inverted_color
+func set_passive_rotation(passive_rotation_degrees: float):
+	$Sprite.passive_rotation = passive_rotation_degrees

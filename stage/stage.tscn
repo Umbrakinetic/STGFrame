@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://u5q5a7xl7gpt" path="res://player/player.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://bt0tnmdih3lea" path="res://stage/stage.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://hrwso57entg" path="res://UI/game_ui.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://c066duutcevli" path="res://spellcard_background.tscn" id="4_cxybx"]
+[ext_resource type="PackedScene" uid="uid://c066duutcevli" path="res://stage/spellcard_background.tscn" id="4_cxybx"]
 [ext_resource type="PackedScene" uid="uid://bnvr4tc24o5q0" path="res://stage/background.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://ddebscdi2xrrq" path="res://stage/clear_border.gd" id="6_7mycd"]
 

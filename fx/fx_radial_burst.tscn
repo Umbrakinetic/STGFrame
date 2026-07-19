@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://7qebyenh7k7e"]
 
-[ext_resource type="Texture2D" uid="uid://buk714fnyqg3u" path="res://enemy/fx_radial.png" id="1_e3lqg"]
+[ext_resource type="Texture2D" uid="uid://buk714fnyqg3u" path="res://fx/fx_radial.png" id="1_e3lqg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a6pid"]
 blend_mode = 1

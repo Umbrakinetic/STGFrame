@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c066duutcevli"]
 
-[ext_resource type="Script" uid="uid://cld2i2kubyjfr" path="res://spellcard_background.gd" id="1_0hjuh"]
+[ext_resource type="Script" uid="uid://cld2i2kubyjfr" path="res://stage/spellcard_background.gd" id="1_0hjuh"]
 [ext_resource type="Texture2D" uid="uid://cjgwmqokwgt1c" path="res://enemy/boss/spellcard.png" id="2_jksd8"]
 
 [node name="SpellcardBackground" type="Node2D" unique_id=1020833381]

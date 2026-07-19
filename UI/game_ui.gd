@@ -57,7 +57,9 @@ func update_resources() -> void:
 	set_resource_counter(%LifeTexture, lives)
 	set_resource_counter(%BombTexture, bombs)
 	
-	if lives < 0: %GameOverMenu.pause()
+	if lives < 0: 
+		await Tool.quick_timer(1).timeout
+		%GameOverMenu.pause()
 
 func set_resource_counter(counter_node, resource_count) -> void:
 	if resource_count <= 0: counter_node.hide()
@@ -88,6 +90,7 @@ func reset_spell_ui():
 
 func _process(delta: float) -> void:
 	if boss != null:
+		queue_redraw()
 		%BossHealthBar.value = lerp(\
 		%BossHealthBar.value, boss.health, 0.2)
 		
@@ -96,6 +99,17 @@ func _process(delta: float) -> void:
 		else: %BossTimer.add_theme_color_override("font_color", Color.WHITE)
 		
 		%BossPhasesRemaining.text = str(boss.current_phase_num + 1) + "/" + str(boss.phases.size())
+
+func _draw() -> void:
+	if boss != null:
+		var boss_x = clamp(boss.global_position.x + 448, 64, 832)
+		
+		draw_polygon([
+			Vector2(boss_x, 936), 
+			Vector2(boss_x + 8, 956), 
+			Vector2(boss_x - 8, 956)], 
+			[Color.WHITE
+			])
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause") and not %PauseMenu.switched_pause_this_frame:

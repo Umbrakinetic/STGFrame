@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cheq1keb46jb"]
 
-[ext_resource type="Script" uid="uid://cimasgrawgxjj" path="res://game_over_menu.gd" id="1_14ib6"]
+[ext_resource type="Script" uid="uid://cimasgrawgxjj" path="res://UI/game_over_menu.gd" id="1_14ib6"]
 
 [node name="GameOverMenu" type="Control" unique_id=1568294371]
 process_mode = 2

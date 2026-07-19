@@ -47,11 +47,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		focused = true
 		speed = default_speed / 2
 		change_focus_scale(0.2, Vector2.ONE)
+		$ItemAutoCollect/CollisionShape2D.disabled = false
 	elif event.is_action_released("focus"):
 		focused = false
 		speed = default_speed
 		change_focus_scale(0.2, Vector2.ZERO)
-	
+		$ItemAutoCollect/CollisionShape2D.disabled = true
 	if event.is_action_pressed("shoot"):
 		shooting = true
 	elif event.is_action_released("shoot"):
@@ -217,3 +218,8 @@ func _on_grazebox_area_entered(area: Area2D) -> void:
 func collect_all_items():
 	for i in get_tree().get_nodes_in_group("item"):
 		i.tracking_player = true
+
+
+func _on_item_auto_collect_area_entered(area: Area2D) -> void:
+	if area is Item:
+		area.tracking_player = true

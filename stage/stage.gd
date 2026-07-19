@@ -2,7 +2,7 @@ extends Node2D
 
 #Enemy1, Enemy2, Midboss, Enemy3, Enemy4, Boss
 #Enemies sections can just be functions
-var sections: Array[Callable] = [enemy_tst_1, boss_tst_1, enemy_tst_1]
+var sections: Array[Callable] = [boss_tst_1, enemy_tst_1]
 var boss: Enemy
 
 signal section_cleared

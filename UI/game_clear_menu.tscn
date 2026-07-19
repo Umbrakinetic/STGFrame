@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://6j1kfdxn6ira"]
 
-[ext_resource type="Script" uid="uid://dbmkt80ioynr" path="res://game_clear_menu.gd" id="1_tefri"]
+[ext_resource type="Script" uid="uid://dbmkt80ioynr" path="res://UI/game_clear_menu.gd" id="1_tefri"]
 
 [node name="GameClearMenu" type="Control" unique_id=1568294371]
 process_mode = 2

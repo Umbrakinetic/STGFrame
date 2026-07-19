@@ -47,6 +47,8 @@ func boss_added() -> void:
 	)
 	boss.defeated.connect(func():
 		set_process(false)
+		boss = null
+		queue_redraw()
 		%BossInfo.hide()
 	)
 

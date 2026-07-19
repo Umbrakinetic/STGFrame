@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://ddwfmbclw0f44"]
+
+[sub_resource type="GDScript" id="GDScript_xvnxm"]
+script/source = "##Tool that easily allows building of the bullet definition.
+
+@tool
+extends Node2D
+
+@export var bullet_types: PackedStringArray
+
+@export_tool_button(\"export bullet type string\") var export_bullet_definition_string = export_string
+func export_string():
+	
+	## Get the longest entry in the array
+	## (To format the constants section)
+	var longest_count: int = 0
+	for i in bullet_types:
+		if i.length() > longest_count: longest_count = i.length()
+	
+	var to_print: String = \"\"
+	
+	## Create the constants
+	var count: int = 0
+	var const_string: String = \"\"
+	for i in bullet_types:
+		var spacing: String = \"\"
+		for l in (longest_count - i.length()):
+			spacing += \" \"
+		const_string += \"const \" + i + spacing + \" = \" + str(count) + \"\\n\"
+		count += 1
+	to_print += const_string
+	
+	## Create the enum
+	var enum_string: String = \"enum Bullet_Type {\\n\"
+	for i in bullet_types:
+		enum_string += (\"	\" + i + \",\\n\")
+	enum_string += \"}\"
+	to_print += enum_string
+	
+	print(to_print)
+"
+
+[node name="BulletDefinitionBuilder" type="Node2D" unique_id=1841975326]
+script = SubResource("GDScript_xvnxm")
+bullet_types = PackedStringArray("TYPE_CIRCLE", "TYPE_CIRCLEBORDER", "TYPE_SQUARE", "TYPE_ARROWHEAD", "TYPE_SCALE", "TYPE_RICE", "TYPE_LTRLBULLET", "TYPE_BLADE", "TYPE_DROPLET", "TYPE_FLOWER", "TYPE_CRYSTAL", "TYPE_STAR", "TYPE_HEART", "TYPE_BUBBLE", "TYPE_ICE", "TYPE_SLAVE")

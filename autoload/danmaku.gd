@@ -1,4 +1,4 @@
-
+@tool
 extends Node
 # Handles everything associated with bullets, lasers and objects.
 # Not exclusive to "bullets" like the title implies, but it pretty much only affects bullet-hell-related things, so...
@@ -11,47 +11,59 @@ func refresh_vars() -> void:
 
 #region Bullet Definition
 
-const TYPE_CIRCLE    = 0
-const TYPE_ARROWHEAD = 1
-const TYPE_SCALE     = 2
-const TYPE_STAR      = 3
-const TYPE_BLADE     = 4
-const TYPE_LTRLBULLET= 5
-const TYPE_DROPLET   = 6
-const TYPE_CRYSTAL   = 7
-const TYPE_FLOWER    = 8
-const TYPE_HEART     = 9
-const TYPE_SQUARE    = 10
-const TYPE_SLAVE     = 11
-
+const TYPE_CIRCLE       = 0
+const TYPE_CIRCLEBORDER = 1
+const TYPE_SQUARE       = 2
+const TYPE_ARROWHEAD    = 3
+const TYPE_SCALE        = 4
+const TYPE_RICE         = 5
+const TYPE_LTRLBULLET   = 6
+const TYPE_BLADE        = 7
+const TYPE_DROPLET      = 8
+const TYPE_FLOWER       = 9
+const TYPE_CRYSTAL      = 10
+const TYPE_STAR         = 11
+const TYPE_HEART        = 12
+const TYPE_BUBBLE       = 13
+const TYPE_ICE          = 14
+const TYPE_SLAVE        = 15
 enum Bullet_Type {
 	TYPE_CIRCLE,
+	TYPE_CIRCLEBORDER,
+	TYPE_SQUARE,
 	TYPE_ARROWHEAD,
 	TYPE_SCALE,
-	TYPE_STAR,
-	TYPE_BLADE,
+	TYPE_RICE,
 	TYPE_LTRLBULLET,
+	TYPE_BLADE,
 	TYPE_DROPLET,
-	TYPE_CRYSTAL,
 	TYPE_FLOWER,
+	TYPE_CRYSTAL,
+	TYPE_STAR,
 	TYPE_HEART,
-	TYPE_SQUARE,
-	
+	TYPE_BUBBLE,
+	TYPE_ICE,
 	TYPE_SLAVE,
-
-#TYPE_FOURSTAR,
-#TYPE_FIVESTAR,
-#TYPE_FLUX,
-#TYPE_CUBE,
 }
 
+
 var type_dict: Dictionary[Bullet_Type, Array] = {
-	TYPE_CIRCLE : [
+	TYPE_CIRCLE : [ ## Example:
 		preload("uid://bbu7axu8cugyu"), ##Bottom Sprite
 		preload("uid://buqxbpyk1f5og"), ##Top Sprite
 		PackedVector2Array([            ##Hitbox Transform
 			Vector2(1.175, 0.0), Vector2(0.0, 1.175), Vector2(0.0, 0.0)
 		]),
+	],
+	TYPE_CIRCLEBORDER : [
+		preload("uid://7bpbsyejv5bf"),
+		preload("uid://dhurxxuxfsp2o"),
+		PackedVector2Array([Vector2(1.35, 0.0), Vector2(0.0, 1.35), Vector2(0.0, 0.0)])
+	],
+	TYPE_SQUARE : [
+		preload("uid://c24m5t6avs504"),
+		preload("uid://ccgxoq2s1ar8s"),
+		PackedVector2Array([Vector2(1.35, 0.0), Vector2(0.0, 1.35), Vector2(0.0, 0.0)])
 	],
 	TYPE_ARROWHEAD : [
 		preload("uid://d0partpowqude"), 
@@ -63,47 +75,56 @@ var type_dict: Dictionary[Bullet_Type, Array] = {
 		preload("uid://c1t36hbm8tfwg"),
 		PackedVector2Array([Vector2(2.56, 0.0), Vector2(0.0, 1.55), Vector2(-1.96, 0.0)])
 	],
-	TYPE_STAR : [
-		preload("uid://bu8akd05b247a"),
-		preload("uid://bcv24gbarcisc"),
-		PackedVector2Array([Vector2(1.44, 0.0), Vector2(0.0, 1.44), Vector2(-3.015, 0.0)])
-	],
-	TYPE_BLADE : [
-		preload("uid://brsvwrost6ugc"),
-		preload("uid://bf3v5i7vldfxq"),
-		PackedVector2Array([Vector2(1.35, 0.0), Vector2(0.0, 0.47), Vector2(7.815, 0.0)]),
+	TYPE_RICE : [
+		preload("uid://b0ko0tt5wuqmq"),
+		preload("uid://dinsy5hdwswyh"),
+		PackedVector2Array([Vector2(1.3, 0.0), Vector2(0.0, 0.65), Vector2(0.0, 0.0)])
 	],
 	TYPE_LTRLBULLET : [
 		preload("uid://csrlhro2pfd3p"), 
 		preload("uid://cbiegvvmyrnht"), 
 		PackedVector2Array([Vector2(2.0, 0.0), Vector2(0.0, 0.65), Vector2(0.0, 0.0)])
 	],
+	TYPE_BLADE : [
+		preload("uid://brsvwrost6ugc"),
+		preload("uid://bf3v5i7vldfxq"),
+		PackedVector2Array([Vector2(1.35, 0.0), Vector2(0.0, 0.47), Vector2(7.815, 0.0)]),
+	],
 	TYPE_DROPLET : [
 		preload("uid://bvu4m3po82t4b"),
 		preload("uid://drtfxdirw60l4"),
 		PackedVector2Array([Vector2(1.575, 0.0), Vector2(0.0, 1.575), Vector2(5.0, 0.0)]),
-	],
-	TYPE_CRYSTAL : [
-		preload("uid://yjrnk7jgufvh"), 
-		preload("uid://bjwypqi8pja5p"), 
-		PackedVector2Array([Vector2(1.48, 0.0), Vector2(0.0, 0.83), Vector2(0.0, 0.0)])
 	],
 	TYPE_FLOWER : [
 		preload("uid://dslscb1drwv3x"), 
 		preload("uid://bjageeff3fbrt"), 
 		PackedVector2Array([Vector2(2.045, 0.0), Vector2(0.0, 2.045), Vector2(-2.0, 0.0)])
 	],
+	TYPE_CRYSTAL : [
+		preload("uid://yjrnk7jgufvh"), 
+		preload("uid://bjwypqi8pja5p"), 
+		PackedVector2Array([Vector2(1.48, 0.0), Vector2(0.0, 0.83), Vector2(0.0, 0.0)])
+	],
+	TYPE_STAR : [
+		preload("uid://bu8akd05b247a"),
+		preload("uid://bcv24gbarcisc"),
+		PackedVector2Array([Vector2(1.44, 0.0), Vector2(0.0, 1.44), Vector2(0.0, 0.0)])
+	],
 	TYPE_HEART : [
 		preload("uid://b0iwcxcemo3yq"), 
 		preload("uid://bmcvmst33fcuh"), 
 		PackedVector2Array([Vector2(2.05, 0.0), Vector2(0.0, 2.05), Vector2(-0.955, 0.0)])
 	],
-	TYPE_SQUARE : [
-		preload("uid://c24m5t6avs504"),
-		preload("uid://ccgxoq2s1ar8s"),
-		PackedVector2Array([Vector2(1.35, 0.0), Vector2(0.0, 1.35), Vector2(0.0, 0.0)])
+	TYPE_BUBBLE : [
+		preload("uid://dtl6w1hw5o134"),
+		preload("uid://cnhx51yci1jdg"),
+		PackedVector2Array([Vector2(4.45, 0.0), Vector2(0.0, 4.45), Vector2(0.0, 0.0)])
 	],
-	
+	TYPE_ICE : [
+		preload("uid://c34ko46fib12r"),
+		preload("uid://dfeoqbdw3in83"),
+		PackedVector2Array([Vector2(2.33, 0.0), Vector2(0.0, 1.35), Vector2(0.0, 0.0)])
+	],
 	TYPE_SLAVE : [
 		preload("uid://dd26tk777pt3t"),
 		null,
@@ -211,6 +232,13 @@ func set_player_bullet(bullet: Bullet, damage_value: float = 10) -> void:
 #
 #
 ##endregion
+
+func add_trail(tracking_object: Node2D) -> Trail:
+	var trail = preload("uid://f1bk6nbqr6nd").instantiate()
+	trail.tracking = tracking_object
+	Gametray.add_child(trail)
+	return trail
+	
 
 #region Lasers
 #const LASER = preload("res://laser.tscn")

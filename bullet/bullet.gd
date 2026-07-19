@@ -77,6 +77,15 @@ var accel_tween: Tween
 ## the point of collision between a bullet and a colliding object.
 var collision_point: Vector2
 
+var add_blending: bool = true:
+	set(value):
+		add_blending = value
+		if value: %Sprite.material.blend_mode = 1
+		else: %Sprite.material.blend_mode = 0
+
+var spin: float = 0
+var init_spin: float = 0
+
 @onready var sprite: Node2D = %Sprite
 @onready var hitbox: CollisionShape2D = %Hitbox
 
@@ -98,7 +107,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Automatically handles the rotation.
-	global_rotation = velocity.angle()
+	if spin: init_spin += spin
+	global_rotation = velocity.angle() + init_spin
 	
 	# Curves the bullet's trajectory.
 	if curve != 0:

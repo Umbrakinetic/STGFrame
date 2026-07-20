@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ddwfmbclw0f44"]
+
+[ext_resource type="Script" uid="uid://g58m3ns6ci81" path="res://bullet/bullet_definition_builder.gd" id="1_0rd7v"]
+[ext_resource type="Texture2D" uid="uid://dcv8glk48dpta" path="res://bullet/sprites/arrow_top.png" id="2_78c1j"]
+[ext_resource type="Texture2D" uid="uid://d0partpowqude" path="res://bullet/sprites/arrow_bottom.png" id="3_gs7kg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+
+[node name="BulletDefinitionBuilder" type="Node2D" unique_id=1841975326]
+script = ExtResource("1_0rd7v")
+bullet_types = PackedStringArray("TYPE_CIRCLE", "TYPE_CIRCLEBORDER", "TYPE_SQUARE", "TYPE_ARROWHEAD", "TYPE_SCALE", "TYPE_RICE", "TYPE_LTRLBULLET", "TYPE_BLADE", "TYPE_DROPLET", "TYPE_FLOWER", "TYPE_CRYSTAL", "TYPE_STAR", "TYPE_HEART", "TYPE_BUBBLE", "TYPE_ICE", "TYPE_SLAVE")
+
+[node name="TopSprite" type="Sprite2D" parent="." unique_id=1914420793]
+z_index = 1
+texture = ExtResource("2_78c1j")
+
+[node name="BottomSprite" type="Sprite2D" parent="." unique_id=254882186]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("3_gs7kg")
+
+[node name="Area2D (Ignore this Node)" type="Area2D" parent="." unique_id=1419516209]
+z_index = 2
+
+[node name="BulletHitbox" type="CollisionShape2D" parent="Area2D (Ignore this Node)" unique_id=1261066442]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_g4v7s")

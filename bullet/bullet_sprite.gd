@@ -1,17 +1,5 @@
 extends Node2D
 
-##TODO move to BulletBuilder
-#@export_tool_button("Print Hitbox Transform") var export_hitbox_info = export
-#func export():
-	#var st = \
-	#"PackedVector2Array([" + \
-	#"Vector2" + str(%Hitbox.get_transform().x) + ", " + \
-	#"Vector2" + str(%Hitbox.get_transform().y) + ", " + \
-	#"Vector2" + str(%Hitbox.get_transform().origin) + "])"
-	#print(st)
-#
-#@export_tool_button("Redraw") var redraw = queue_redraw
-
 var bullet_type: Danmaku.Bullet_Type: 
 	set(value):
 		if not is_inside_tree():

@@ -42,10 +42,9 @@ func set_size(value) -> void:
 	scale = value
 
 ## The bullet's transparency.
-@export var alpha: float = 255
+@export var alpha: float = 1
 func set_alpha(value) -> void:
-	alpha = value
-	modulate.a = alpha
+	alpha = clamp(value, 0, 1)
 func get_alpha() -> float:
 	return modulate.a
 

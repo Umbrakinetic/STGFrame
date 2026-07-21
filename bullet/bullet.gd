@@ -45,6 +45,7 @@ func set_size(value) -> void:
 @export var alpha: float = 1
 func set_alpha(value) -> void:
 	alpha = clamp(value, 0, 1)
+	modulate.a = alpha
 func get_alpha() -> float:
 	return modulate.a
 

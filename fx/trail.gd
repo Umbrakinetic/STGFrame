@@ -1,6 +1,6 @@
 class_name Trail extends Line2D
 
-var max_points: int = 20
+var max_points: int = 32
 var point_array: Array[Vector2] = []
 
 ## The Node2D this trail is following

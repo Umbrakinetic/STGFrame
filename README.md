@@ -6,7 +6,7 @@
 
 
 
-STGFrame is an open-source framework to develop touhou-style shmup games in Godot. This project is currently maintained on Godot 4.5.
+STGFrame is an open-source framework to develop touhou-style shmup games in Godot. This project is currently maintained on Godot 4.7.
 
 
 

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://okad731yqb1o"]
+
+[ext_resource type="PackedScene" uid="uid://dkhguhsi42glx" path="res://stage/stage.tscn" id="1_631su"]
+[ext_resource type="Script" uid="uid://d1vogmed8b64b" path="res://stage/stage_1/stage_1.gd" id="2_u5qfc"]
+[ext_resource type="PackedScene" uid="uid://bnvr4tc24o5q0" path="res://stage/stage_1/background.tscn" id="3_bvuje"]
+[ext_resource type="PackedScene" uid="uid://c066duutcevli" path="res://stage/stage_1/spellcard_background.tscn" id="4_h16f0"]
+
+[node name="Stage" unique_id=188197104 instance=ExtResource("1_631su")]
+script = ExtResource("2_u5qfc")
+
+[node name="Background" parent="." index="4" unique_id=1563378113 instance=ExtResource("3_bvuje")]
+unique_name_in_owner = true
+offset_left = -384.0
+offset_top = -240.0
+offset_right = 384.0
+offset_bottom = 656.0
+
+[node name="SpellcardBackground" parent="." index="5" unique_id=1020833381 instance=ExtResource("4_h16f0")]
+unique_name_in_owner = true
+position = Vector2(-384, -240)
+
+[editable path="Background"]

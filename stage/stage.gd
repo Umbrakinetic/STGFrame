@@ -1,16 +1,36 @@
+class_name Stage
 extends Node2D
 
-#Enemy1, Enemy2, Midboss, Enemy3, Enemy4, Boss
-#Enemies sections can just be functions
-var sections: Array[Callable] = [boss_tst_1, enemy_tst_1]
+var player_scene: PackedScene = Gametray.chosen_player_type
+var background_scene: PackedScene
+var spellcard_background_scene: PackedScene
+
+var sections: Array[Callable] = []
 var boss: Enemy
 
 signal section_cleared
 signal all_sections_cleared
 
-func _ready():
-	Gametray.player = $Player
-	$GameUI.start_ui()
+func pre_start():
+	pass
+
+func start():
+	var player: Player = player_scene.instantiate()
+	add_child(player)
+	player.global_position = Vector2(0, 512)
+	if background_scene != null:
+		var background: Node = background_scene.instantiate()
+		add_child(background)
+		background.global_position = Vector2(-384, -240)
+	else: printerr("no background provided for this stage!")
+	if spellcard_background_scene != null:
+		var spellcard_background: Node = spellcard_background_scene.instantiate()
+		add_child(spellcard_background)
+		spellcard_background.global_position = Vector2(-384, -240)
+	else: printerr("no spellcard background provided for this stage!")
+	
+	Gametray.player = player
+	%GameUI.start_ui()
 	
 	await Transition.finished
 	
@@ -21,129 +41,19 @@ func _ready():
 	await Tool.quick_timer(1).timeout
 	emit_signal("all_sections_cleared")
 	
-	$GameUI.open_game_clear_menu()
+	if Gametray.full_run and get_script() == Gametray.stage_order[-1]:
+		%GameUI.open_game_clear_menu()
+	elif Gametray.full_run and not Gametray.stage_order.find(get_script()) == Gametray.stage_order[-1]:
+		pass
+		##stage clear screen
+		##next stage
+	elif not Gametray.full_run:
+		%GameUI.open_game_clear_menu()
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 	
-	#Point of Collection-- if player is above a certain value, all items start tracking the player
+	##Point of Collection-- if player's y value is low enough (y < 0), all items start tracking the player
 	if Gametray.player.global_position.y <= 0 and not Gametray.player.respawning:
-		Gametray.player.collect_all_items()
+		Gametray.player._collect_all_items()
 	
-	#real-time debug info
-	%DebugBulletCount.text = "Bullet Count: " + str(Gametray.bullet_list.size())
-	%DebugFPS.text = "FPS: " + str(snappedi(Engine.get_frames_per_second(), 1))
-
-var bullet_counter: int = 1
-
-#region pattern1
-func tst_1():
-	while true:
-		for count in 16:
-			var s: int = Tool.rand_sign()
-			var curve = randf_range(0.3, 1) * s
-			var color: Color = Color.from_ok_hsl(bullet_counter / 80.0, 1, 0.5, 1)
-			var b: = Danmaku.spawn_circle(20, Vector2.ZERO, 5, randi(), Danmaku.TYPE_CIRCLE, color)
-			for i in b:
-				i.set_behavior(tst_1_custom.bind(), [i, curve])
-			await Tool.quick_timer(0.12).timeout
-			bullet_counter += 1
-		await Tool.quick_timer(3).timeout
-
-func tst_1_custom(args: Array) -> void:
-	var b: Bullet = args[0]
-	var curve = args[1]
-	Tool.quick_tween_method(b, b.set_speed, b.get_speed(), b.get_speed()/8, 1)
-	Tool.quick_tween(b, "curve", curve)
-	await b.wait(1.4)
-	b.sprite.bullet_type = Danmaku.TYPE_ARROWHEAD
-	Tool.quick_tween_method(b, b.set_speed, b.get_speed(), b.get_speed()*12, 3, Tween.EASE_IN_OUT, Tween.TRANS_LINEAR)
-	Tool.quick_tween(b, "curve", curve / 4)
-	b.set_size(Vector2.ONE * max(abs(curve * 2), 1.2))
-	Tool.quick_tween_method(b, b.set_size, b.size, b.size / 2, 0.3, Tween.EASE_OUT)
-	#b.sprite.passive_rotation = 2 * -sign(curve)
-#endregion
-
-#region pattern2
-func tst_2() -> void:
-	while true:
-		var b = Danmaku.spawn_bullet(Vector2.ZERO, 3, randi(), Danmaku.TYPE_SLAVE, Color.WHITE)
-		b.set_behavior(custom.bind(), [b])
-		b.get_node("%Sprite").passive_rotation = 2
-		await Tool.quick_timer(1).timeout
-
-func custom(arg: Array):
-	var b: Bullet = arg[0]
-	b.accelerate(8, 3)
-	b.curve = 0.4
-	while b:
-		await b.wait(0.4)
-		var circ: = Danmaku.spawn_circle(8, b.position, 2, randi(), Danmaku.TYPE_ARROWHEAD)
-		for i in circ:
-			i.accelerate(6, 2)
-	
-#endregion
-
-#region pattern3
-func tst_3() -> void:
-	await Tool.quick_timer(1).timeout
-	var slave = Danmaku.spawn_slave()
-	slave.scale = Vector2.ZERO
-	var tween: = Tool.quick_tween(slave, "scale", Vector2.ONE)
-	slave.lifetime_frames = -1
-	
-	await tween.finished
-	var tween2: = Tool.quick_tween(slave, "scale", Vector2(8, 1), 0.7)
-	Tool.quick_tween(slave, "position:y", -196, 0.7)
-	
-	await tween2.finished
-	while slave:
-		var p = Vector2(randf_range(-384, 384), randf_range(-128, -200))
-		var to_player = rad_to_deg(p.angle_to_point(Gametray.player.global_position))
-		for count in 1:
-			Danmaku.spawn_bullet(p, randf_range(8, 12), 90, Danmaku.TYPE_CRYSTAL, Color.BLUE)
-		await Tool.quick_timer(0.02).timeout
-#endregion
-
-#region enemy1
-func enemy_tst_1():
-	var scene = preload("uid://etx7et4252gc")
-	var d = 1
-	for count in 2:
-		for i in 8:
-			var enemy = scene.instantiate()
-			Gametray.call_deferred("add_child", enemy)
-			enemy.global_position = Vector2(-320 * d, -300)
-			enemy.health = 8
-			enemy.set_behavior(enemy_tst_1_move.bind(), [enemy, d])
-			enemy.set_behavior(enemy_tst_1_shoot.bind(), [enemy])
-			await Tool.quick_timer(0.2).timeout
-		await Tool.quick_timer(1.8).timeout
-		d *= -1
-		
-
-func enemy_tst_1_move(args: Array):
-	var enemy = args[0]
-	enemy.velocity = Vector2.DOWN * 10 * 60
-	await enemy.wait(0.2)
-	Tool.quick_tween(enemy, "velocity", Vector2.RIGHT * 10 * 60 * args[1], 1, Tween.EASE_IN_OUT, Tween.TRANS_LINEAR)
-
-func enemy_tst_1_shoot(args: Array):
-	var enemy = args[0]
-	for i in 24:
-		await enemy.wait(0.3)
-		Danmaku.spawn_bullet(enemy.position, 8, Tool.find_angle_to_player(enemy.position))
-
-#endregion
-
-#region boss1
-func boss_tst_1() -> void:
-	var new_boss: Enemy = preload("uid://du3vcvy2rhe0m").instantiate()
-	boss = new_boss
-	Gametray.add_child(boss)
-	boss.global_position = Vector2(0, -320)
-	$GameUI.boss_added()
-	$SpellcardBackground.boss = boss
-	
-	await boss.defeated
-#endregion

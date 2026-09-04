@@ -79,6 +79,7 @@ var collision_point: Vector2
 
 var add_blending: bool = true:
 	set(value):
+		%Sprite.material = %Sprite.material.duplicate()
 		add_blending = value
 		if value: %Sprite.material.blend_mode = 1
 		else: %Sprite.material.blend_mode = 0

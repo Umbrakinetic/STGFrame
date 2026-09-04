@@ -10,7 +10,6 @@ blend_mode = 1
 
 [node name="Bullet" type="CharacterBody2D" unique_id=327240604 groups=["bullet"]]
 process_mode = 1
-z_index = -1
 collision_layer = 4
 collision_mask = 0
 collision_priority = 10.0

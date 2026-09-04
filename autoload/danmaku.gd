@@ -3,12 +3,6 @@ extends Node
 # Handles everything associated with bullets, lasers and objects.
 # Not exclusive to "bullets" like the title implies, but it pretty much only affects bullet-hell-related things, so...
 
-#var Gametray
-
-func refresh_vars() -> void:
-	pass
-	#Gametray = get_tree().current_scene.get_node("Gametray")
-
 #region Bullet Definition
 
 const TYPE_CIRCLE       = 0
@@ -233,26 +227,21 @@ func set_player_bullet(bullet: Bullet, damage_value: float = 10) -> void:
 #
 ##endregion
 
-func add_trail(tracking_object: Node2D) -> Trail:
-	var trail = preload("uid://f1bk6nbqr6nd").instantiate()
-	trail.tracking = tracking_object
-	Gametray.add_child(trail)
-	return trail
-	
-
 #region Lasers
-#const LASER = preload("res://laser.tscn")
-#
-#func spawn_laser(position: Vector2, angle: float, color: Color = Color.RED, active_time: float = 3, delay: float = 1.5, _solid: bool = false) -> Laser:
-	#var laser: Laser = LASER.instantiate()
-	#laser.rotation_degrees = angle
-	#laser.delay = delay
-	#laser.active_time = active_time
-	#laser.color = color
-	##laser.set_collision_mask_value(2, solid)
+
+func spawn_laser(position: Vector2, angle: float, length: float = 256, width: float = 1, delay_sec: float = 1.5, lifetime_sec: float = 3, color: Color = Color.RED) -> Laser:
+	var laser: Laser = preload("uid://dvftgtad5v74q").instantiate()
 	#Gametray.call_deferred("add_child", laser)
-	#laser.global_position = position
-	#return laser
+	Gametray.add_child(laser)
+	laser.global_rotation_degrees = angle
+	laser.length = length
+	laser.width = width
+	laser.delay_frames = int(delay_sec * 60)
+	laser.lifetime_frames = int(lifetime_sec * 60)
+	laser.color = color
+	
+	laser.global_position = position
+	return laser
 #
 ### Spawns an array of bullets along a laser's length.
 ### The number of bullets depends on the distance argument, where distance is the space between each bullet along the line.
@@ -289,4 +278,28 @@ func add_trail(tracking_object: Node2D) -> Trail:
 
 #func set_player_laser(laser: Laser, damage_value: float, attribute: Global.attribute_types = Global.attribute_types.NULL, special_attack_charge: float = 1) -> void:
 	#pass
+#endregion
+
+
+#region Enemies
+
+func spawn_enemy(position: Vector2, health: float = 10, sprite: Enemy.SpriteType = Enemy.SpriteType.COMMON_FAIRY) -> Enemy:
+	var enemy_scene = preload("uid://etx7et4252gc")
+	var enemy = enemy_scene.instantiate()
+	enemy.health = health
+	Gametray.add_child(enemy)
+	enemy.global_position = position
+	
+	return enemy
+
+func spawn_boss(scene: PackedScene, position: Vector2 = Vector2(-240, -320)) -> Boss:
+	var boss: Boss = scene.instantiate()
+	
+	Gametray.add_child(boss)
+	boss.global_position = position
+	
+	
+	
+	return boss
+
 #endregion

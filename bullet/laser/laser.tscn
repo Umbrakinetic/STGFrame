@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://dvftgtad5v74q"]
+
+[ext_resource type="Script" uid="uid://chrr80jxy12xh" path="res://bullet/laser/laser.gd" id="1_ahggf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(16, 12)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ahggf"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_ahggf"]
+offsets = PackedFloat32Array(0, 0.7121951, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.95609754, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
+gradient = SubResource("Gradient_ahggf")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_1ns7c"]
+offsets = PackedFloat32Array(0.2, 0.3, 0.5, 0.7, 0.8)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bc4yd"]
+gradient = SubResource("Gradient_1ns7c")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_10emr"]
+offsets = PackedFloat32Array(0.51707315, 0.70731705)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ahggf"]
+gradient = SubResource("Gradient_10emr")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_tkq8s"]
+offsets = PackedFloat32Array(0.3, 0.4, 0.5, 0.6, 0.7)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xn788"]
+gradient = SubResource("Gradient_tkq8s")
+fill_to = Vector2(0, 1)
+
+[node name="Laser" type="Area2D" unique_id=588028811 groups=["laser"]]
+process_mode = 1
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_ahggf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1126070666]
+z_index = 10
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_yf5fn")
+disabled = true
+
+[node name="SourceBottom" type="Sprite2D" parent="." unique_id=1788726859]
+modulate = Color(0.74, 0, 0.012333145, 1)
+z_index = -1
+material = SubResource("CanvasItemMaterial_ahggf")
+texture = SubResource("GradientTexture2D_g4v7s")
+
+[node name="BeamBottom" type="Sprite2D" parent="." unique_id=434732047]
+modulate = Color(0.74, 0, 0.012333145, 1)
+z_index = -1
+material = SubResource("CanvasItemMaterial_ahggf")
+texture = SubResource("GradientTexture2D_bc4yd")
+offset = Vector2(32, 0)
+
+[node name="SourceTop" type="Sprite2D" parent="." unique_id=689914296]
+material = SubResource("CanvasItemMaterial_ahggf")
+texture = SubResource("GradientTexture2D_ahggf")
+
+[node name="BeamTop" type="Sprite2D" parent="." unique_id=681165606]
+z_index = 1
+material = SubResource("CanvasItemMaterial_ahggf")
+texture = SubResource("GradientTexture2D_xn788")
+offset = Vector2(32, 0)

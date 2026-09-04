@@ -1,6 +1,7 @@
 -- Graphics --
-Default Reimu Player Sprite: DD
-Cutin/Spellcard portrait: dairi
+Default Player Sprites: Umbrakinetic
+Bullet Sprites: Umbrakinetic
+Dialogue/Spellcard portrait: wanwan_satsujii
 
 -- SFX --
 Shooting, Player Death, Enemy Kill: the same source that ZUN used. i forgot the name

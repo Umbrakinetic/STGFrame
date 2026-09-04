@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://ddym65lowcjss"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ttj6x"]
+
+[sub_resource type="Gradient" id="Gradient_5144u"]
+colors = PackedColorArray(0.23392546, 0.23392546, 0.23392543, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xlnb1"]
+gradient = SubResource("Gradient_5144u")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qgmoh"]
+texture = SubResource("GradientTexture2D_xlnb1")
+
+[node name="BossPhaseHealthBar" type="ProgressBar" unique_id=1772743541]
+custom_minimum_size = Vector2(0, 12)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxEmpty_ttj6x")
+theme_override_styles/fill = SubResource("StyleBoxTexture_qgmoh")
+value = 100.0
+show_percentage = false

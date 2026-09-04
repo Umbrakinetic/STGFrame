@@ -2,7 +2,7 @@ extends Control
 
 var player
 
-var boss
+var boss: Boss
 
 var graze_count: int = 0
 
@@ -12,10 +12,7 @@ var bomb_texture = preload("uid://cfpshct2k52qa")
 func _ready() -> void:
 	%BossInfo.hide()
 	
-	%SpellName.text = ""
-	%SpellNameBG.modulate.a = 0
-	%SpellNameBG.scale = Vector2(2, 2)
-	%SpellNameBG.offset_transform_position_ratio.y = 8.33
+	reset_spell_ui()
 
 ## The reason this is not a _ready() function is because it fires before Gametray.player is defined;
 ## So it is only manually called *after* that variable is defined.
@@ -33,13 +30,20 @@ func boss_added() -> void:
 	%BossInfo.show()
 	boss = Gametray.get_node("Boss")
 	boss.spell_declared.connect(declare_spell.bind())
-	boss.phase_ended.connect(reset_spell_ui.bind())
+	boss.phase_ended.connect(func():
+		current_healthbar.value = 0
+		reset_spell_ui()
+	)
+	
+	boss.collection_started.connect(boss_collection_started.bind())
+	boss_collection_started()
 	
 	set_process(true)
 	%BossName.text = boss.boss_name
 	boss.phase_started.connect(func():
-		%BossHealthBar.max_value = boss.health
-		%BossHealthBar.value = boss.health
+		current_healthbar = healthbars[boss.current_phase_num]
+		current_healthbar.max_value = boss.health
+		current_healthbar.value = boss.health
 		%BossPhaseTimer.start(\
 		boss.current_phase.get_phase_time() + 2 if boss.current_phase_num == 0
 		else boss.current_phase.get_phase_time() + 1
@@ -51,6 +55,31 @@ func boss_added() -> void:
 		queue_redraw()
 		%BossInfo.hide()
 	)
+
+var healthbars: Array[ProgressBar]
+var current_healthbar: ProgressBar
+var current_healthbar_num: int = 0
+
+func boss_collection_started():
+	if boss.current_collection_num + 1 == boss.total_collection_size: 
+		%BossPhaseCollectionCounter.hide()
+	else:
+		%BossPhaseCollectionCounter.show()
+		%BossPhaseCollectionCounter.custom_minimum_size.x = 48 * (boss.total_collection_size - (boss.current_collection_num + 1))
+	for node in %Healthbars.get_children():
+		node.queue_free()
+	healthbars.clear()
+	var c: int = 1
+	for phase in boss.current_collection_size:
+		var phase_healthbar = preload("uid://ddym65lowcjss").instantiate()
+		if c != boss.current_collection_size:
+			phase_healthbar.self_modulate = Color.from_hsv(0, 0.5, 1)
+			phase_healthbar.size_flags_stretch_ratio = 0.5
+		
+		%Healthbars.add_child(phase_healthbar)
+		healthbars.push_front(phase_healthbar)
+		c += 1
+	current_healthbar = healthbars[0]
 
 func update_resources() -> void:
 	var lives = player.lives
@@ -71,10 +100,8 @@ func set_resource_counter(counter_node, resource_count) -> void:
 var spell_tween: Tween
 
 func declare_spell(spell_name: String):
+	reset_spell_ui()
 	%SpellName.text = spell_name
-	%SpellNameBG.modulate.a = 0
-	%SpellNameBG.offset_transform_scale = Vector2(2, 2)
-	%SpellNameBG.offset_transform_position_ratio.y = 8.33
 	
 	if spell_tween != null: spell_tween.kill()
 	
@@ -91,21 +118,25 @@ func reset_spell_ui():
 	%SpellNameBG.offset_transform_position_ratio.y = 8.33
 
 func _process(delta: float) -> void:
+	##real-time debug info
+	%DebugBulletCount.text = "Bullet Count: " + str(Gametray.bullet_list.size())
+	%DebugFPS.text = "FPS: " + str(snappedi(Engine.get_frames_per_second(), 1))
+	
 	if boss != null:
 		queue_redraw()
-		%BossHealthBar.value = lerp(\
-		%BossHealthBar.value, boss.health, 0.2)
+		if current_healthbar != null:
+			current_healthbar.value = boss.health
 		
-		%BossTimer.text = str(min(snappedi(%BossPhaseTimer.time_left + 0.5, 1),99))
+		%BossTimer.text = str(min(snapped(%BossPhaseTimer.time_left + 0.5, 1),99))
 		if %BossPhaseTimer.time_left < 10: %BossTimer.add_theme_color_override("font_color", Color.RED)
 		else: %BossTimer.add_theme_color_override("font_color", Color.WHITE)
 		
-		%BossPhasesRemaining.text = str(boss.current_phase_num + 1) + "/" + str(boss.phases.size())
+		#%BossPhasesRemaining.text = str(boss.current_phase_num + 1) + "/" + str(boss.phases.size())
 
 func _draw() -> void:
+	## Draws the boss position indicator at the bottom of the screen.
 	if boss != null:
 		var boss_x = clamp(boss.global_position.x + 448, 64, 832)
-		
 		draw_polygon([
 			Vector2(boss_x, 936), 
 			Vector2(boss_x + 8, 956), 
@@ -124,4 +155,5 @@ func open_game_clear_menu():
 
 func _on_boss_phase_timer_timeout() -> void:
 	boss.health = 0
+	current_healthbar.value = 0
 	boss._on_death()

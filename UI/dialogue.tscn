@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cu7x0tv2pa8a1"]
+
+[ext_resource type="Texture2D" uid="uid://c1s26xl83e00n" path="res://UI/dialogue/player2_dialogue.png" id="1_f8kjv"]
+[ext_resource type="Texture2D" uid="uid://bbp2oncf8p3ct" path="res://UI/dialogue/player1_dialogue.png" id="2_347mh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_347mh"]
+bg_color = Color(0, 0, 0, 0.48235294)
+
+[node name="Dialogue" type="Node2D" unique_id=981277321]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2004367360]
+z_index = -5
+position = Vector2(240, 580)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_f8kjv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1486671304]
+z_index = -5
+position = Vector2(528, 580)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_347mh")
+
+[node name="Panel" type="Panel" parent="." unique_id=1719895384]
+offset_left = 16.0
+offset_top = 672.0
+offset_right = 754.0
+offset_bottom = 848.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_347mh")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1174755427]
+points = PackedVector2Array(0, 0, 768, 0, 768, 864, 0, 864)
+closed = true
+width = 4.0

@@ -6,6 +6,7 @@ var switched_pause_this_frame: bool = false
 
 func pause():
 	switched_pause_this_frame = true
+	RenderingServer.global_shader_parameter_set("paused", true)
 	get_tree().paused = true
 	show()
 	%ResumeButton.grab_focus()
@@ -25,6 +26,7 @@ func _on_resume_button_pressed() -> void:
 	resume()
 
 func resume():
+	RenderingServer.global_shader_parameter_set("paused", false)
 	hide()
 	release_focus()
 	get_tree().paused = false

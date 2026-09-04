@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://etx7et4252gc"]
 
 [ext_resource type="Script" uid="uid://sccx3xnyduhd" path="res://enemy/enemy.gd" id="1_4gyqm"]
-[ext_resource type="Texture2D" uid="uid://cukjq8427xti8" path="res://icon_default.svg" id="1_7k104"]
-[ext_resource type="PackedScene" uid="uid://p3vq5ngw2h8f" path="res://hitbox.tscn" id="3_ppra6"]
+[ext_resource type="Texture2D" uid="uid://dqf8esnt16soc" path="res://enemy/fairy_common.png" id="2_ppra6"]
+[ext_resource type="PackedScene" uid="uid://p3vq5ngw2h8f" path="res://enemy/hitbox.tscn" id="3_ppra6"]
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1372969461 groups=["enemy"]]
 process_mode = 1
@@ -16,7 +16,7 @@ drops = Dictionary[int, int]({
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=835839949]
 z_index = -100
-texture = ExtResource("1_7k104")
+texture = ExtResource("2_ppra6")
 
 [node name="Hitbox" parent="." unique_id=2062089881 instance=ExtResource("3_ppra6")]
 collision_layer = 2

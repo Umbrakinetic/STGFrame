@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://fkamamt0yhi1"]
+
+[ext_resource type="PackedScene" uid="uid://du3vcvy2rhe0m" path="res://enemy/boss/boss.tscn" id="1_pukqv"]
+[ext_resource type="Script" uid="uid://do5hd0rfonm1n" path="res://enemy/boss/stage_1/stage_1_boss_1.gd" id="2_l78td"]
+
+[node name="Boss" unique_id=903074780 instance=ExtResource("1_pukqv")]
+script = ExtResource("2_l78td")

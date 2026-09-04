@@ -1,14 +1,12 @@
 class_name Enemy
 extends CharacterBody2D
 
-enum ItemTypes {
-	POWER,
-	POINT,
-	LIFE,
-	BOMB
+enum SpriteType {
+	COMMON_FAIRY,
+	SUNFLOWER_FAIRY,
 }
 
-@export var health: float = 100
+@export var health: float = 10
 
 @export var drops: Dictionary [Item.ItemType, int]
 
@@ -37,6 +35,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 
 func take_damage(damage_value: float) -> void:
+	if invincible: return
 	health -= damage_value
 	if health <= 0 and not dying:
 		dying = true 

@@ -5,12 +5,15 @@ var boss: Enemy
 
 var phase_health: float = 1000
 
-@export var phase_time: int
+## Does the boss give item pickups after this phase?
+var give_drops: bool = true
+
+var phase_time: int = 30
 
 signal ended
 
 func get_phase_time() -> int:
-	return 30
+	return phase_time
 
 func start() -> void:
 	pass

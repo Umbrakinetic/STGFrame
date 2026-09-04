@@ -17,7 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="STGFrame"
 run/main_scene="uid://cxpiy2crvahvs"
 config/features=PackedStringArray("4.7", "Mobile")
-config/icon="res://icon_default.svg"
+config/icon="uid://5v67r8m77uft"
 
 [autoload]
 
@@ -109,3 +109,10 @@ pause={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[shader_globals]
+
+paused={
+"type": "bool",
+"value": false
+}

@@ -4,7 +4,10 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func find_angle_to_player(from: Vector2) -> float:
-	return rad_to_deg(from.angle_to_point(Gametray.player.global_position))
+	if Gametray.player != null:
+		return rad_to_deg(from.angle_to_point(Gametray.player.global_position))
+	else:
+		return 90
 
 func rand_sign() -> int:
 	return [1,-1].pick_random()

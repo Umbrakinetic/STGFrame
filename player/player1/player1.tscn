@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://u5q5a7xl7gpt"]
 
-[ext_resource type="Script" uid="uid://ctu8x43gowxsu" path="res://player/player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://6beax3xb0m5f" path="res://player/player_sprite.png" id="2_g1dw6"]
-[ext_resource type="Texture2D" uid="uid://dsbevi61088yy" path="res://player/player_option.png" id="2_g6k8r"]
-[ext_resource type="Texture2D" uid="uid://bff6p8kerdprl" path="res://player/grazebox.png" id="3_g1dw6"]
-[ext_resource type="AudioStream" uid="uid://bsn80eostomy3" path="res://sfx/player_shoot.wav" id="4_yw30f"]
-[ext_resource type="AudioStream" uid="uid://didpaba04piaq" path="res://sfx/player_death.wav" id="5_qjkh3"]
-[ext_resource type="Texture2D" uid="uid://ouicuthw64vl" path="res://player/invincible.png" id="7_boad6"]
+[ext_resource type="Script" uid="uid://ctu8x43gowxsu" path="res://player/player1/player1.gd" id="1_pyciq"]
+[ext_resource type="Texture2D" uid="uid://dsbevi61088yy" path="res://player/player1/player1_option.png" id="2_pyciq"]
+[ext_resource type="AudioStream" uid="uid://bsn80eostomy3" path="res://sfx/player_shoot.wav" id="3_vu5xk"]
+[ext_resource type="AudioStream" uid="uid://didpaba04piaq" path="res://sfx/player_death.wav" id="4_bs4po"]
+[ext_resource type="Texture2D" uid="uid://ouicuthw64vl" path="res://player/invincible.png" id="5_xutgx"]
+[ext_resource type="Texture2D" uid="uid://d3bcp21a3bd31" path="res://player/player1/player1_sprite.png" id="6_vmcmo"]
+[ext_resource type="Texture2D" uid="uid://bff6p8kerdprl" path="res://player/grazebox.png" id="7_y0gj7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g6k8r"]
 radius = 8.0
@@ -37,7 +37,7 @@ radius = 128.0
 z_index = -50
 collision_mask = 16
 motion_mode = 1
-script = ExtResource("1_onrkg")
+script = ExtResource("1_pyciq")
 
 [node name="Node" type="Node" parent="." unique_id=343259564]
 
@@ -49,13 +49,13 @@ z_index = -50
 unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0.5372549)
 position = Vector2(-64, 0)
-texture = ExtResource("2_g6k8r")
+texture = ExtResource("2_pyciq")
 
 [node name="Option2" type="Sprite2D" parent="Node/OptionPosition" unique_id=427410758]
 unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0.5372549)
 position = Vector2(64, 0)
-texture = ExtResource("2_g6k8r")
+texture = ExtResource("2_pyciq")
 
 [node name="Option1Focused" type="Marker2D" parent="Node/OptionPosition" unique_id=1357391835]
 unique_name_in_owner = true
@@ -81,7 +81,7 @@ shape = SubResource("CircleShape2D_g6k8r")
 unique_name_in_owner = true
 z_index = 50
 collision_layer = 0
-collision_mask = 36
+collision_mask = 44
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grazebox" unique_id=1581953984]
@@ -91,7 +91,7 @@ shape = SubResource("CircleShape2D_4flbx")
 unique_name_in_owner = true
 z_index = 50
 collision_layer = 0
-collision_mask = 4
+collision_mask = 12
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1506896550]
@@ -101,12 +101,12 @@ shape = SubResource("CircleShape2D_qjkh3")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=125738947]
 unique_name_in_owner = true
-stream = ExtResource("4_yw30f")
+stream = ExtResource("3_vu5xk")
 volume_db = -7.918
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1203826029]
 unique_name_in_owner = true
-stream = ExtResource("5_qjkh3")
+stream = ExtResource("4_bs4po")
 volume_db = -7.918
 
 [node name="Sprites" type="Node2D" parent="." unique_id=24278416]
@@ -116,14 +116,11 @@ unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.49803922)
 material = SubResource("CanvasItemMaterial_boad6")
 scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("7_boad6")
+texture = ExtResource("5_xutgx")
 
 [node name="Sprite" type="Sprite2D" parent="Sprites" unique_id=1775286534]
 unique_name_in_owner = true
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("2_g1dw6")
-hframes = 8
-vframes = 3
+texture = ExtResource("6_vmcmo")
 
 [node name="HitboxSprite" type="Sprite2D" parent="Sprites" unique_id=884109145]
 unique_name_in_owner = true
@@ -134,23 +131,24 @@ texture = SubResource("GradientTexture2D_i3pqv")
 unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0.42745098)
 scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("3_g1dw6")
+texture = ExtResource("7_y0gj7")
 
 [node name="InvincibilityTimer" type="Timer" parent="." unique_id=1334866341]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="ItemAutoCollect" type="Area2D" parent="." unique_id=810023083]
+[node name="ItemAutoCollectRange" type="Area2D" parent="." unique_id=810023083]
 collision_layer = 0
 collision_mask = 32
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemAutoCollect" unique_id=1567715282]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemAutoCollectRange" unique_id=1567715282]
 shape = SubResource("CircleShape2D_g4v7s")
 disabled = true
 
 [connection signal="area_entered" from="Grazebox" to="." method="_on_grazebox_area_entered"]
 [connection signal="body_entered" from="Grazebox" to="." method="_on_grazebox_body_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
-[connection signal="area_entered" from="ItemAutoCollect" to="." method="_on_item_auto_collect_area_entered"]
+[connection signal="area_entered" from="ItemAutoCollectRange" to="." method="_on_item_auto_collect_area_entered"]

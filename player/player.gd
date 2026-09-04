@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 var lives: int = 2:
@@ -12,13 +13,45 @@ var bombs: int = bombs_per_life:
 		resources_updated.emit()
 var bombing: bool = false
 
-var default_speed: float = 400
+@export var default_speed: float = 400
 var can_move : bool = true
-var can_shoot: bool = true
+var can_shoot: bool = true:
+	set(value):
+		can_shoot = value
+		if not can_shoot: 
+			shooting = false
 var can_bomb : bool = true
 
-var focused: bool = false
-var shooting: bool = false
+var focused: bool = false:
+	set(value):
+		focused = value
+		if focused:
+			_focused()
+		else:
+			_unfocused()
+func _focused():
+	pass
+func _unfocused():
+	pass
+
+var shooting: bool = false:
+	set(value):
+		if not can_shoot: 
+			shooting = false
+		else:
+			if shooting == false and value == true:
+				started_shooting()
+			elif shooting == true and value == false:
+				stopped_shooting()
+			shooting = value
+			
+				
+
+func started_shooting():
+	pass
+func stopped_shooting():
+	pass
+
 var respawning: bool = false
 var movement_input_direction: Vector2
 var invincible: bool = false:
@@ -47,28 +80,27 @@ func _unhandled_input(event: InputEvent) -> void:
 		focused = true
 		speed = default_speed / 2
 		change_focus_scale(0.2, Vector2.ONE)
-		$ItemAutoCollect/CollisionShape2D.disabled = false
+		$ItemAutoCollectRange/CollisionShape2D.disabled = false
 	elif event.is_action_released("focus"):
 		focused = false
 		speed = default_speed
 		change_focus_scale(0.2, Vector2.ZERO)
-		$ItemAutoCollect/CollisionShape2D.disabled = true
+		$ItemAutoCollectRange/CollisionShape2D.disabled = true
 	if event.is_action_pressed("shoot"):
 		shooting = true
 	elif event.is_action_released("shoot"):
 		shooting = false
 	
 	if event.is_action_pressed("bomb") and bombs > 0 and not bombing and not respawning and can_bomb:
-		collect_all_items()
+		_collect_all_items()
 		bombs -= 1
 		bombing = true
 		emit_signal("bombed")
 		
-		var bomb = preload("uid://dwkqrejr5v000").instantiate()
-		bomb.player = self
-		Gametray.add_child(bomb)
-		bomb.global_position = global_position
-		
+		_bomb()
+
+func _bomb():
+	pass
 
 func change_focus_scale(time: float, sprite_scale: Vector2) -> void:
 	if focus_tween != null: focus_tween.kill()
@@ -78,35 +110,28 @@ func change_focus_scale(time: float, sprite_scale: Vector2) -> void:
 	focus_tween.parallel().tween_property(%HitboxSprite, "scale", sprite_scale, time)
 
 var iframe_blink: int = 0
-var frame_c: int = 0
+var frame_count: int = 0
 
 var invincibility_time_left: float = 0
 
+var laser_graze_delay: int = 0
+
 func _physics_process(delta: float) -> void:
-	frame_c += 1
+	frame_count += 1
 	
-	if not frame_c % 8:
-		%Sprite.frame = (%Sprite.frame + 1) % 8
+	laser_graze_delay += 1
+	
+	if laser_graze_delay % 8 == 0:
+		for i in %Grazebox.get_overlapping_areas():
+			if i is Laser and not i.is_in_group("playerbullet"):
+				grazed.emit()
 	
 	%GrazeboxSprite.rotation_degrees += 1.5
-	for option in %OptionPosition.get_children():
-		option.rotation_degrees += 4
+
 	
 	
 	%InvincibilityIndicator.rotation_degrees -= 1.5
 	%InvincibilityIndicator.scale = Vector2.ONE * min(%InvincibilityTimer.time_left, 1)
-	
-	var a = [
-		[%Option1, %Option1Unfocused, %Option1Focused],
-		[%Option2, %Option2Unfocused, %Option2Focused],
-	]
-	for i in a:
-		if focused:
-			i[0].global_position = lerp(i[0].global_position, i[2].global_position, 0.25)
-		else:
-			i[0].global_position = lerp(i[0].global_position, i[1].global_position, 0.25)
-	
-	%OptionPosition.global_position = lerp(%OptionPosition.global_position, global_position, 0.2)
 	
 	velocity = movement_input_direction * delta * 60 * speed
 	var collision: = move_and_slide()
@@ -118,70 +143,59 @@ func _physics_process(delta: float) -> void:
 	if not invincible and not visible:
 		show()
 	
-	if shooting and not frame_c % 4 and not respawning and not bombing:
-		shoot(-16)
-		shoot(16)
+	if shooting and not frame_count % 4 and not respawning and not bombing:
+		_shoot()
 		%ShootSound.play()
 
-@onready var options: = [%Option1, %Option2]
-func shoot(x_offset: float):
-	var b: = Danmaku.spawn_bullet(global_position + Vector2(x_offset, -32), 32, -90, Danmaku.TYPE_SQUARE, Color.PINK, self, 0)
-	Danmaku.set_player_bullet(b, 3)
-	b.modulate.a = 0.4
-	b.set_size(Vector2(3, 0.5))
-	
-	if focused:
-		for i: Node2D in options:
-			var op_b: = Danmaku.spawn_bullet(i.global_position, 30, -90, Danmaku.TYPE_ARROWHEAD, Color.RED, self, 0)
-			Danmaku.set_player_bullet(op_b, 1.8)
-			op_b.modulate.a = 0.3
-			op_b.set_size(Vector2(3, 0.5))
-	else:
-		for i: Node2D in options:
-			var op_b: = Danmaku.spawn_bullet(i.global_position, 20, -90, Danmaku.TYPE_SQUARE, Color.RED, self, 0)
-			Danmaku.set_player_bullet(op_b, 1.5)
-			op_b.modulate.a = 0.3
-			op_b.set_behavior(bullet_homing.bind(), [op_b])
-
-func bullet_homing(args: Array) -> void:
-	var b: Bullet = args[0]
-	var s = b.speed
-	while b != null:
-		await get_tree().physics_frame
-		if b == null or get_tree() == null: break
-		
-		var enemies = get_tree().get_nodes_in_group("enemy")
-		if enemies.is_empty(): 
-			continue
-		
-		var closest = Tool.sort_closest(enemies, b.global_position)[0]
-		b.velocity = b.velocity.lerp(b.global_position.direction_to(closest.global_position) * 60 * 16, 0.2)
-		b.velocity.clamp(Vector2(-16, -16), Vector2(16, 16))
+func _shoot():
+	pass
 
 var hit_this_frame: bool = false
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body is Bullet and not body.is_in_group("playerbullet") == true and not invincible and not hit_this_frame:
+	if body is Bullet and not body.is_in_group("playerbullet") == true and \
+	not invincible and not hit_this_frame:
 		hit_this_frame = true
+		can_move = false
 		%DeathSound.play()
 		body.start_free()
 		set_deferred("invincible", true)
 		for i in 8:
 			await get_tree().physics_frame
-		if bombing: return
-		die()
+		if bombing: 
+			can_move = true
+			return
+		can_shoot = false
+		_die()
+		
+		await get_tree().physics_frame
+		hit_this_frame = false
+
+func _on_hitbox_area_entered(area: Node2D) -> void:
+	if area is Laser and not area.is_in_group("playerbullet") == true and \
+	not invincible and not hit_this_frame:
+		hit_this_frame = true
+		can_move = false
+		%DeathSound.play()
+		set_deferred("invincible", true)
+		for i in 8:
+			await get_tree().physics_frame
+		if bombing: 
+			can_move = true
+			return
+		_die()
 		
 		await get_tree().physics_frame
 		hit_this_frame = false
 
 
-func die():
+func _die():
 	lives -= 1
 	emit_signal("died")
 	
 	%Sprite.hide()
-	set_invincibility(4)
+	_set_invincibility(4)
 	respawning = true
-	can_move = false
+	
 	
 	await Tool.quick_timer(1).timeout
 	
@@ -192,10 +206,10 @@ func die():
 	respawning = false
 	can_move = true
 	await Tool.quick_timer(3).timeout
-	
+	can_shoot = true
 	show()
 
-func set_invincibility(time: float):
+func _set_invincibility(time: float):
 	invincible = true
 	if time > %InvincibilityTimer.time_left:
 		%InvincibilityTimer.start(time)
@@ -212,7 +226,7 @@ func _on_grazebox_area_entered(area: Area2D) -> void:
 	if area is Item:
 		area.queue_free()
 
-func collect_all_items():
+func _collect_all_items():
 	for i in get_tree().get_nodes_in_group("item"):
 		i.tracking_player = true
 

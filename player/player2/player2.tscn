@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://dwasf6mnbwagh"]
+
+[ext_resource type="Script" uid="uid://bmeu1dwkwrg50" path="res://player/player2/player2.gd" id="1_erp6h"]
+[ext_resource type="Texture2D" uid="uid://d3c3kqqmnbld1" path="res://player/player2/player2_option.png" id="2_qm5g0"]
+[ext_resource type="Texture2D" uid="uid://rnmgklbeaye6" path="res://player/player2/player2_laser.png" id="3_od5k7"]
+[ext_resource type="AudioStream" uid="uid://bsn80eostomy3" path="res://sfx/player_shoot.wav" id="3_qim4t"]
+[ext_resource type="AudioStream" uid="uid://didpaba04piaq" path="res://sfx/player_death.wav" id="4_ubohm"]
+[ext_resource type="Texture2D" uid="uid://ouicuthw64vl" path="res://player/invincible.png" id="5_gh56v"]
+[ext_resource type="Texture2D" uid="uid://bn5i0t4860svv" path="res://player/player2/player2_sprite.png" id="6_t0cx5"]
+[ext_resource type="Texture2D" uid="uid://bff6p8kerdprl" path="res://player/grazebox.png" id="7_v4pgl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(4, 1024)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g4v7s"]
+blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g6k8r"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qjkh3"]
+radius = 4.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_boad6"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_onrkg"]
+offsets = PackedFloat32Array(0, 0.23391813, 0.29239765, 0.64327484)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.049999952, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i3pqv"]
+gradient = SubResource("Gradient_onrkg")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 128.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1322631415]
+z_index = -50
+collision_mask = 16
+motion_mode = 1
+script = ExtResource("1_erp6h")
+
+[node name="Node" type="Node" parent="." unique_id=343259564]
+
+[node name="OptionPosition" type="Node2D" parent="Node" unique_id=1231550396]
+unique_name_in_owner = true
+z_index = -50
+
+[node name="Option1" type="Sprite2D" parent="Node/OptionPosition" unique_id=509704394]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.5372549)
+position = Vector2(-64, 0)
+texture = ExtResource("2_qm5g0")
+
+[node name="PlayerLaser1" type="Area2D" parent="Node/OptionPosition/Option1" unique_id=1485657350]
+unique_name_in_owner = true
+scale = Vector2(1e-05, 1)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/OptionPosition/Option1/PlayerLaser1" unique_id=941172856]
+position = Vector2(0, -512)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node/OptionPosition/Option1/PlayerLaser1" unique_id=387118180]
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_g4v7s")
+position = Vector2(-1.8569423e-05, 0)
+rotation = 1.5707964
+texture = ExtResource("3_od5k7")
+offset = Vector2(-512, 3.8146973e-06)
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 32)
+
+[node name="Option2" type="Sprite2D" parent="Node/OptionPosition" unique_id=427410758]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.5372549)
+position = Vector2(64, 0)
+texture = ExtResource("2_qm5g0")
+
+[node name="PlayerLaser2" type="Area2D" parent="Node/OptionPosition/Option2" unique_id=733267460]
+unique_name_in_owner = true
+scale = Vector2(1e-05, 1)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/OptionPosition/Option2/PlayerLaser2" unique_id=1644382791]
+position = Vector2(0, -512)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node/OptionPosition/Option2/PlayerLaser2" unique_id=254923226]
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_g4v7s")
+position = Vector2(-1.8569423e-05, 0)
+rotation = 1.5707964
+texture = ExtResource("3_od5k7")
+offset = Vector2(-512, 3.8146973e-06)
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 32)
+
+[node name="Option1Focused" type="Marker2D" parent="Node/OptionPosition" unique_id=1357391835]
+unique_name_in_owner = true
+position = Vector2(-24, -64)
+
+[node name="Option1Unfocused" type="Marker2D" parent="Node/OptionPosition" unique_id=1376563079]
+unique_name_in_owner = true
+position = Vector2(-64, 0)
+
+[node name="Option2Focused" type="Marker2D" parent="Node/OptionPosition" unique_id=1326124271]
+unique_name_in_owner = true
+position = Vector2(24, -64)
+
+[node name="Option2Unfocused" type="Marker2D" parent="Node/OptionPosition" unique_id=1112429537]
+unique_name_in_owner = true
+position = Vector2(64, 0)
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=827137443]
+z_index = 50
+shape = SubResource("CircleShape2D_g6k8r")
+
+[node name="Grazebox" type="Area2D" parent="." unique_id=1284035167]
+unique_name_in_owner = true
+z_index = 50
+collision_layer = 0
+collision_mask = 44
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grazebox" unique_id=1581953984]
+visible = false
+shape = SubResource("CircleShape2D_4flbx")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=663919142]
+unique_name_in_owner = true
+z_index = 50
+collision_layer = 0
+collision_mask = 12
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1506896550]
+shape = SubResource("CircleShape2D_qjkh3")
+
+[node name="Sounds" type="Node2D" parent="." unique_id=298275777]
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=125738947]
+unique_name_in_owner = true
+stream = ExtResource("3_qim4t")
+volume_db = -7.918
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1203826029]
+unique_name_in_owner = true
+stream = ExtResource("4_ubohm")
+volume_db = -7.918
+
+[node name="Sprites" type="Node2D" parent="." unique_id=24278416]
+
+[node name="InvincibilityIndicator" type="Sprite2D" parent="Sprites" unique_id=637751781]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.49803922)
+material = SubResource("CanvasItemMaterial_boad6")
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("5_gh56v")
+
+[node name="Sprite" type="Sprite2D" parent="Sprites" unique_id=1775286534]
+unique_name_in_owner = true
+texture = ExtResource("6_t0cx5")
+
+[node name="HitboxSprite" type="Sprite2D" parent="Sprites" unique_id=884109145]
+unique_name_in_owner = true
+scale = Vector2(1e-05, 1e-05)
+texture = SubResource("GradientTexture2D_i3pqv")
+
+[node name="GrazeboxSprite" type="Sprite2D" parent="Sprites" unique_id=1800018782]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.42745098)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("7_v4pgl")
+
+[node name="InvincibilityTimer" type="Timer" parent="." unique_id=1334866341]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="ItemAutoCollectRange" type="Area2D" parent="." unique_id=810023083]
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemAutoCollectRange" unique_id=1567715282]
+visible = false
+shape = SubResource("CircleShape2D_g4v7s")
+disabled = true
+
+[connection signal="area_entered" from="Grazebox" to="." method="_on_grazebox_area_entered"]
+[connection signal="body_entered" from="Grazebox" to="." method="_on_grazebox_body_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="area_entered" from="ItemAutoCollectRange" to="." method="_on_item_auto_collect_area_entered"]

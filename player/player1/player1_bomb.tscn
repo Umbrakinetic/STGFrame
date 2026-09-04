@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dwkqrejr5v000"]
+
+[ext_resource type="Script" uid="uid://dybthc81pemm3" path="res://player/player1/player1_bomb.gd" id="1_0mshh"]
+[ext_resource type="Texture2D" uid="uid://c0voj6tk5yhrc" path="res://player/border_line.png" id="1_vpyvq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tgdgs"]
+size = Vector2(140, 140)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wv2yy"]
+
+[node name="Bomb" type="Area2D" unique_id=832889956]
+process_mode = 1
+z_index = -100
+collision_layer = 0
+collision_mask = 6
+monitorable = false
+script = ExtResource("1_0mshh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=848786466]
+shape = SubResource("RectangleShape2D_tgdgs")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=39876708]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_wv2yy")
+points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+closed = true
+width = 16.0
+texture = ExtResource("1_vpyvq")
+texture_mode = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -53,6 +53,12 @@ func _process(delta: float) -> void:
 	if status == ResourceLoader.THREAD_LOAD_LOADED:
 		var next_scene = ResourceLoader.load_threaded_get(next_scene_path)
 		get_tree().change_scene_to_packed(next_scene)
+		if next_scene.resource_path.contains("stage"):
+			await get_tree().scene_changed
+			get_tree().current_scene.set_script(Gametray.next_stage)
+			get_tree().current_scene.pre_start()
+			get_tree().current_scene.start()
+			
 		fade_out()
 		transitioning = false
 		set_process(false)

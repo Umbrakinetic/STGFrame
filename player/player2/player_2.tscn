@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://dwasf6mnbwagh"]
 
-[ext_resource type="Script" uid="uid://bmeu1dwkwrg50" path="res://player/player2/player2.gd" id="1_erp6h"]
-[ext_resource type="Texture2D" uid="uid://d3c3kqqmnbld1" path="res://player/player2/player2_option.png" id="2_qm5g0"]
-[ext_resource type="Texture2D" uid="uid://rnmgklbeaye6" path="res://player/player2/player2_laser.png" id="3_od5k7"]
+[ext_resource type="Script" uid="uid://bmeu1dwkwrg50" path="res://player/player2/player_2.gd" id="1_erp6h"]
+[ext_resource type="Texture2D" uid="uid://d3c3kqqmnbld1" path="res://player/player2/player_2_option.png" id="2_qm5g0"]
+[ext_resource type="Texture2D" uid="uid://rnmgklbeaye6" path="res://player/player2/player_2_laser.png" id="3_od5k7"]
 [ext_resource type="AudioStream" uid="uid://bsn80eostomy3" path="res://sfx/player_shoot.wav" id="3_qim4t"]
 [ext_resource type="AudioStream" uid="uid://didpaba04piaq" path="res://sfx/player_death.wav" id="4_ubohm"]
 [ext_resource type="Texture2D" uid="uid://ouicuthw64vl" path="res://player/invincible.png" id="5_gh56v"]
-[ext_resource type="Texture2D" uid="uid://bn5i0t4860svv" path="res://player/player2/player2_sprite.png" id="6_t0cx5"]
+[ext_resource type="Texture2D" uid="uid://bn5i0t4860svv" path="res://player/player2/player_2_sprite.png" id="6_t0cx5"]
 [ext_resource type="Texture2D" uid="uid://bff6p8kerdprl" path="res://player/grazebox.png" id="7_v4pgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
@@ -108,7 +108,7 @@ region_rect = Rect2(0, 0, 1024, 32)
 
 [node name="Option1Focused" type="Marker2D" parent="Node/OptionPosition" unique_id=1357391835]
 unique_name_in_owner = true
-position = Vector2(-24, -64)
+position = Vector2(-64, -64)
 
 [node name="Option1Unfocused" type="Marker2D" parent="Node/OptionPosition" unique_id=1376563079]
 unique_name_in_owner = true
@@ -116,7 +116,7 @@ position = Vector2(-64, 0)
 
 [node name="Option2Focused" type="Marker2D" parent="Node/OptionPosition" unique_id=1326124271]
 unique_name_in_owner = true
-position = Vector2(24, -64)
+position = Vector2(64, -64)
 
 [node name="Option2Unfocused" type="Marker2D" parent="Node/OptionPosition" unique_id=1112429537]
 unique_name_in_owner = true

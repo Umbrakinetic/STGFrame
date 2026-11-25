@@ -1,19 +1,28 @@
 class_name Player
 extends CharacterBody2D
 
+## The player's number of starting lives.[br]
+## if lives is at 0 when player dies, the "Game Over" menu appears.
 var lives: int = 2:
 	set(value):
 		lives = value
 		resources_updated.emit()
 
+## How many bombs the player has by default when spawning or respawning.
 var bombs_per_life: int = 3
+
+## The player's starting number of bombs. [br]
+## When player dies, the value is set to bombs_per_life.
 var bombs: int = bombs_per_life:
 	set(value):
 		bombs = value
 		resources_updated.emit()
+
+## Whether the player is currently using a bomb.
 var bombing: bool = false
 
-@export var default_speed: float = 400
+
+var default_speed: float = 400
 var can_move : bool = true
 var can_shoot: bool = true:
 	set(value):
@@ -69,9 +78,6 @@ signal grazed
 signal lost
 
 var focus_tween: Tween
-
-func _ready() -> void:
-	%OptionPosition.global_position = global_position
 
 func _unhandled_input(event: InputEvent) -> void:
 	movement_input_direction = Input.get_vector("ui_left", "ui_right","ui_up","ui_down") * int(can_move)
@@ -187,7 +193,6 @@ func _on_hitbox_area_entered(area: Node2D) -> void:
 		await get_tree().physics_frame
 		hit_this_frame = false
 
-
 func _die():
 	lives -= 1
 	emit_signal("died")
@@ -195,7 +200,6 @@ func _die():
 	%Sprite.hide()
 	_set_invincibility(4)
 	respawning = true
-	
 	
 	await Tool.quick_timer(1).timeout
 	
@@ -205,8 +209,9 @@ func _die():
 	%Sprite.show()
 	respawning = false
 	can_move = true
-	await Tool.quick_timer(3).timeout
 	can_shoot = true
+	await Tool.quick_timer(3).timeout
+	
 	show()
 
 func _set_invincibility(time: float):

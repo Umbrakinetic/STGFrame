@@ -28,7 +28,10 @@ func _ready() -> void:
 	
 	await twn.finished
 	player.bombing = false
-	player.speed = player.default_speed
+	if player.focused:
+		player.speed = player.default_speed / 2
+	else:
+		player.speed = player.default_speed
 	queue_free()
 
 

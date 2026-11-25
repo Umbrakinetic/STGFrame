@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://u5q5a7xl7gpt"]
 
-[ext_resource type="Script" uid="uid://ctu8x43gowxsu" path="res://player/player1/player1.gd" id="1_pyciq"]
-[ext_resource type="Texture2D" uid="uid://dsbevi61088yy" path="res://player/player1/player1_option.png" id="2_pyciq"]
+[ext_resource type="Script" uid="uid://ctu8x43gowxsu" path="res://player/player1/player_1.gd" id="1_pyciq"]
+[ext_resource type="Texture2D" uid="uid://dsbevi61088yy" path="res://player/player1/player_1_option.png" id="2_pyciq"]
 [ext_resource type="AudioStream" uid="uid://bsn80eostomy3" path="res://sfx/player_shoot.wav" id="3_vu5xk"]
 [ext_resource type="AudioStream" uid="uid://didpaba04piaq" path="res://sfx/player_death.wav" id="4_bs4po"]
 [ext_resource type="Texture2D" uid="uid://ouicuthw64vl" path="res://player/invincible.png" id="5_xutgx"]
-[ext_resource type="Texture2D" uid="uid://d3bcp21a3bd31" path="res://player/player1/player1_sprite.png" id="6_vmcmo"]
+[ext_resource type="Texture2D" uid="uid://d3bcp21a3bd31" path="res://player/player1/player_1_sprite.png" id="6_vmcmo"]
 [ext_resource type="Texture2D" uid="uid://bff6p8kerdprl" path="res://player/grazebox.png" id="7_y0gj7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g6k8r"]

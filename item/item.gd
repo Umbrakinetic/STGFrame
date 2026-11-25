@@ -36,10 +36,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y = clamp(velocity.y + item_gravity, -4, 2.5)
 		global_position.y += velocity.y
 	else:
-		if Gametray.player.respawning:
+		if Stage.player.respawning:
 			tracking_player = false
 			velocity = Vector2.ZERO
-		velocity = global_position.direction_to(Gametray.player.global_position) * 16
+		velocity = global_position.direction_to(Stage.player.global_position) * 16
 	
 	global_position += velocity
 	

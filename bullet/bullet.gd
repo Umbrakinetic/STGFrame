@@ -66,17 +66,13 @@ var spawning: bool = true
 ## is the current bullet in the start_free() process?
 var freeing: bool = false
 
-#var origin: Enemy
-
-## variable used to force a bullet to move to a certain position.
-var force_moving: bool = false
-var force_position: Vector2 = Vector2(0, 0)
-
 var accel_tween: Tween
 
 ## the point of collision between a bullet and a colliding object.
 var collision_point: Vector2
 
+## Changes the bullet's blending mode from MIX to ADD.
+## Purely aesthetic, just makes some nice contrast.
 var add_blending: bool = true:
 	set(value):
 		%Sprite.material = %Sprite.material.duplicate()
@@ -180,11 +176,11 @@ func sort_closest(a, b) -> Variant:
 
 ## Accelerates a bullet to a given speed over time.
 ## If accelerate is called again while already accelerating, the current acceleration is overridden.
-func accelerate(final_speed: float, time: float) -> void:
+func accelerate(final_speed: float, time_sec: float) -> void:
 	if accel_tween != null: accel_tween.kill()
 	accelerating = true
 	accel_tween = create_tween()
-	accel_tween.tween_method(set_speed, get_speed(), final_speed, time)
+	accel_tween.tween_method(set_speed, get_speed(), final_speed, time_sec)
 	await accel_tween.finished
 	accelerating = false
 	emit_signal("acceleration_finished")

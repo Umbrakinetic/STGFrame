@@ -89,6 +89,7 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../St3")
 theme_override_font_sizes/font_size = 32
 text = "Stage 1"
 
@@ -103,6 +104,7 @@ text = "Stage 2"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
+focus_neighbor_bottom = NodePath("../St1")
 theme_override_font_sizes/font_size = 32
 text = "Stage 3"
 
@@ -139,20 +141,20 @@ text = "Marisa"
 unique_name_in_owner = true
 visible = false
 layout_mode = 0
-offset_left = 774.0
-offset_top = -16.0
-offset_right = 1094.0
-offset_bottom = 364.0
+offset_left = -144.0
+offset_top = -97.0
+offset_right = 582.0
+offset_bottom = 765.125
 texture = ExtResource("3_bws42")
 
 [node name="Player2Img" type="TextureRect" parent="TextureRect/MarginContainer/PlayerMenu" unique_id=2048217873]
 unique_name_in_owner = true
 visible = false
 layout_mode = 0
-offset_left = 774.0
-offset_top = -16.0
-offset_right = 1094.0
-offset_bottom = 364.0
+offset_left = 638.0
+offset_top = -148.0
+offset_right = 1384.0
+offset_bottom = 737.875
 texture = ExtResource("4_3f7m4")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TextureRect/MarginContainer/PlayerMenu" unique_id=1116228311]
@@ -168,8 +170,8 @@ fit_content = true
 [connection signal="pressed" from="TextureRect/MarginContainer/MainMenu/Choices/StageButton" to="." method="_on_stage_button_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/MainMenu/Choices/Exit Button" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/StageMenu/Choices/St1" to="." method="_on_stage_selected" binds= [0]]
-[connection signal="pressed" from="TextureRect/MarginContainer/StageMenu/Choices/St2" to="." method="_on_stage_selected" binds= [0]]
-[connection signal="pressed" from="TextureRect/MarginContainer/StageMenu/Choices/St3" to="." method="_on_stage_selected" binds= [0]]
+[connection signal="pressed" from="TextureRect/MarginContainer/StageMenu/Choices/St2" to="." method="_on_stage_selected" binds= [1]]
+[connection signal="pressed" from="TextureRect/MarginContainer/StageMenu/Choices/St3" to="." method="_on_stage_selected" binds= [2]]
 [connection signal="focus_entered" from="TextureRect/MarginContainer/PlayerMenu/Choices/Player1Button" to="." method="_on_player_button_hover" binds= [0]]
 [connection signal="pressed" from="TextureRect/MarginContainer/PlayerMenu/Choices/Player1Button" to="." method="_on_player_selected" binds= [0]]
 [connection signal="focus_entered" from="TextureRect/MarginContainer/PlayerMenu/Choices/Player2Button" to="." method="_on_player_button_hover" binds= [1]]

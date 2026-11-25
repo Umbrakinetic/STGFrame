@@ -1,14 +1,6 @@
 [gd_scene format=3 uid="uid://d2nn2p4lcttyo"]
 
-[ext_resource type="Texture2D" uid="uid://da27ery5wnwrd" path="res://stage/stage_2/forest.png" id="1_66ekl"]
-
-[sub_resource type="Environment" id="Environment_g4v7s"]
-fog_enabled = true
-fog_mode = 1
-fog_light_color = Color(0.47058824, 0.6, 0.7882353, 1)
-fog_density = 1.0
-fog_depth_begin = 2.0
-fog_depth_end = 5.0
+[ext_resource type="Texture2D" uid="uid://da27ery5wnwrd" path="res://stage/stage_2/tex_1.png" id="1_66ekl"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_eq6nc"]
 
@@ -30,22 +22,10 @@ uv1_offset = Vector3(0, 1, 0)
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0:uv1_offset:y")
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0:uv1_offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:surface_material_override/0:uv1_offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -75,33 +55,44 @@ _data = {
 &"new_animation": SubResource("Animation_1j60q")
 }
 
-[node name="Background" type="Node3D" unique_id=1442434444]
+[sub_resource type="Gradient" id="Gradient_66ekl"]
+offsets = PackedFloat32Array(0, 0.072289154, 0.15060242, 0.25301206, 0.60240966, 1)
+colors = PackedColorArray(0.38451502, 0.53, 0.20669998, 0, 0.45711482, 0.6252, 0.35970038, 0.6385882, 0.6438, 0.87, 0.75313, 1, 0.6142, 0.83, 0.75806665, 1, 0.47200003, 0.6196001, 0.8, 0.40784314, 0.4536, 0.59022, 0.81, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=132277883]
-environment = SubResource("Environment_g4v7s")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
+gradient = SubResource("Gradient_66ekl")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[node name="Background" type="SubViewportContainer" unique_id=321618579]
+z_index = -500
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=681257073]
+handle_input_locally = false
+size = Vector2i(768, 896)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=549049388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.883, 3.9)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=963941118]
 transform = Transform3D(6.75, 0, 0, 0, 2.25, 0, 0, 0, 4.5, 0, 0, 0)
 mesh = SubResource("PlaneMesh_eq6nc")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_66ekl")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=747095966]
 transform = Transform3D(6.75, 0, 0, 0, -9.835064e-08, -6.75, 0, 2.2500002, -2.9505188e-07, 0, 2.2, -2.2)
 mesh = SubResource("PlaneMesh_eq6nc")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_fyobn")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=321618579]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=681257073]
-handle_input_locally = false
-size = Vector2i(768, 896)
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=549049388]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.883, 3.9)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=442962391]
 libraries/ = SubResource("AnimationLibrary_66ekl")
 autoplay = &"new_animation"
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=755562664]
+transform = Transform3D(21.09, 0, 0, 0, 2.4156928, 0.8660253, 0, -4.1841025, 0.49999994, 0, 0.8014488, -0.7659259)
+texture = SubResource("GradientTexture2D_g4v7s")

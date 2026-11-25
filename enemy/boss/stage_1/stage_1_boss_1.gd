@@ -6,10 +6,6 @@ func _init() -> void:
 			preload("uid://bjxy3cjmsrv4u"),
 			preload("uid://cdmh8q7o5ku51")
 		],
-		[ ##Healthbar 2
-			preload("uid://bjxy3cjmsrv4u"),
-			preload("uid://cdmh8q7o5ku51")
-		],
 	]
 
 func _ready() -> void:

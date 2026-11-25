@@ -3,6 +3,7 @@ extends Phase
 func _init():
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 	phase_time = 18
+	phase_health = 500
 	give_drops = false
 
 func start() -> void:
@@ -24,9 +25,9 @@ func loop():
 	var attack_count: int = 0
 	while boss.health > 0:
 		for count in 2:
-			var c := Danmaku.spawn_circle(16, boss.position, 6 - count, randi(), Danmaku.TYPE_STAR)
+			var c := Danmaku.spawn_circle(16, boss.position, 6 - count, randi(), Danmaku.TYPE_CIRCLEBORDER)
 			for i in c:
-				i.set_passive_rotation(1)
+				#i.set_passive_rotation(1)
 				i.set_size(Vector2.ONE + (Vector2.ONE * (count + 0.5)))
 				i.curve = 0.4 * curve_direction
 				i.get_node("Sprite").color = Color.from_ok_hsl(hue, 1, 0.5)

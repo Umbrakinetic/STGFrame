@@ -1,7 +1,14 @@
 -- Graphics --
-Default Player Sprites: Umbrakinetic
+Player Sprites; Boss Sprite: Umbrakinetic
 Bullet Sprites: Umbrakinetic
 Dialogue/Spellcard portrait: wanwan_satsujii
 
+Spellcard Background: Umbrakinetic
+Stage Background: Modelling by Umbrakinetic (textures shamelessly downloaded from Google)
+
+
+
 -- SFX --
-Shooting, Player Death, Enemy Kill: the same source that ZUN used. i forgot the name
+Shooting, Player Death, Enemy Kill: 
+https://web.archive.org/web/20060117143932/http://ckgamefactory.hp.infoseek.co.jp/sounds.html
+("switch01", "laser01", "ss01")

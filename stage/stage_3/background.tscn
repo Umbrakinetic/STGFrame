@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://c7qf2rpsjgnvy"]
+
+[ext_resource type="PackedScene" uid="uid://deqmcdagmrekb" path="res://stage/stage_3/background_model.tscn" id="1_cn6nd"]
+
+[sub_resource type="Environment" id="Environment_g4v7s"]
+fog_enabled = true
+fog_mode = 1
+fog_sun_scatter = 0.05
+fog_density = 1.0
+fog_height_density = 0.2147
+fog_depth_curve = 5.4641685
+fog_depth_end = 32.0
+
+[sub_resource type="Animation" id="Animation_cn6nd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5258781, 5.718428)]
+}
+
+[sub_resource type="Animation" id="Animation_doat8"]
+resource_name = "new_animation"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5258781, 5.718428), Vector3(24, 1.5258781, 5.718428)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_01c2k"]
+_data = {
+&"RESET": SubResource("Animation_cn6nd"),
+&"anim1": SubResource("Animation_doat8")
+}
+
+[node name="Background" type="SubViewportContainer" unique_id=321618579]
+z_index = -500
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=681257073]
+handle_input_locally = false
+size = Vector2i(768, 896)
+render_target_update_mode = 4
+
+[node name="CanvasModulate" type="CanvasModulate" parent="SubViewport" unique_id=2006009831]
+color = Color(0.48, 0.1728, 0.4544001, 1)
+
+[node name="Model" parent="SubViewport" unique_id=388712080 instance=ExtResource("1_cn6nd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, -1.618, 3.8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport/Model" unique_id=709123419]
+transform = Transform3D(1, 0, 0, 0, -0.86602545, 0.49999997, 0, -0.49999997, -0.86602545, -25, 7, 0)
+shadow_enabled = true
+
+[node name="Model2" parent="SubViewport" unique_id=644125184 instance=ExtResource("1_cn6nd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -1.618, 3.8)
+
+[node name="Model3" parent="SubViewport" unique_id=380554619 instance=ExtResource("1_cn6nd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.618, 3.8)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=549049388]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, 0, 1.5258781, 5.718428)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport" unique_id=311089390]
+environment = SubResource("Environment_g4v7s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=949655485]
+root_node = NodePath("../SubViewport")
+libraries/ = SubResource("AnimationLibrary_01c2k")
+autoplay = &"anim1"

@@ -1,19 +1,14 @@
 extends Node2D
 
-var player
+var chosen_player_type: PackedScene
 
-var boss: Enemy
-
-var chosen_player_type
-
+## The order of stages in a full run.
 var stage_order: Array = [
 	preload("uid://d1vogmed8b64b"),
 	preload("uid://ce4gciehm5e0h"),
+	preload("uid://bygnqv77oy373"),
+	
 ]
-
-## The next stage to be loaded into the Stage scene.
-## You should only define this immediately before going to that stage.
-var next_stage
 
 ## Is the player attempting a playthrough of all stages? (as opposed to one stage)
 var full_run: bool = false
@@ -25,7 +20,7 @@ func clear():
 	for i in get_children():
 		i.queue_free()
 
-## The max amount of bullets allowed to exist at any one point.
+## The max amount of bullets allowed to exist at any one point.[br]
 ## If the current bullet count is at the maximum, Danmaku.Spawn_Bullet() will not create a bullet.
 var max_bullet_count: int = 1000
 

@@ -1,8 +1,7 @@
 # -- STGFrame --
 
 
-
-\[this readme \& documentation is currently unfinished.]
+## AS OF 1.0.0 THIS DOCUMENTATION IS HEAVILY OUTDATED 
 
 
 

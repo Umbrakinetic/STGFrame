@@ -36,16 +36,23 @@ func _on_restart_button_pressed() -> void:
 
 func restart():
 	Gametray.clear()
-	Transition.load_next_scene(get_tree().current_scene.scene_file_path)
-	await Transition.finished
-	resume()
+	if Gametray.full_run:
+		var stage_1 = Gametray.stage_order[0]
+		Transition.load_next_scene(Transition.STAGE, stage_1)
+		await Transition.finished
+		resume()
+	else:
+		var current_stage = load(get_tree().current_scene.get_script().get_path())
+		Transition.load_next_scene(Transition.STAGE, current_stage)
+		await Transition.finished
+		resume()
 
 func _on_main_menu_button_pressed() -> void:
 	go_to_confirm("Return to Main Menu", go_to_main_menu)
 
 func go_to_main_menu():
 	Gametray.clear()
-	Transition.load_next_scene("res://main_menu/main_menu.tscn")
+	Transition.load_next_scene(Transition.MAIN_MENU)
 	await Transition.finished
 	resume()
 

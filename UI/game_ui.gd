@@ -9,16 +9,23 @@ var graze_count: int = 0
 var life_texture = preload("uid://bi0yej7noch3r")
 var bomb_texture = preload("uid://cfpshct2k52qa")
 
+## temporary fix?
+## when timing out a boss's pattern, the healthbar is set to full, currently (should be empty).
+## this fixes that
+var tracking_health: bool = true
+
+
 func _ready() -> void:
 	%BossInfo.hide()
 	
 	reset_spell_ui()
 
-## The reason this is not a _ready() function is because it fires before Gametray.player is defined;
+## The reason this is not a _ready() function is because it fires before Stage.player is defined;
 ## So it is only manually called *after* that variable is defined.
 func start_ui() -> void:
-	player = Gametray.player
-	Gametray.player.resources_updated.connect(update_resources)
+	if player != null: return
+	player = Stage.player
+	Stage.player.resources_updated.connect(update_resources)
 	update_resources()
 	
 	player.grazed.connect(func():
@@ -44,6 +51,7 @@ func boss_added() -> void:
 		current_healthbar = healthbars[boss.current_phase_num]
 		current_healthbar.max_value = boss.health
 		current_healthbar.value = boss.health
+		tracking_health = true
 		%BossPhaseTimer.start(\
 		boss.current_phase.get_phase_time() + 2 if boss.current_phase_num == 0
 		else boss.current_phase.get_phase_time() + 1
@@ -54,6 +62,7 @@ func boss_added() -> void:
 		boss = null
 		queue_redraw()
 		%BossInfo.hide()
+		%BossPhaseTimer.stop()
 	)
 
 var healthbars: Array[ProgressBar]
@@ -117,6 +126,7 @@ func reset_spell_ui():
 	%SpellNameBG.offset_transform_scale = Vector2(2, 2)
 	%SpellNameBG.offset_transform_position_ratio.y = 8.33
 
+
 func _process(delta: float) -> void:
 	##real-time debug info
 	%DebugBulletCount.text = "Bullet Count: " + str(Gametray.bullet_list.size())
@@ -124,7 +134,7 @@ func _process(delta: float) -> void:
 	
 	if boss != null:
 		queue_redraw()
-		if current_healthbar != null:
+		if current_healthbar != null and tracking_health:
 			current_healthbar.value = boss.health
 		
 		%BossTimer.text = str(min(snapped(%BossPhaseTimer.time_left + 0.5, 1),99))
@@ -144,16 +154,24 @@ func _draw() -> void:
 			[Color.WHITE
 			])
 
+signal confirm_next_stage
 func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("shoot") and %StageClearMenu.visible:
+		emit_signal("confirm_next_stage")
+		%StageClearMenu.hide()
+	
 	if Input.is_action_just_pressed("pause") and not %PauseMenu.switched_pause_this_frame:
 		%PauseMenu.pause()
 	else:
 		%PauseMenu.resume()
 
+func open_stage_clear_menu():
+	%StageClearMenu.show()
+
 func open_game_clear_menu():
 	%GameClearMenu.pause()
 
 func _on_boss_phase_timer_timeout() -> void:
-	boss.health = 0
+	tracking_health = false
 	current_healthbar.value = 0
-	boss._on_death()
+	boss._die()

@@ -1,25 +1,17 @@
 [gd_scene format=3 uid="uid://cu7x0tv2pa8a1"]
 
+[ext_resource type="FontFile" uid="uid://c3tiigb2hpvlq" path="res://UI/THBiolinium.otf" id="1_6k0i6"]
 [ext_resource type="Texture2D" uid="uid://c1s26xl83e00n" path="res://UI/dialogue/player2_dialogue.png" id="1_f8kjv"]
 [ext_resource type="Texture2D" uid="uid://bbp2oncf8p3ct" path="res://UI/dialogue/player1_dialogue.png" id="2_347mh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_347mh"]
 bg_color = Color(0, 0, 0, 0.48235294)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 
 [node name="Dialogue" type="Node2D" unique_id=981277321]
-visible = false
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2004367360]
-z_index = -5
-position = Vector2(240, 580)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("1_f8kjv")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1486671304]
-z_index = -5
-position = Vector2(528, 580)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("2_347mh")
 
 [node name="Panel" type="Panel" parent="." unique_id=1719895384]
 offset_left = 16.0
@@ -28,7 +20,47 @@ offset_right = 754.0
 offset_bottom = 848.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_347mh")
 
-[node name="Line2D" type="Line2D" parent="." unique_id=1174755427]
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=172788323]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer" unique_id=46134603]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_6k0i6")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Test Text"
+
+[node name="StageBorder" type="Line2D" parent="." unique_id=1174755427]
 points = PackedVector2Array(0, 0, 768, 0, 768, 864, 0, 864)
 closed = true
 width = 4.0
+
+[node name="ActorLeftAnchor" type="Marker2D" parent="." unique_id=658323229]
+position = Vector2(238, 581)
+
+[node name="Sprite2D" type="Sprite2D" parent="ActorLeftAnchor" unique_id=2004367360]
+z_index = -5
+position = Vector2(-77, 54)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_f8kjv")
+
+[node name="ActorRightAnchor" type="Marker2D" parent="." unique_id=672847803]
+position = Vector2(672, 580)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ActorRightAnchor" unique_id=1486671304]
+z_index = -5
+position = Vector2(-11, 28)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_347mh")

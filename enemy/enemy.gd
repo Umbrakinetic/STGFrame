@@ -10,11 +10,17 @@ enum SpriteType {
 
 @export var drops: Dictionary [Item.ItemType, int]
 
-@onready var player = Gametray.player
+@onready var player = Stage.player
+
+## Determines whether the enemy can go past the off-screen borders that clear bullets
+## and enemies by default.
+var allowed_out_of_bounds: bool = false
+
+## Used in the event that an enemy that can drop items shouldn't.
+## (currently, only when full-clearing a screen of bullets and enemies.)
+var drops_items: bool = true
 
 var invincible: bool = false
-
-var allowed_out_of_bounds: bool = false
 
 signal died
 
@@ -28,7 +34,7 @@ var dying: bool = false
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body is Bullet and body.is_in_group("playerbullet"):
-		body.start_free()
+		if body.cancellable: body.start_free()
 		_damaged()
 		if invincible: return
 		take_damage(body.get_meta("Damage"))
@@ -39,20 +45,20 @@ func take_damage(damage_value: float) -> void:
 	health -= damage_value
 	if health <= 0 and not dying:
 		dying = true 
-		_on_death()
+		_die()
 
 func _damaged():
 	pass
 
-func _on_death() -> void:
+func _die() -> void:
 	var die_fx: = preload("uid://7qebyenh7k7e").instantiate()
 	Gametray.add_child(die_fx)
 	die_fx.global_position = global_position
 	die_fx.get_child(0).play("radial_burst")
 	
-	
 	died.emit()
-	give_drops()
+	Tool.oneshot_sound(preload("uid://dhm262tj0gt2e"), 1, 0.65)
+	if drops_items: give_drops()
 	queue_free()
 
 func give_drops() -> void:

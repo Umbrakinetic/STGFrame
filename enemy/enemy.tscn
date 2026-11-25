@@ -7,7 +7,7 @@
 [node name="Enemy" type="CharacterBody2D" unique_id=1372969461 groups=["enemy"]]
 process_mode = 1
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("1_4gyqm")
 drops = Dictionary[int, int]({
 0: 2,

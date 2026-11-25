@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d2nn2p4lcttyo"]
 
 [ext_resource type="Texture2D" uid="uid://da27ery5wnwrd" path="res://stage/stage_2/tex_1.png" id="1_66ekl"]
+[ext_resource type="Texture2D" uid="uid://dgcmpcj08qq1v" path="res://stage/stage_2/tex_2.png" id="2_0qu3f"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_eq6nc"]
 
@@ -9,13 +10,10 @@ shading_mode = 0
 albedo_texture = ExtResource("1_66ekl")
 uv1_offset = Vector3(0, 1, 0)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0qu3f"]
-load_path = "res://.godot/imported/sky.png-8cf7de0628e0d35272525ac87d15b006.s3tc.ctex"
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fyobn"]
 shading_mode = 0
 disable_fog = true
-albedo_texture = SubResource("CompressedTexture2D_0qu3f")
+albedo_texture = ExtResource("2_0qu3f")
 uv1_offset = Vector3(0, 1, 0)
 
 [sub_resource type="Animation" id="Animation_ok1bx"]

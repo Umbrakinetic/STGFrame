@@ -4,6 +4,8 @@ extends Control
 ## This feels a little obtuse, but whatever
 var switched_pause_this_frame: bool = false
 
+var last_button: Button
+
 func pause():
 	switched_pause_this_frame = true
 	RenderingServer.global_shader_parameter_set("paused", true)
@@ -21,6 +23,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		await get_tree().process_frame
 		switched_pause_this_frame = false
+	
+	if get_viewport().gui_get_focus_owner() is Button:
+		last_button = get_viewport().gui_get_focus_owner()
+	
+	if Input.is_anything_pressed() and not get_viewport().gui_get_focus_owner() is Button:
+		last_button.grab_focus()
+	
 
 func _on_resume_button_pressed() -> void:
 	resume()

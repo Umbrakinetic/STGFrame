@@ -3,10 +3,19 @@ extends Control
 func _ready() -> void:
 	hide()
 
+var last_button: Button
+
 func pause():
 	get_tree().paused = true
 	show()
 	%MainMenuButton.grab_focus()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if get_viewport().gui_get_focus_owner() is Button:
+		last_button = get_viewport().gui_get_focus_owner()
+	
+	if Input.is_anything_pressed() and not get_viewport().gui_get_focus_owner() is Button:
+		last_button.grab_focus()
 
 func resume():
 	hide()

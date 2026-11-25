@@ -3,6 +3,8 @@ extends Control
 func _ready() -> void:
 	hide()
 
+var last_button: Button
+
 func pause():
 	get_tree().paused = true
 	show()
@@ -12,6 +14,13 @@ func _on_continue_button_pressed() -> void:
 	Gametray.continued_run = true
 	Stage.player.lives = 2
 	resume()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if get_viewport().gui_get_focus_owner() is Button:
+		last_button = get_viewport().gui_get_focus_owner()
+	
+	if Input.is_anything_pressed() and not get_viewport().gui_get_focus_owner() is Button:
+		last_button.grab_focus()
 
 func resume():
 	hide()

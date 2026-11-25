@@ -27,6 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
@@ -37,6 +38,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 0
 
 [node name="MainText" type="RichTextLabel" parent="PauseMenu/MarginContainer/MainPauseMenu" unique_id=928684391]
 layout_mode = 2
@@ -73,6 +75,7 @@ visible = false
 custom_minimum_size = Vector2(188, 0)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 0
 
 [node name="ConfirmationText" type="RichTextLabel" parent="PauseMenu/MarginContainer/ConfirmationMenu" unique_id=1403812897]
 unique_name_in_owner = true

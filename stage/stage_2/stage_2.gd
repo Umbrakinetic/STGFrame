@@ -12,8 +12,6 @@ func _physics_process(delta: float) -> void:
 
 #region sections
 
-
-
 	#region enemy1
 func enemy_tst_1():
 	var d = 1

@@ -7,8 +7,6 @@ class_name Boss extends Enemy
 
 @export var boss_name: String = "BossName"
 
-signal entered
-
 ## Phase:
 ## A bullet pattern used within the confines of one healthbar and timer.
 ## PhaseCollection:
@@ -40,6 +38,8 @@ var phases: Array[Array] = [
 @onready var current_phase_num: int = 0
 
 var first_phase_time: float = 30
+
+signal entered
 
 signal phase_started
 signal phase_ended

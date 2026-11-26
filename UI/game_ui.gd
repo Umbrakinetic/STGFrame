@@ -65,6 +65,7 @@ func boss_added() -> void:
 		%BossPhaseTimer.stop()
 	)
 
+
 var healthbars: Array[ProgressBar]
 var current_healthbar: ProgressBar
 var current_healthbar_num: int = 0
@@ -90,6 +91,7 @@ func boss_collection_started():
 		c += 1
 	current_healthbar = healthbars[0]
 
+
 func update_resources() -> void:
 	var lives = player.lives
 	var bombs = player.bombs
@@ -101,10 +103,12 @@ func update_resources() -> void:
 		await Tool.quick_timer(1).timeout
 		%GameOverMenu.pause()
 
+
 func set_resource_counter(counter_node, resource_count) -> void:
 	if resource_count <= 0: counter_node.hide()
 	else: counter_node.show()
 	counter_node.custom_minimum_size.x = 48 * resource_count
+
 
 var spell_tween: Tween
 
@@ -119,6 +123,7 @@ func declare_spell(spell_name: String):
 	spell_tween.tween_interval(0.2)
 	spell_tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	spell_tween.tween_property(%SpellNameBG, "offset_transform_position_ratio:y", 0, 1)
+
 
 func reset_spell_ui():
 	%SpellName.text = ""
@@ -140,8 +145,7 @@ func _process(delta: float) -> void:
 		%BossTimer.text = str(min(snapped(%BossPhaseTimer.time_left + 0.5, 1),99))
 		if %BossPhaseTimer.time_left < 10: %BossTimer.add_theme_color_override("font_color", Color.RED)
 		else: %BossTimer.add_theme_color_override("font_color", Color.WHITE)
-		
-		#%BossPhasesRemaining.text = str(boss.current_phase_num + 1) + "/" + str(boss.phases.size())
+
 
 func _draw() -> void:
 	## Draws the boss position indicator at the bottom of the screen.

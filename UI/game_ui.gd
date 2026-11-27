@@ -16,7 +16,7 @@ var bomb_texture = preload("uid://cfpshct2k52qa")
 ## circumstances:
 ## when timing out a boss's phase
 ## when ending a boss's phase with damage from a bomb(???)
-var tracking_health: bool = true
+var tracking_boss_health: bool = true
 
 
 func _ready() -> void:
@@ -42,7 +42,7 @@ func boss_added() -> void:
 	boss = Gametray.get_node("Boss")
 	boss.spell_declared.connect(declare_spell.bind())
 	boss.phase_ended.connect(func():
-		tracking_health = false
+		tracking_boss_health = false
 		current_healthbar.value = 0
 		reset_spell_ui()
 	)
@@ -56,7 +56,7 @@ func boss_added() -> void:
 		current_healthbar = healthbars[boss.current_phase_num]
 		current_healthbar.max_value = boss.health
 		current_healthbar.value = boss.health
-		tracking_health = true
+		tracking_boss_health = true
 		%BossPhaseTimer.start(\
 		boss.current_phase.get_phase_time() + 2 if boss.current_phase_num == 0
 		else boss.current_phase.get_phase_time() + 1
@@ -144,7 +144,7 @@ func _process(delta: float) -> void:
 	
 	if boss != null:
 		queue_redraw()
-		if current_healthbar != null and tracking_health:
+		if current_healthbar != null and tracking_boss_health:
 			current_healthbar.value = boss.health
 		
 		%BossTimer.text = str(min(snapped(%BossPhaseTimer.time_left + 0.5, 1),99))
@@ -181,6 +181,6 @@ func open_game_clear_menu():
 	%GameClearMenu.pause()
 
 func _on_boss_phase_timer_timeout() -> void:
-	tracking_health = false
+	tracking_boss_health = false
 	current_healthbar.value = 0
 	boss._die()

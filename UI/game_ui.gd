@@ -10,8 +10,12 @@ var life_texture = preload("uid://bi0yej7noch3r")
 var bomb_texture = preload("uid://cfpshct2k52qa")
 
 ## temporary fix?
-## when timing out a boss's pattern, the healthbar is set to full, currently (should be empty).
+## under certain circumstances, when ending a boss's phase,
+## that phase's healthbar may appear full (visual glitch only)
 ## this fixes that
+## circumstances:
+## when timing out a boss's phase
+## when ending a boss's phase with damage from a bomb(???)
 var tracking_health: bool = true
 
 
@@ -38,6 +42,7 @@ func boss_added() -> void:
 	boss = Gametray.get_node("Boss")
 	boss.spell_declared.connect(declare_spell.bind())
 	boss.phase_ended.connect(func():
+		tracking_health = false
 		current_healthbar.value = 0
 		reset_spell_ui()
 	)
